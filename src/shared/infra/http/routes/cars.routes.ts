@@ -4,10 +4,10 @@ import uploadConfig from '@config/upload';
 
 import { ensureAdmin } from '../middlewares/ensureAdmin';
 import { ensureAuthenticated } from '../middlewares/ensureAuthenticated';
-import { CreateCarController } from '@modules/cars/useCases/createCar/CreateCarController';
-import { CreateCarSpecificationController } from '@modules/cars/useCases/createCarSpecification/CreateCarSpecificationController';
-import { ListAvailableController } from '@modules/cars/useCases/lisAvailableCars/ListAvailableController';
-import { UploadCarImagesController } from '@modules/cars/useCases/uploadCarImages/UploadCarImagesController';
+import { CreateCarController } from '@modules/products/useCases/createCar/CreateCarController';
+import { CreateCarSpecificationController } from '@modules/products/useCases/createCarSpecification/CreateCarSpecificationController';
+import { ListAvailableController } from '@modules/products/useCases/lisAvailableCars/ListAvailableController';
+import { UploadCarImagesController } from '@modules/products/useCases/uploadCarImages/UploadCarImagesController';
 
 const carsRoutes = Router();
 
