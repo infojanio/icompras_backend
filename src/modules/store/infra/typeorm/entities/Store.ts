@@ -1,10 +1,13 @@
 import { Column, CreateDateColumn, Entity, PrimaryColumn } from 'typeorm';
 import { v4 as uuidV4 } from 'uuid';
 
-@Entity('users')
-class User {
+@Entity('store')
+class Store {
   @PrimaryColumn()
   id: string;
+
+  @Column()
+  slug: string;
 
   @Column()
   name: string;
@@ -19,13 +22,34 @@ class User {
   phone: string;
 
   @Column()
-  isAdmin: boolean;
+  active: boolean;
 
   @Column()
-  avatar: string;
+  service_day: string;
+
+  @Column()
+  service_hour: string;
 
   /*
-  @ManyToOne(() => Address)
+  @ManyToOne(() => Banner)
+  @JoinColumn({ name: 'banner_id' })
+  banner: Banner;
+
+  @Column()
+  banner_id: string;
+*/
+
+  /*
+  @OneToMany(() => City)
+  @JoinColumn({ name: 'city_id' })
+  city: City;
+
+  @Column()
+  city_id: string;
+*/
+
+  /*
+  @OneToOne(() => Address)
   @JoinColumn({ name: 'address_id' })
   address: Address;
 
@@ -42,4 +66,4 @@ class User {
     }
   }
 }
-export { User };
+export { Store };
