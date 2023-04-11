@@ -2,6 +2,7 @@ import { ICreateOrderDTO } from '../dtos/ICreateOrderDTO';
 import { Order } from '../infra/typeorm/entities/Order';
 
 interface IOrdersRepository {
+  findOpenOrderByProduct(product_id: string): Promise<Order | undefined>;
   findOpenOrderByStore(store_id: string): Promise<Order | undefined>;
   findOpenOrderByUser(user_id: string): Promise<Order | undefined>;
 

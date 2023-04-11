@@ -1,7 +1,8 @@
 interface ICreateOrderDTO {
-  user_id: number;
-  store_id: number;
-  address_id: number;
+  user_id: string;
+  store_id: string;
+  address_id: string;
+  product_id: string;
   form_payment: string;
   change?: number; //troco em dinheiro
   freight: number; //frete

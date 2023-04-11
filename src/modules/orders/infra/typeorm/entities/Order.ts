@@ -21,13 +21,16 @@ class Order {
   user: User;
 
   @Column()
-  user_id: number;
+  user_id: string;
 
   @Column()
-  store_id: number;
+  store_id: string;
 
   @Column()
-  address_id: number;
+  address_id: string;
+
+  @Column()
+  product_id: string;
 
   @Column()
   form_payment: string;

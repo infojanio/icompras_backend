@@ -1,46 +1,44 @@
-import { ICreateRentalDTO } from '@modules/orders/dtos/ICreateOrderDTO';
-import { Rental } from '@modules/orders/infra/typeorm/entities/Order';
-import { IRentalsRepository } from '../IOrdersRepository';
+import { ICreateOrderDTO } from '@modules/orders/dtos/ICreateOrderDTO';
+import { Order } from '@modules/orders/infra/typeorm/entities/Order';
+import { IOrdersRepository } from '../IOrdersRepository';
 
-class RentalsRepositoryInMemory implements IRentalsRepository {
-  rentals: Rental[] = [];
+class OrdersRepositoryInMemory implements IOrdersRepository {
+  orders: Order[] = [];
 
   //encontra o veículo que ainda não foi devolvido
-  async findOpenRentalByCar(car_id: string): Promise<Rental | undefined> {
-    return this.rentals.find(
-      (rental) => rental.car_id === car_id && !rental.end_date,
-    );
+  async findOpenOrderByProduct(product_id: string): Promise<Order | undefined> {
+    return this.orders.find((order) => order.product_id === product_id);
   }
 
-  async findOpenRentalByUser(user_id: string): Promise<Rental | undefined> {
-    return this.rentals.find(
-      (rental) => rental.user_id === user_id && !rental.end_date,
-    );
+  async findOpenOrderByUser(user_id: string): Promise<Order | undefined> {
+    return this.orders.find((order) => order.user_id === user_id);
   }
 
   async create({
-    car_id,
-    expected_return_date,
+    product_id,
     user_id,
-  }: ICreateRentalDTO): Promise<Rental> {
-    const rental = new Rental();
+    subtotal,
+    total,
+  }: ICreateOrderDTO): Promise<Order> {
+    const order = new Order();
 
-    Object.assign(rental, {
-      car_id,
-      expected_return_date,
+    Object.assign(order, {
+      product_id,
       user_id,
+      subtotal,
+      total,
       start_date: new Date(),
     });
-    this.rentals.push(rental);
-    return rental;
+    this.orders.push(order);
+    return order;
   }
 
-  async findById(id: string): Promise<Rental | undefined> {
-    return this.rentals.find((rental) => rental.id === id);
+  async findById(id: string): Promise<Order | undefined> {
+    return this.orders.find((order) => order.id === id);
   }
 
-  async findByUser(user_id: string): Promise<Rental[]> {
-    return this.rentals.filter((rental) => rental.user_id === user_id);
+  async findByUser(user_id: string): Promise<Order[]> {
+    return this.orders.filter((order) => order.user_id === user_id);
   }
 }
-export { RentalsRepositoryInMemory };
+export { OrdersRepositoryInMemory };
