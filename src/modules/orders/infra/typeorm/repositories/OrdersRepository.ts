@@ -24,38 +24,46 @@ class OrdersRepository implements IOrdersRepository {
   }
 
   async create({
-    store_id,
-    expected_return_date,
     user_id,
-    id,
-    end_date,
+    store_id,
+    address_id,
+    form_payment,
+    change,
+    freight,
+    discount,
+    subtotal,
     total,
+    order_date,
   }: ICreateOrderDTO): Promise<Order | undefined> {
     const order = this.repository.create({
-      product_id,
-      expected_return_date,
       user_id,
-      id,
-      end_date,
+      store_id,
+      address_id,
+      form_payment,
+      change,
+      freight,
+      discount,
+      subtotal,
       total,
+      order_date,
     });
 
     await this.repository.save(order);
     return order;
   }
 
-  async findById(id: string): Promise<Rental> {
-    const rental = await this.repository.findOne(id);
-    return rental;
+  async findById(id: string): Promise<Order> {
+    const order = await this.repository.findOne(id);
+    return order;
   }
 
-  async findByUser(user_id: string): Promise<Rental[]> {
-    const rentals = await this.repository.find({
+  async findByUser(user_id: string): Promise<Order[]> {
+    const orders = await this.repository.find({
       where: { user_id },
-      relations: ['car'], //busca o relacionamento da entidade Rental
+      relations: ['product'], //busca o relacionamento da entidade Order
     });
-    return rentals;
+    return orders;
   }
 }
 
-export { RentalsRepository };
+export { OrdersRepository };

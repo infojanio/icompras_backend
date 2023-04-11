@@ -21,7 +21,7 @@ class Order {
   user: User;
 
   @Column()
-  user_id: string;
+  user_id: number;
 
   @Column()
   store_id: number;

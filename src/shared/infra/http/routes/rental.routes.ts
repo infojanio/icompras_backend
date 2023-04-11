@@ -1,4 +1,4 @@
-import { ListRentalsByUserController } from '@modules/orders/listRentalsByUser/ListRentalsByUserController';
+import { ListRentalsByUserController } from '@modules/orders/listOrdersByUser/ListRentalsByUserController';
 import { CreateRentalController } from '@modules/orders/useCases/createRental/CreateRentalController';
 import { DevolutionRentalController } from '@modules/orders/useCases/devolutionRental/DevolutionRentalController';
 import { Router } from 'express';

@@ -8,7 +8,6 @@ interface ICreateOrderDTO {
   discount?: number; //desconto
   subtotal?: number;
   total?: number;
-
   order_date?: Date;
 }
 

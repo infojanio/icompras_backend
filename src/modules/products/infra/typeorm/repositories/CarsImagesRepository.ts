@@ -18,4 +18,5 @@ class CarsImagesRepository implements ICarsImagesRepository {
     return carImage;
   }
 }
+
 export { CarsImagesRepository };
