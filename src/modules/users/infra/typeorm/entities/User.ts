@@ -1,6 +1,22 @@
 import { Column, CreateDateColumn, Entity, PrimaryColumn } from 'typeorm';
 import { v4 as uuidV4 } from 'uuid';
-
+/*
+  id: string;
+  name: string;
+  email: string;
+  password: string;
+  phone: string;
+  avatar?: string;
+  city_id: string;
+  cep?: number;
+  district: string;
+  street: string;
+  complement?: string;
+  longitude?: number;
+  latitude?: number;
+  isActive: boolean;
+  isAdmin: boolean;
+*/
 @Entity('users')
 class User {
   @PrimaryColumn()
@@ -19,10 +35,19 @@ class User {
   phone: string;
 
   @Column()
-  isAdmin: boolean;
+  avatar: string;
+
+  /*
+  @ManyToOne(() => City)
+  @JoinColumn({ name: 'city_id' })
+  city: City;
 
   @Column()
-  avatar: string;
+  city_id: string;
+*/
+
+  @Column()
+  isAdmin: boolean;
 
   /*
   @ManyToOne(() => Address)
