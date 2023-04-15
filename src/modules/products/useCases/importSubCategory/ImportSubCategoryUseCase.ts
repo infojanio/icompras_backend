@@ -1,25 +1,25 @@
-import { ICategoriesRepository } from '@modules/products/repositories/ICategoriesRepository';
+import { ISubCategoriesRepository } from '@modules/products/repositories/ISubCategoriesRepository';
 import csvParse from 'csv-parse';
 import fs from 'fs';
 import { inject, injectable } from 'tsyringe';
 
-interface IImportCategory {
+interface IImportSubCategory {
   name: string;
   image: string;
 }
 
 @injectable()
-class ImportCategoryUseCase {
+class ImportSubCategoryUseCase {
   constructor(
-    @inject('CategoriesRepository')
-    private categoriesRepository: ICategoriesRepository,
+    @inject('SubCategoriesRepository')
+    private subcategoriesRepository: ISubCategoriesRepository,
   ) {}
 
   //faz a leitura das categorias
-  loadCategories(file: Express.Multer.File): Promise<IImportCategory[]> {
+  loadSubCategories(file: Express.Multer.File): Promise<IImportSubCategory[]> {
     return new Promise((resolve, reject) => {
       const stream = fs.createReadStream(file.path);
-      const categories: IImportCategory[] = [];
+      const subcategories: IImportSubCategory[] = [];
 
       const parseFile = csvParse();
 
@@ -28,14 +28,14 @@ class ImportCategoryUseCase {
       parseFile
         .on('data', async (line) => {
           const [name, image] = line;
-          categories.push({
+          subcategories.push({
             name,
             image,
           });
         }) //aguarda o resultado de categories
         .on('end', () => {
           fs.promises.unlink(file.path); //faz a remoção do arquivo sempre que salvar outro
-          resolve(categories);
+          resolve(subcategories);
         })
         .on('error', (err) => {
           reject(err);
@@ -44,16 +44,18 @@ class ImportCategoryUseCase {
   }
 
   async execute(file: Express.Multer.File): Promise<void> {
-    const categories = await this.loadCategories(file);
+    const subcategories = await this.loadSubCategories(file);
 
     //salva no banco de dados
-    categories.map(async (category) => {
-      const { name, image } = category;
+    subcategories.map(async (subcategory) => {
+      const { name, image } = subcategory;
 
-      const existCategory = await this.categoriesRepository.findByName(name);
+      const existSubCategory = await this.subcategoriesRepository.findByName(
+        name,
+      );
 
-      if (!existCategory) {
-        await this.categoriesRepository.create({
+      if (!existSubCategory) {
+        await this.subcategoriesRepository.create({
           name,
           image,
         });
@@ -62,4 +64,4 @@ class ImportCategoryUseCase {
   }
 }
 
-export { ImportCategoryUseCase };
+export { ImportSubCategoryUseCase };

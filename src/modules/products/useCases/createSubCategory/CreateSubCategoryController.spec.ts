@@ -8,7 +8,7 @@ import createConnection from '@shared/infra/typeorm';
 
 let connection: Connection;
 
-describe('Create Category Controller', () => {
+describe('Create SubCategory Controller', () => {
   //roda antes de tudo
   beforeAll(async () => {
     connection = await createConnection();
@@ -31,7 +31,7 @@ describe('Create Category Controller', () => {
   });
 
   //Deve ser possível criar uma nova categoria
-  it('Should be able to create a new category', async () => {
+  it('Should be able to create a new subcategory', async () => {
     const responseToken = await request(app).post('/sessions').send({
       email: 'admin@rentlx.com.br',
       password: 'admin',
@@ -39,10 +39,10 @@ describe('Create Category Controller', () => {
     const { token } = responseToken.body;
 
     const response = await request(app)
-      .post('/categories')
+      .post('/subcategories')
       .send({
-        name: 'Category Supertest',
-        image: 'Category Supertest',
+        name: 'SubCategory Supertest',
+        image: 'SubCategory Supertest',
       })
       .set({
         Authorization: `Bearer ${token}`,
@@ -52,7 +52,7 @@ describe('Create Category Controller', () => {
 });
 
 //Não deve ser possível criar uma categoria já existente
-it('Should not be able to create a new category with name exists', async () => {
+it('Should not be able to create a new subcategory with name exists', async () => {
   const responseToken = await request(app).post('/sessions').send({
     email: 'admin@rentlx.com.br',
     password: 'admin',
@@ -60,10 +60,10 @@ it('Should not be able to create a new category with name exists', async () => {
   const { token } = responseToken.body;
 
   const response = await request(app)
-    .post('/categories')
+    .post('/subcategories')
     .send({
-      name: 'Category Supertest',
-      image: 'Category Supertest',
+      name: 'SubCategory Supertest',
+      image: 'SubCategory Supertest',
     })
     .set({
       Authorization: `Bearer ${token}`,

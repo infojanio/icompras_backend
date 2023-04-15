@@ -6,18 +6,13 @@ class UsersRepositoryInMemory implements IUsersRepository {
   users: User[] = [];
 
   //1. teste de criação do usuário
-  async create({
-    phone,
-    email,
-    name,
-    password,
-  }: ICreateUserDTO): Promise<void> {
+  async create({ id, name, email, password }: ICreateUserDTO): Promise<void> {
     const user = new User();
 
     Object.assign(user, {
-      phone,
-      email,
+      id,
       name,
+      email,
       password,
     });
     this.users.push(user);
@@ -31,6 +26,11 @@ class UsersRepositoryInMemory implements IUsersRepository {
   //3. teste de verificação de
   async findById(id: string): Promise<User | undefined> {
     return this.users.find((user) => user.id === id);
+  }
+
+  //2. teste de verificação de cadastro de usuário já existente
+  async findByPhone(phone: string): Promise<User | undefined> {
+    return this.users.find((user) => user.phone === phone);
   }
 }
 export { UsersRepositoryInMemory };

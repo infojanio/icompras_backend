@@ -8,7 +8,7 @@ import createConnection from '@shared/infra/typeorm';
 
 let connection: Connection;
 
-describe('Create Category Controller', () => {
+describe('Create List All SubCategory', () => {
   //roda antes de tudo
   beforeAll(async () => {
     connection = await createConnection();
@@ -30,43 +30,31 @@ describe('Create Category Controller', () => {
     await connection.close();
   });
 
-  //Deve ser possível criar uma nova categoria
-  it('Should be able to create a new category', async () => {
+  //Deve ser possível listar todas as categorias
+  it('Should be able to list all subcategories', async () => {
     const responseToken = await request(app).post('/sessions').send({
       email: 'admin@rentlx.com.br',
       password: 'admin',
     });
     const { token } = responseToken.body;
 
-    const response = await request(app)
-      .post('/categories')
+    await request(app)
+      .post('/subcategories')
       .send({
-        name: 'Category Supertest',
-        image: 'Category Supertest',
+        name: 'SubCategory Supertest',
+        image: 'SubCategory Supertest',
       })
       .set({
         Authorization: `Bearer ${token}`,
       });
-    expect(response.status).toBe(201); //201 permitiu a inclusão da nova categoria
-  });
-});
 
-//Não deve ser possível criar uma categoria já existente
-it('Should not be able to create a new category with name exists', async () => {
-  const responseToken = await request(app).post('/sessions').send({
-    email: 'admin@rentlx.com.br',
-    password: 'admin',
-  });
-  const { token } = responseToken.body;
+    const response = await request(app).get('/subcategories');
 
-  const response = await request(app)
-    .post('/categories')
-    .send({
-      name: 'Category Supertest',
-      image: 'Category Supertest',
-    })
-    .set({
-      Authorization: `Bearer ${token}`,
-    });
-  expect(response.status).toBe(401); //401 não permitiu a inclusão
+    console.log(response.body);
+
+    expect(response.status).toBe(201); //201 permitiu a listagem de categorias
+    expect(response.body.length).toBe(1); //retorna 1 array
+    expect(response.body[0]).toHaveProperty('id');
+    expect(response.body[0].name).toEqual('SubCategory Supertest');
+  });
 });

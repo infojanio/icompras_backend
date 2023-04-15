@@ -5,7 +5,7 @@ interface ICreateUserDTO {
   password: string;
   phone: string;
   avatar?: string;
-  city_id: string;
+  //city_id: string;
   cep?: number;
   district: string;
   street: string;

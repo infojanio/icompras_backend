@@ -4,7 +4,7 @@ import { ICategoriesRepository } from '@modules/products/repositories/ICategorie
 
 interface IRequest {
   name: string;
-  description: string;
+  image: string;
 }
 
 @injectable()
@@ -14,7 +14,7 @@ class CreateCategoryUseCase {
     private categoriesRepository: ICategoriesRepository,
   ) {}
 
-  async execute({ name, description }: IRequest): Promise<void> {
+  async execute({ name, image }: IRequest): Promise<void> {
     //verifica se a categoria já existe
     const categoryAlreadyExists = await this.categoriesRepository.findByName(
       name,
@@ -25,7 +25,7 @@ class CreateCategoryUseCase {
 
     await this.categoriesRepository.create({
       name,
-      description,
+      image,
     });
   }
 }

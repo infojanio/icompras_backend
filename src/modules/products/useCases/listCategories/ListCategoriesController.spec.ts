@@ -42,7 +42,7 @@ describe('Create List All Category', () => {
       .post('/categories')
       .send({
         name: 'Category Supertest',
-        description: 'Category Supertest',
+        image: 'Category Supertest',
       })
       .set({
         Authorization: `Bearer ${token}`,
