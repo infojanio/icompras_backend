@@ -12,21 +12,14 @@ class CreateUserUseCase {
   ) {}
 
   async execute({
-    id,
     name,
     email,
     password,
     phone,
     avatar,
-    //city_id,
-    cep,
-    district,
-    street,
-    complement,
-    longitude,
-    latitude,
     isActive,
     isAdmin,
+    address_id,
   }: ICreateUserDTO): Promise<void> {
     //Não permitir cadastrar usuário com mesmo email
     const userAlreadyExists = await this.usersRepository.findByEmail(email);
@@ -39,21 +32,14 @@ class CreateUserUseCase {
     const passwordHash = await hash(password, 8);
 
     await this.usersRepository.create({
-      id,
       name,
       email,
-      password: passwordHash,
+      password,
       phone,
       avatar,
-      //city_id,
-      cep,
-      district,
-      street,
-      complement,
-      longitude,
-      latitude,
       isActive,
       isAdmin,
+      address_id,
     });
   }
 }

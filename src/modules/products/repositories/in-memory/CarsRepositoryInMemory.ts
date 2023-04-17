@@ -1,6 +1,6 @@
 import { ICreateCarDTO } from '@modules/products/dtos/ICreateCarDTO';
 import { Car } from '@modules/products/infra/typeorm/entities/Product';
-import { ICarsRepository } from '../ICarsRepository';
+import { ICarsRepository } from '../IProductsRepository';
 
 class CarsRepositoryInMemory implements ICarsRepository {
   cars: Car[] = [];

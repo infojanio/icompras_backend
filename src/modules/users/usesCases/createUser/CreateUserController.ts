@@ -5,39 +5,26 @@ import { CreateUserUseCase } from './CreateUserUseCase';
 class CreateUserController {
   async handle(request: Request, response: Response): Promise<Response> {
     const {
-      id,
       name,
       email,
-      phone,
       password,
+      phone,
       avatar,
-      cep,
-      district,
-      street,
-      complement,
-      longitude,
-      latitude,
       isActive,
       isAdmin,
+      address_id,
     } = request.body;
 
     const createUserUseCase = container.resolve(CreateUserUseCase);
     await createUserUseCase.execute({
-      id,
       name,
       email,
-      phone,
       password,
+      phone,
       avatar,
-      //city_id,
-      cep,
-      district,
-      street,
-      complement,
-      longitude,
-      latitude,
       isActive,
       isAdmin,
+      address_id,
     });
     return response.status(201).send();
   }

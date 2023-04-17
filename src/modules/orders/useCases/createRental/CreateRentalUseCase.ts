@@ -5,8 +5,8 @@ import { IRentalsRepository } from '@modules/orders/repositories/IOrdersReposito
 import { IDateProvider } from '@shared/container/providers/DateProvider/IDateProvider';
 import { AppError } from '@shared/errors/AppError';
 import { inject, injectable } from 'tsyringe';
-import { ICarsRepository } from '@modules/products/repositories/ICarsRepository';
-import { CarsRepository } from '@modules/products/infra/typeorm/repositories/CarsRepository';
+import { ICarsRepository } from '@modules/products/repositories/IProductsRepository';
+import { CarsRepository } from '@modules/products/infra/typeorm/repositories/ProductsRepository';
 
 interface IRequest {
   user_id: string;

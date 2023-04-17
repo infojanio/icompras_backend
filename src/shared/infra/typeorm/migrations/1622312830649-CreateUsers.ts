@@ -18,24 +18,28 @@ export class CreateUsers1622312830649 implements MigrationInterface {
           },
 
           {
-            name: 'username',
+            name: 'email',
             type: 'varchar',
-            isUnique: true,
+          },
+
+          {
+            name: 'phone',
+            type: 'varchar',
           },
 
           {
             name: 'password',
             type: 'varchar',
           },
-
           {
-            name: 'email',
+            name: 'avatar',
             type: 'varchar',
           },
 
           {
-            name: 'driver_license',
-            type: 'varchar',
+            name: 'isActive',
+            type: 'boolean',
+            default: true,
           },
 
           {
@@ -48,6 +52,17 @@ export class CreateUsers1622312830649 implements MigrationInterface {
             name: 'created_at',
             type: 'timestamp',
             default: 'now()',
+          },
+        ],
+
+        foreignKeys: [
+          {
+            name: 'FKAddressUser',
+            referencedTableName: 'address',
+            referencedColumnNames: ['id'],
+            columnNames: ['address_id'],
+            onDelete: 'SET NULL',
+            onUpdate: 'SET NULL',
           },
         ],
       }),

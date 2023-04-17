@@ -1,6 +1,6 @@
 import { inject, injectable } from 'tsyringe';
 import { Car } from '@modules/products/infra/typeorm/entities/Product';
-import { ICarsRepository } from '@modules/products/repositories/ICarsRepository';
+import { ICarsRepository } from '@modules/products/repositories/IProductsRepository';
 import { ISpecificationsRepository } from '@modules/products/repositories/ISpecificationsRepository';
 import { AppError } from '@shared/errors/AppError';
 

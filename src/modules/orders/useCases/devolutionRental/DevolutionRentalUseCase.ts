@@ -1,4 +1,4 @@
-import { ICarsRepository } from '@modules/products/repositories/ICarsRepository';
+import { ICarsRepository } from '@modules/products/repositories/IProductsRepository';
 import { Rental } from '@modules/orders/infra/typeorm/entities/Order';
 import { IRentalsRepository } from '@modules/orders/repositories/IOrdersRepository';
 import { IDateProvider } from '@shared/container/providers/DateProvider/IDateProvider';

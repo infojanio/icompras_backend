@@ -1,3 +1,4 @@
+/*
 import { MigrationInterface, QueryRunner, TableColumn } from 'typeorm';
 
 export class AlterUserAddAvatar1622406737388 implements MigrationInterface {
@@ -16,3 +17,4 @@ export class AlterUserAddAvatar1622406737388 implements MigrationInterface {
     await queryRunner.dropColumn('users', 'avatar');
   }
 }
+*/

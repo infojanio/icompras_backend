@@ -1,3 +1,4 @@
+/*
 import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 
 export class CreateCars1623701334584 implements MigrationInterface {
@@ -79,3 +80,4 @@ export class CreateCars1623701334584 implements MigrationInterface {
     await queryRunner.dropTable('cars');
   }
 }
+*/

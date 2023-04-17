@@ -1,16 +1,16 @@
 import { ICreateCarDTO } from '@modules/products/dtos/ICreateCarDTO';
-import { ICarsRepository } from '@modules/products/repositories/ICarsRepository';
+import { IProductsRepository } from '@modules/products/repositories/IProductsRepository';
 import { getRepository, Repository } from 'typeorm';
-import { Car } from '../entities/Product';
+import { Product } from '../entities/Product';
 
-class CarsRepository implements ICarsRepository {
-  private repository: Repository<Car>;
+class ProductsRepository implements IProductsRepository {
+  private repository: Repository<Product>;
 
   constructor() {
-    this.repository = getRepository(Car);
+    this.repository = getRepository(Product);
   }
 
-  //Deve ser possível cadastrar um novo carro
+  //Deve ser possível cadastrar um novo Productro
   async create({
     name,
     description,
@@ -21,8 +21,8 @@ class CarsRepository implements ICarsRepository {
     license_plate,
     specifications,
     id,
-  }: ICreateCarDTO): Promise<Car> {
-    const car = this.repository.create({
+  }: ICreateProductDTO): Promise<Product> {
+    const product = this.repository.create({
       name,
       description,
       brand,
@@ -33,26 +33,27 @@ class CarsRepository implements ICarsRepository {
       specifications,
       id,
     });
-    await this.repository.save(car);
-    return car;
+    await this.repository.save(product);
+    return product;
   }
 
-  //Encontra carro por placa
+  /*Encontra carro por placa
   async findByLicensePlate(license_plate: string): Promise<Car | undefined> {
     const car = await this.repository.findOne({
       license_plate,
     });
     return car;
   }
+  */
 
   //ATENÇÃO: O método findAvailable retorna o filtro no console.log, mas não retorna no Insominia
 
-  // Encontra todos os carros disponíveis
+  // Encontra todos os produtos disponíveis
   async findAvailable(
     brand?: string,
     name?: string,
     category_id?: string,
-  ): Promise<Car[]> {
+  ): Promise<Product[]> {
     const carsQuery = await this.repository
       .createQueryBuilder('c')
       .where('available = :available', { available: true });
@@ -72,14 +73,14 @@ class CarsRepository implements ICarsRepository {
       carsQuery.andWhere('category_id = :category_id', { category_id });
     }
 
-    const cars = await carsQuery.getMany();
-    return cars;
+    const products = await carsQuery.getMany();
+    return products;
     //console.log(cars); No insominia não retorna os dados filtrados
   }
 
-  async findById(id: string): Promise<Car | undefined> {
-    const car = await this.repository.findOne(id);
-    return car;
+  async findById(id: string): Promise<Product | undefined> {
+    const product = await this.repository.findOne(id);
+    return product;
   }
 
   async updateAvailable(id: string, available: boolean): Promise<void> {
@@ -94,4 +95,4 @@ class CarsRepository implements ICarsRepository {
     //update cars set available = 'true' where id = :id
   }
 }
-export { CarsRepository };
+export { ProductsRepository };

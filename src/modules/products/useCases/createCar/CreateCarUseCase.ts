@@ -1,5 +1,5 @@
 import { Car } from '@modules/products/infra/typeorm/entities/Product';
-import { ICarsRepository } from '@modules/products/repositories/ICarsRepository';
+import { ICarsRepository } from '@modules/products/repositories/IProductsRepository';
 import { AppError } from '@shared/errors/AppError';
 import { inject, injectable } from 'tsyringe';
 

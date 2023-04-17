@@ -1,20 +1,22 @@
 interface ICreateUserDTO {
-  id: string;
   name: string;
   email: string;
-  password: string;
   phone: string;
+  password: string;
   avatar?: string;
-  //city_id: string;
+  isActive: boolean;
+  isAdmin: boolean;
+  address_id: string;
+}
+export { ICreateUserDTO };
+
+/* table address
+
+  city_id: string;
   cep?: number;
   district: string;
   street: string;
   complement?: string;
   longitude?: number;
   latitude?: number;
-  isActive: boolean;
-  isAdmin: boolean;
-}
-export { ICreateUserDTO };
-
-//git dev
+*/

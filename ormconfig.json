@@ -9,9 +9,10 @@
   "migrations": ["./src/shared/infra/typeorm/migrations/**.ts"],
 
   "entities": [
-    "./src/modules/cars/infra/typeorm/entities/**.ts",
-    "./src/modules/accounts/infra/typeorm/entities/**.ts",
-    "./src/modules/rentals/infra/typeorm/entities/**.ts"
+    "./src/modules/orders/infra/typeorm/entities/**.ts",
+    "./src/modules/products/infra/typeorm/entities/**.ts",
+    "./src/modules/store/infra/typeorm/entities/**.ts",
+    "./src/modules/users/infra/typeorm/entities/**.ts"
   ],
 
   "cli": {
