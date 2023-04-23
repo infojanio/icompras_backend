@@ -12,7 +12,9 @@
     "./src/modules/orders/infra/typeorm/entities/**.ts",
     "./src/modules/products/infra/typeorm/entities/**.ts",
     "./src/modules/store/infra/typeorm/entities/**.ts",
-    "./src/modules/users/infra/typeorm/entities/**.ts"
+    "./src/modules/users/infra/typeorm/entities/**.ts",
+    "./src/modules/address/infra/typeorm/entities/**.ts",
+    "./src/modules/cities/infra/typeorm/entities/**.ts"
   ],
 
   "cli": {

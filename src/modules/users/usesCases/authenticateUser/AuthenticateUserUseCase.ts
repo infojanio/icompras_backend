@@ -48,14 +48,14 @@ class AuthenticateUserUseCase {
     } = auth;
 
     if (!user) {
-      throw new AppError('Email or password incorrect!');
+      throw new AppError('EEmail or password incorrect!');
     }
 
     ////senha está correta? compara a senha com a criptografada
     const passwordMatch = await compare(password, user.password);
 
     if (!passwordMatch) {
-      throw new AppError('Email or password incorrect!');
+      throw new AppError('Email or Ppassword incorrect!');
     }
 
     const token = sign({}, secret_token, {

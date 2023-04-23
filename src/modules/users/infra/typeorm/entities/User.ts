@@ -1,4 +1,11 @@
-import { Column, CreateDateColumn, Entity, PrimaryColumn } from 'typeorm';
+import { Address } from '@modules/address/infra/typeorm/entities/Address';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  OneToMany,
+  PrimaryColumn,
+} from 'typeorm';
 import { v4 as uuidV4 } from 'uuid';
 
 @Entity('users')
@@ -27,6 +34,10 @@ class User {
   @Column()
   isAdmin: boolean;
 
+  //1 cliente pode ter muitos endereços
+  @OneToMany(() => Address, (address) => address.user)
+  addresses: Address[];
+
   @Column()
   address_id: string;
 
@@ -40,30 +51,3 @@ class User {
   }
 }
 export { User };
-
-/*
-  @ManyToOne(() => City)
-  @JoinColumn({ name: 'city_id' })
-  city: City;
-
-  @Column()
-  city_id: string;
-  
-  @Column()
-  cep: number;
-  
-  @Column()
-  district: string;
-  
-  @Column()
-  street: string;
-  
-  @Column()
-  complement: string;
-  
-  @Column()
-  latitude: number;
-  
-  @Column()
-  longitude: number;
-  */

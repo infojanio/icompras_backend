@@ -1,5 +1,12 @@
-import { Column, CreateDateColumn, Entity, PrimaryColumn } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  ManyToOne,
+  PrimaryColumn,
+} from 'typeorm';
 import { v4 as uuidV4 } from 'uuid';
+import { Category } from './Category';
 
 @Entity('subcategories')
 class SubCategory {
@@ -11,6 +18,10 @@ class SubCategory {
 
   @Column()
   image: string;
+
+  // muitos subcategorias para 1 categoria
+  @ManyToOne(() => Category, (category) => category.subcategories)
+  category: Category;
 
   @CreateDateColumn()
   created_at: Date;

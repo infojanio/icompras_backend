@@ -4,12 +4,13 @@ import { Category } from '../infra/typeorm/entities/Category';
 interface ICreateCategoryDTO {
   name: string;
   image: string;
+  subcategory_id: string;
 }
 
 interface ICategoriesRepository {
   findByName(name: string): Promise<Category | undefined>;
   list(): Promise<Category[]>;
-  create({ name, image }: ICreateCategoryDTO): Promise<void>;
+  create({ name, image, subcategory_id }: ICreateCategoryDTO): Promise<void>;
 }
 
 export { ICategoriesRepository, ICreateCategoryDTO };

@@ -7,8 +7,8 @@ class CreateUserController {
     const {
       name,
       email,
-      password,
       phone,
+      password,
       avatar,
       isActive,
       isAdmin,
@@ -19,8 +19,8 @@ class CreateUserController {
     await createUserUseCase.execute({
       name,
       email,
-      password,
       phone,
+      password,
       avatar,
       isActive,
       isAdmin,

@@ -14,6 +14,18 @@ class Specification {
   description: string;
 
   @CreateDateColumn()
+  expiration_date;
+
+  @Column()
+  unity: string;
+
+  @Column()
+  weight: string;
+
+  @Column()
+  brand: string;
+
+  @CreateDateColumn()
   created_at: Date;
 
   constructor() {

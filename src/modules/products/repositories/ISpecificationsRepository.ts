@@ -1,14 +1,20 @@
 import { Specification } from '@modules/products/infra/typeorm/entities/Specification';
 
 interface ICreateSpecificationDTO {
-  name: string;
   description: string;
+  expiration_date: Date;
+  unity: string;
+  weight: string;
+  brand: string;
 }
 
 interface ISpecificationsRepository {
   create({
     description,
-    name,
+    expiration_date,
+    unity,
+    weight,
+    brand,
   }: ICreateSpecificationDTO): Promise<Specification>;
   findByName(name: string): Promise<Specification | undefined>;
   findByIds(ids: string[]): Promise<Specification[]>;

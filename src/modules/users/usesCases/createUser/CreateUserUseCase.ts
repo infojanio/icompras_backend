@@ -14,8 +14,8 @@ class CreateUserUseCase {
   async execute({
     name,
     email,
-    password,
     phone,
+    password,
     avatar,
     isActive,
     isAdmin,
@@ -34,8 +34,8 @@ class CreateUserUseCase {
     await this.usersRepository.create({
       name,
       email,
-      password,
       phone,
+      password: passwordHash,
       avatar,
       isActive,
       isAdmin,

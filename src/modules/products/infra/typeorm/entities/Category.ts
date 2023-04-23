@@ -2,11 +2,12 @@ import {
   Column,
   CreateDateColumn,
   Entity,
-  JoinColumn,
-  ManyToOne,
+  OneToMany,
   PrimaryColumn,
 } from 'typeorm';
 import { v4 as uuidV4 } from 'uuid';
+import { SubCategory } from './SubCategory';
+import { Product } from './Product';
 
 @Entity('categories')
 class Category {
@@ -17,16 +18,21 @@ class Category {
   name: string;
 
   @Column()
-  image: string;
+  image?: string;
 
   /*
   @ManyToOne(() => Category)
   @JoinColumn({ name: 'subcategory_id' })
   category: Category;
+  */
 
-  @Column()
-  subcategory_id: string;
-*/
+  //1 cliente pode ter muitos endereços
+  @OneToMany(() => Product, (product) => product.categories)
+  products: Product[];
+
+  //1 cliente pode ter muitos endereços
+  @OneToMany(() => SubCategory, (subcategory) => subcategory.category)
+  subcategories: SubCategory[];
 
   @CreateDateColumn()
   created_at: Date;

@@ -11,6 +11,7 @@ import {
 import { v4 as uuidV4 } from 'uuid';
 import { Category } from './Category';
 import { Specification } from './Specification';
+import { Store } from '@modules/store/infra/typeorm/entities/Store';
 
 @Entity('products')
 class Product {
@@ -21,37 +22,27 @@ class Product {
   name: string;
 
   @Column()
-  description: string;
-
-  @Column()
-  daily_rate: number;
-
-  @Column()
   available: boolean;
 
   @Column()
-  license_plate: string;
+  price: number;
 
   @Column()
-  fine_amount: number;
+  quantity: number;
 
-  @Column()
-  brand: string;
-
-  @ManyToOne(() => Category)
-  @JoinColumn({ name: 'category_id' })
-  category: Category;
+  // muitos endereços para 1 cliente
+  @ManyToOne(() => Category, (category) => category.products)
+  categories: Category;
 
   @Column()
   category_id: string;
 
-  @ManyToMany(() => Specification)
-  @JoinTable({
-    name: 'specifications_cars',
-    joinColumns: [{ name: 'car_id' }],
-    inverseJoinColumns: [{ name: 'specification_id' }],
-  })
-  specifications: Specification[];
+  // muitos endereços para 1 cliente
+  @ManyToOne(() => Store, (store) => store.products)
+  stores: Store;
+
+  @Column()
+  store_id: string;
 
   @CreateDateColumn()
   created_at: Date;
@@ -64,3 +55,23 @@ class Product {
   }
 }
 export { Product };
+
+/*
+  //Muitos produtos para 1 categoria
+  @ManyToOne(() => Category)
+  @JoinColumn({ name: 'category_id' })
+  category: Category;
+
+  @Column()
+  category_id: string;
+  */
+
+/*
+  @ManyToOne(() => Specification)
+  @JoinTable({
+    name: 'specifications_products',
+    joinColumns: [{ name: 'product_id' }],
+    inverseJoinColumns: [{ name: 'specification_id' }],
+  })
+  specifications: Specification[];
+*/

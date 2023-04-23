@@ -7,16 +7,7 @@ interface ICreateUserDTO {
   isActive: boolean;
   isAdmin: boolean;
   address_id: string;
+
+  id?: string;
 }
 export { ICreateUserDTO };
-
-/* table address
-
-  city_id: string;
-  cep?: number;
-  district: string;
-  street: string;
-  complement?: string;
-  longitude?: number;
-  latitude?: number;
-*/

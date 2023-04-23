@@ -9,7 +9,7 @@ export class CreateUsers1622312830649 implements MigrationInterface {
           {
             name: 'id',
             type: 'uuid',
-            isPrimary: true, // definição da chave primária
+            isPrimary: true,
           },
 
           {
@@ -46,6 +46,12 @@ export class CreateUsers1622312830649 implements MigrationInterface {
             name: 'isAdmin',
             type: 'boolean',
             default: false,
+          },
+
+          {
+            name: 'address_id',
+            type: 'uuid',
+            isNullable: true,
           },
 
           {
