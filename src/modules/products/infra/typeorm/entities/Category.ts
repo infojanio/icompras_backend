@@ -2,6 +2,8 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
+  ManyToOne,
   OneToMany,
   PrimaryColumn,
 } from 'typeorm';
@@ -30,9 +32,21 @@ class Category {
   @OneToMany(() => Product, (product) => product.categories)
   products: Product[];
 
-  //1 cliente pode ter muitos endereços
+  //1 categoria pode ter muitas subcategorias
   @OneToMany(() => SubCategory, (subcategory) => subcategory.category)
   subcategories: SubCategory[];
+
+  @Column()
+  subcategory_id: string;
+
+  /*
+  @ManyToOne(() => SubCategory)
+  @JoinColumn({ name: 'subcategory_id' })
+  subcategory: SubCategory;
+  
+  @Column()
+  subcategory_id: string;
+  */
 
   @CreateDateColumn()
   created_at: Date;

@@ -2,6 +2,7 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
   ManyToOne,
   PrimaryColumn,
 } from 'typeorm';
@@ -22,6 +23,12 @@ class SubCategory {
   // muitos subcategorias para 1 categoria
   @ManyToOne(() => Category, (category) => category.subcategories)
   category: Category;
+
+  /*
+  @ManyToOne(() => Category)
+  @JoinColumn({ name: 'category_id' })
+  category: Category;
+  */
 
   @CreateDateColumn()
   created_at: Date;

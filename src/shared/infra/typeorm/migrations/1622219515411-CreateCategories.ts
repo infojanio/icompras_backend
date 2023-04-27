@@ -37,7 +37,7 @@ export class CreateCategories1622219515411 implements MigrationInterface {
 
         foreignKeys: [
           {
-            name: 'FKSubcategoryCategory',
+            name: 'FKSubCategoryCategory',
             referencedTableName: 'subcategories',
             referencedColumnNames: ['id'],
             columnNames: ['subcategory_id'],
