@@ -2,10 +2,12 @@ import { CreateCityController } from '@modules/cities/usesCases/createCity/Creat
 import { ensureAuthenticated } from '@shared/infra/http/middlewares/ensureAuthenticated';
 import { Router } from 'express';
 import { ensureAdmin } from '../middlewares/ensureAdmin';
+import { ListCitiesController } from '@modules/cities/usesCases/listCities/ListCitiesController';
 
 const citiesRoutes = Router();
 
 const createCityController = new CreateCityController();
+const listCitiesController = new ListCitiesController();
 
 citiesRoutes.post(
   '/',
@@ -14,11 +16,6 @@ citiesRoutes.post(
   createCityController.handle,
 );
 
-citiesRoutes.get(
-  '/',
-  ensureAuthenticated,
-  ensureAdmin,
-  createCityController.handle,
-);
+citiesRoutes.get('/', listCitiesController.handle); //não necessita estar logado
 
 export { citiesRoutes };

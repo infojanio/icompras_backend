@@ -20,15 +20,19 @@ class SubCategory {
   @Column()
   image: string;
 
-  // muitos subcategorias para 1 categoria
+  /*
   @ManyToOne(() => Category, (category) => category.subcategories)
   category: Category;
+  
+  */
 
-  /*
+  // muitos subcategorias -> 1 categoria
   @ManyToOne(() => Category)
   @JoinColumn({ name: 'category_id' })
   category: Category;
-  */
+
+  @Column()
+  category_id: string;
 
   @CreateDateColumn()
   created_at: Date;

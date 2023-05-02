@@ -4,14 +4,14 @@ import { CreateSubCategoryUseCase } from './CreateSubCategoryUseCase';
 
 class CreateSubCategoryController {
   async handle(request: Request, response: Response): Promise<Response> {
-    const { name, image } = request.body;
+    const { name, image, category_id } = request.body;
 
     //injeção de dependências
     const createSubCategoryUseCase = container.resolve(
       CreateSubCategoryUseCase,
     );
 
-    await createSubCategoryUseCase.execute({ name, image });
+    await createSubCategoryUseCase.execute({ name, image, category_id });
 
     return response.status(201).send();
   }

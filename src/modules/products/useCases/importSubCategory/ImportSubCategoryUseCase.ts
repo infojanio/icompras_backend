@@ -6,6 +6,7 @@ import { inject, injectable } from 'tsyringe';
 interface IImportSubCategory {
   name: string;
   image: string;
+  category_id: string;
 }
 
 @injectable()
@@ -27,10 +28,11 @@ class ImportSubCategoryUseCase {
 
       parseFile
         .on('data', async (line) => {
-          const [name, image] = line;
+          const [name, image, category_id] = line;
           subcategories.push({
             name,
             image,
+            category_id,
           });
         }) //aguarda o resultado de categories
         .on('end', () => {
@@ -48,7 +50,7 @@ class ImportSubCategoryUseCase {
 
     //salva no banco de dados
     subcategories.map(async (subcategory) => {
-      const { name, image } = subcategory;
+      const { name, image, category_id } = subcategory;
 
       const existSubCategory = await this.subcategoriesRepository.findByName(
         name,
@@ -58,6 +60,7 @@ class ImportSubCategoryUseCase {
         await this.subcategoriesRepository.create({
           name,
           image,
+          category_id,
         });
       }
     });

@@ -17,6 +17,7 @@ router.use('/subcategories', subcategoriesRoutes);
 router.use('/specifications', specificationsRoutes);
 router.use('/users', usersRoutes);
 router.use('/cities', citiesRoutes);
+router.use('/stores', storesRoutes);
 router.use('/products', productsRoutes);
 router.use('/orders', orderRoutes);
 router.use('/password', passwordRoutes);

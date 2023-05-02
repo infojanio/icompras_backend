@@ -28,16 +28,13 @@ class Category {
   category: Category;
   */
 
-  //1 cliente pode ter muitos endereços
+  //1 categoria -> vários produtos
   @OneToMany(() => Product, (product) => product.categories)
   products: Product[];
 
-  //1 categoria pode ter muitas subcategorias
+  //1 categoria -> várias subcategorias
   @OneToMany(() => SubCategory, (subcategory) => subcategory.category)
   subcategories: SubCategory[];
-
-  @Column()
-  subcategory_id: string;
 
   /*
   @ManyToOne(() => SubCategory)

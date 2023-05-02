@@ -12,10 +12,15 @@ class SubCategoriesRepository implements ISubCategoriesRepository {
     this.repository = getRepository(SubCategory);
   }
 
-  async create({ name, image }: ICreateSubCategoryDTO): Promise<void> {
+  async create({
+    name,
+    image,
+    category_id,
+  }: ICreateSubCategoryDTO): Promise<void> {
     const subcategory = this.repository.create({
       name,
       image,
+      category_id,
     });
 
     await this.repository.save(subcategory);

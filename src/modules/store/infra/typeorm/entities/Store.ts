@@ -4,10 +4,14 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
   OneToMany,
+  OneToOne,
   PrimaryColumn,
 } from 'typeorm';
 import { v4 as uuidV4 } from 'uuid';
+import { OpeningHours } from './OpeningHours';
+import { Banner } from './Banner';
 
 @Entity('store')
 class Store {
@@ -29,6 +33,12 @@ class Store {
   @Column()
   phone: string;
 
+  @Column()
+  isActive: boolean;
+
+  @Column()
+  isAdmin: boolean;
+
   //1 cliente pode ter muitos endereços
   @OneToMany(() => Address, (address) => address.store)
   addresses: Address[];
@@ -36,12 +46,25 @@ class Store {
   @Column()
   address_id: number;
 
+  //cada 1 supermercado -> 1 horário de atendimento
+  @OneToOne(() => Banner)
+  @JoinColumn({ name: 'banner_id' })
+  banner: Banner;
+
   @Column()
-  active: boolean;
+  banner_id: number;
 
   //1 cliente pode ter muitos endereços
   @OneToMany(() => Product, (product) => product.stores)
   products: Product[];
+
+  //cada 1 supermercado -> 1 horário de atendimento
+  @OneToOne(() => OpeningHours)
+  @JoinColumn({ name: 'opening_hours_id' })
+  opening_hours: OpeningHours;
+
+  @Column()
+  opening_hours_id: string;
 
   @CreateDateColumn()
   created_at: Date;

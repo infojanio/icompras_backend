@@ -19,12 +19,17 @@ class SubCategoriesRepositoryInMemory implements ISubCategoriesRepository {
     return all;
   }
 
-  async create({ name, image }: ICreateSubCategoryDTO): Promise<void> {
+  async create({
+    name,
+    image,
+    category_id,
+  }: ICreateSubCategoryDTO): Promise<void> {
     const subcategory = new SubCategory();
 
     Object.assign(subcategory, {
       name,
       image,
+      category_id,
     });
     this.subcategories.push(subcategory);
   }

@@ -34,8 +34,13 @@ class CitiesRepository implements ICitiesRepository {
     const city = await this.repository.findOne({
       where: { name },
     });
-    console.log(city);
+    // console.log(city);
     return city;
+  }
+
+  async list(): Promise<City[]> {
+    const cities = await this.repository.find();
+    return cities;
   }
   /*
   async findById(id: string): Promise<City | undefined> {

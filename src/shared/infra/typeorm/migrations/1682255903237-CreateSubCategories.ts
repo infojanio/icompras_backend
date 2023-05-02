@@ -23,9 +23,26 @@ export class CreateSubCategories1682255903237 implements MigrationInterface {
           },
 
           {
+            name: 'category_id',
+            type: 'uuid',
+            isNullable: true,
+          },
+
+          {
             name: 'created_at',
             type: 'timestamp',
             default: 'now()',
+          },
+        ],
+
+        foreignKeys: [
+          {
+            name: 'FKCategorySubCategory',
+            referencedTableName: 'categories',
+            referencedColumnNames: ['id'],
+            columnNames: ['category_id'],
+            onDelete: 'SET NULL',
+            onUpdate: 'SET NULL',
           },
         ],
       }),
