@@ -29,6 +29,12 @@ export class CreateSubCategories1682255903237 implements MigrationInterface {
           },
 
           {
+            name: 'tenant_id',
+            type: 'uuid',
+            isNullable: true,
+          },
+
+          {
             name: 'created_at',
             type: 'timestamp',
             default: 'now()',
@@ -41,6 +47,15 @@ export class CreateSubCategories1682255903237 implements MigrationInterface {
             referencedTableName: 'categories',
             referencedColumnNames: ['id'],
             columnNames: ['category_id'],
+            onDelete: 'SET NULL',
+            onUpdate: 'SET NULL',
+          },
+
+          {
+            name: 'FKTenantCategory',
+            referencedTableName: 'tenants',
+            referencedColumnNames: ['id'],
+            columnNames: ['tenant_id'],
             onDelete: 'SET NULL',
             onUpdate: 'SET NULL',
           },

@@ -33,9 +33,9 @@ export class CreateOpeningHours1682790883431 implements MigrationInterface {
           },
 
           {
-            name: 'isActive',
-            type: 'boolean',
-            default: true,
+            name: 'status',
+            type: 'varchar',
+            isNullable: true,
           },
 
           {

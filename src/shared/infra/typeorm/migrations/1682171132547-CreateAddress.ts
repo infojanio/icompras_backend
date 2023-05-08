@@ -13,27 +13,18 @@ export class CreateAddress1682171132547 implements MigrationInterface {
           },
 
           {
-            name: 'name',
+            name: 'district',
             type: 'varchar',
           },
 
           {
-            name: 'uf',
+            name: 'street',
             type: 'varchar',
           },
 
           {
-            name: 'cep',
+            name: 'complement',
             type: 'varchar',
-          },
-
-          {
-            name: 'longitude',
-            type: 'numeric',
-          },
-          {
-            name: 'latitude',
-            type: 'numeric',
           },
 
           {
@@ -58,7 +49,7 @@ export class CreateAddress1682171132547 implements MigrationInterface {
         foreignKeys: [
           {
             name: 'FKCityAddress',
-            referencedTableName: 'city',
+            referencedTableName: 'cities',
             referencedColumnNames: ['id'],
             columnNames: ['city_id'],
             onDelete: 'SET NULL',

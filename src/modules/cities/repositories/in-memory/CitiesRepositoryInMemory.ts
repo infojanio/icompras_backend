@@ -34,5 +34,10 @@ class CitiesRepositoryInMemory implements ICitiesRepository {
   async findById(id: string): Promise<City | undefined> {
     return this.cities.find((city) => city.id === id);
   }
+
+  async list(): Promise<City[]> {
+    const all = this.cities;
+    return all;
+  }
 }
 export { CitiesRepositoryInMemory };

@@ -1,9 +1,11 @@
 import { Address } from '@modules/address/infra/typeorm/entities/Address';
+import { MapLocation } from '@modules/maplocations/infra/typeorm/entities/MapLocation';
 import {
   Column,
   CreateDateColumn,
   Entity,
   OneToMany,
+  OneToOne,
   PrimaryColumn,
 } from 'typeorm';
 import { v4 as uuidV4 } from 'uuid';
@@ -29,6 +31,9 @@ class User {
   avatar: string;
 
   @Column()
+  type: 'funcionario' | 'cliente';
+
+  @Column()
   isActive: boolean;
 
   @Column()
@@ -38,8 +43,9 @@ class User {
   @OneToMany(() => Address, (address) => address.user)
   addresses: Address[];
 
-  @Column()
-  address_id: string;
+  //1 cliente pode ter muitos endereços
+  @OneToMany(() => MapLocation, (maplocation) => maplocation.user)
+  maplocations: MapLocation[];
 
   @CreateDateColumn()
   created_at: Date;

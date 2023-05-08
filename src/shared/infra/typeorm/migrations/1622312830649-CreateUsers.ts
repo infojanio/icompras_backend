@@ -10,30 +10,45 @@ export class CreateUsers1622312830649 implements MigrationInterface {
             name: 'id',
             type: 'uuid',
             isPrimary: true,
+            isNullable: false,
+            //   generationStrategy: "uuid",
+            //   default: "uuid_generate_v4()"
           },
 
           {
             name: 'name',
             type: 'varchar',
+            isNullable: false,
           },
 
           {
             name: 'email',
             type: 'varchar',
+            isNullable: false,
+            isUnique: true,
           },
 
           {
             name: 'phone',
             type: 'varchar',
+            isNullable: false,
           },
 
           {
             name: 'password',
             type: 'varchar',
+            isNullable: false,
           },
           {
             name: 'avatar',
             type: 'varchar',
+            isNullable: true,
+          },
+
+          {
+            name: 'type',
+            type: 'varchar',
+            isNullable: false,
           },
 
           {
@@ -49,26 +64,9 @@ export class CreateUsers1622312830649 implements MigrationInterface {
           },
 
           {
-            name: 'address_id',
-            type: 'uuid',
-            isNullable: true,
-          },
-
-          {
             name: 'created_at',
             type: 'timestamp',
             default: 'now()',
-          },
-        ],
-
-        foreignKeys: [
-          {
-            name: 'FKAddressUser',
-            referencedTableName: 'address',
-            referencedColumnNames: ['id'],
-            columnNames: ['address_id'],
-            onDelete: 'SET NULL',
-            onUpdate: 'SET NULL',
           },
         ],
       }),

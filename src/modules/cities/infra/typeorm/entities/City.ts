@@ -8,7 +8,7 @@ import {
 } from 'typeorm';
 import { v4 as uuidV4 } from 'uuid';
 
-@Entity('city')
+@Entity('cities')
 class City {
   @PrimaryColumn()
   id: string;
@@ -21,12 +21,6 @@ class City {
 
   @Column()
   cep: string;
-
-  @Column()
-  longitude: number;
-
-  @Column()
-  latitude: number;
 
   @Column()
   isActive: boolean;

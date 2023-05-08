@@ -42,11 +42,10 @@ class CitiesRepository implements ICitiesRepository {
     const cities = await this.repository.find();
     return cities;
   }
-  /*
+
   async findById(id: string): Promise<City | undefined> {
     const city = await this.repository.findOne(id);
     return city;
   }
-  */
 }
 export { CitiesRepository };

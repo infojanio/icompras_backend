@@ -8,6 +8,7 @@ import {
 } from 'typeorm';
 import { v4 as uuidV4 } from 'uuid';
 import { Category } from './Category';
+import { Tenant } from '@modules/tenants/infra/typeorm/entities/Tenant';
 
 @Entity('subcategories')
 class SubCategory {
@@ -20,12 +21,6 @@ class SubCategory {
   @Column()
   image: string;
 
-  /*
-  @ManyToOne(() => Category, (category) => category.subcategories)
-  category: Category;
-  
-  */
-
   // muitos subcategorias -> 1 categoria
   @ManyToOne(() => Category)
   @JoinColumn({ name: 'category_id' })
@@ -33,6 +28,14 @@ class SubCategory {
 
   @Column()
   category_id: string;
+
+  //muitas subcategorias para 1 estabelecimento
+  @ManyToOne(() => Tenant)
+  @JoinColumn({ name: 'tenant_id' })
+  tenant: Tenant;
+
+  @Column()
+  tenant_id: string;
 
   @CreateDateColumn()
   created_at: Date;

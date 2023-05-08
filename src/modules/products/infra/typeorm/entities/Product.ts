@@ -11,7 +11,7 @@ import {
 import { v4 as uuidV4 } from 'uuid';
 import { Category } from './Category';
 import { Specification } from './Specification';
-import { Store } from '@modules/store/infra/typeorm/entities/Store';
+import { Store } from '@modules/stores/infra/typeorm/entities/Store';
 
 @Entity('products')
 class Product {

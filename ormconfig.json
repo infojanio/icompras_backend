@@ -9,12 +9,15 @@
   "migrations": ["./src/shared/infra/typeorm/migrations/**.ts"],
 
   "entities": [
+    "./src/modules/address/infra/typeorm/entities/**.ts",
+    "./src/modules/cities/infra/typeorm/entities/**.ts",
+    "./src/modules/companies/infra/typeorm/entities/**.ts",
+    "./src/modules/maplocations/infra/typeorm/entities/**.ts",
     "./src/modules/orders/infra/typeorm/entities/**.ts",
     "./src/modules/products/infra/typeorm/entities/**.ts",
-    "./src/modules/store/infra/typeorm/entities/**.ts",
+    "./src/modules/stores/infra/typeorm/entities/**.ts",
     "./src/modules/users/infra/typeorm/entities/**.ts",
-    "./src/modules/address/infra/typeorm/entities/**.ts",
-    "./src/modules/cities/infra/typeorm/entities/**.ts"
+    "./src/modules/tenants/infra/typeorm/entities/**.ts"
   ],
 
   "cli": {
