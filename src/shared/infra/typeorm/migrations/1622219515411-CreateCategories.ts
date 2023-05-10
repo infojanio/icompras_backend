@@ -18,14 +18,31 @@ export class CreateCategories1622219515411 implements MigrationInterface {
           },
 
           {
-            name: 'description',
+            name: 'image',
             type: 'varchar',
+          },
+
+          {
+            name: 'tenant_id',
+            type: 'uuid',
+            isNullable: true,
           },
 
           {
             name: 'created_at',
             type: 'timestamp',
             default: 'now()',
+          },
+        ],
+
+        foreignKeys: [
+          {
+            name: 'FKTenantCategory',
+            referencedTableName: 'tenants',
+            referencedColumnNames: ['id'],
+            columnNames: ['tenant_id'],
+            onDelete: 'SET NULL',
+            onUpdate: 'SET NULL',
           },
         ],
       }),

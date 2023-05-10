@@ -9,33 +9,52 @@ export class CreateUsers1622312830649 implements MigrationInterface {
           {
             name: 'id',
             type: 'uuid',
-            isPrimary: true, // definição da chave primária
+            isPrimary: true,
+            isNullable: false,
+            //   generationStrategy: "uuid",
+            //   default: "uuid_generate_v4()"
           },
 
           {
             name: 'name',
             type: 'varchar',
-          },
-
-          {
-            name: 'username',
-            type: 'varchar',
-            isUnique: true,
-          },
-
-          {
-            name: 'password',
-            type: 'varchar',
+            isNullable: false,
           },
 
           {
             name: 'email',
             type: 'varchar',
+            isNullable: false,
+            isUnique: true,
           },
 
           {
-            name: 'driver_license',
+            name: 'phone',
             type: 'varchar',
+            isNullable: false,
+          },
+
+          {
+            name: 'password',
+            type: 'varchar',
+            isNullable: false,
+          },
+          {
+            name: 'avatar',
+            type: 'varchar',
+            isNullable: true,
+          },
+
+          {
+            name: 'type',
+            type: 'varchar',
+            isNullable: false,
+          },
+
+          {
+            name: 'isActive',
+            type: 'boolean',
+            default: true,
           },
 
           {

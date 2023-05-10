@@ -1,25 +1,69 @@
 import { container } from 'tsyringe';
 import '@shared/container/providers';
 
-import { UsersRepository } from '@modules/accounts/infra/typeorm/repositories/UsersRepository';
-import { IUsersRepository } from '@modules/accounts/repositories/IUsersRepository';
-import { ICategoriesRepository } from '@modules/cars/repositories/ICategoriesRepository';
-import { CategoriesRepository } from '@modules/cars/infra/typeorm/repositories/CategoriesRepository';
+import { IUsersRepository } from '@modules/users/repositories/IUsersRepository';
+import { UsersRepository } from '@modules/users/infra/typeorm/repositories/UsersRepository';
 
-import { ISpecificationsRepository } from '@modules/cars/repositories/ISpecificationsRepository';
-import { SpecificationsRepository } from '@modules/cars/infra/typeorm/repositories/SpecificationsRepository';
-import { CarsRepository } from '@modules/cars/infra/typeorm/repositories/CarsRepository';
-import { ICarsRepository } from '@modules/cars/repositories/ICarsRepository';
-import { ICarsImagesRepository } from '@modules/cars/repositories/ICarsImagesRepository';
-import { CarsImagesRepository } from '@modules/cars/infra/typeorm/repositories/CarsImagesRepository';
-import { IRentalsRepository } from '@modules/rentals/repositories/IRentalsRepository';
-import { RentalsRepository } from '@modules/rentals/infra/typeorm/repositories/RentalsRepository';
-import { UsersTokensRepository } from '@modules/accounts/infra/typeorm/repositories/UsersTokensRepository';
-import { IUsersTokensRepository } from '@modules/accounts/repositories/IUsersTokensRepository';
+import { ICategoriesRepository } from '@modules/products/repositories/ICategoriesRepository';
+import { CategoriesRepository } from '@modules/products/infra/typeorm/repositories/CategoriesRepository';
+
+import { ISubCategoriesRepository } from '@modules/products/repositories/ISubCategoriesRepository';
+import { SubCategoriesRepository } from '@modules/products/infra/typeorm/repositories/SubCategoriesRepository';
+
+import { IProductsImagesRepository } from '@modules/products/repositories/IProductsImagesRepository';
+import { ProductsImagesRepository } from '@modules/products/infra/typeorm/repositories/ProductsImagesRepository';
+
+import { IUsersTokensRepository } from '@modules/users/repositories/IUsersTokensRepository';
+import { UsersTokensRepository } from '@modules/users/infra/typeorm/repositories/UsersTokensRepository';
+
+import { ICitiesRepository } from '@modules/cities/repositories/ICitiesRepository';
+import { CitiesRepository } from '@modules/cities/infra/typeorm/repositories/CitiesRepository';
+
+import { ISpecificationsRepository } from '@modules/products/repositories/ISpecificationsRepository';
+import { SpecificationsRepository } from '@modules/products/infra/typeorm/repositories/SpecificationsRepository';
+
+import { IProductsRepository } from '@modules/products/repositories/IProductsRepository';
+import { ProductsRepository } from '@modules/products/infra/typeorm/repositories/ProductsRepository';
+
+import { IOrdersRepository } from '@modules/orders/repositories/IOrdersRepository';
+import { OrdersRepository } from '@modules/orders/infra/typeorm/repositories/OrdersRepository';
+import { StoreRepository } from '@modules/stores/infra/typeorm/repositories/StoreRepository';
+import { IStoresRepository } from '@modules/stores/repositories/IStoresRepository';
+import { ICompaniesRepository } from '@modules/companies/repositories/ICompaniesRepository';
+
+container.registerSingleton<IUsersRepository>(
+  'UsersRepository',
+  UsersRepository,
+);
+
+container.registerSingleton<IUsersTokensRepository>(
+  'UsersTokensRepository',
+  UsersTokensRepository,
+);
 
 container.registerSingleton<ICategoriesRepository>(
   'CategoriesRepository',
   CategoriesRepository,
+);
+
+container.registerSingleton<ISubCategoriesRepository>(
+  'SubCategoriesRepository',
+  SubCategoriesRepository,
+);
+
+container.registerSingleton<ICitiesRepository>(
+  'CitiesRepository',
+  CitiesRepository,
+);
+
+container.registerSingleton<IStoresRepository>(
+  'StoreRepository',
+  StoreRepository,
+);
+
+container.registerSingleton<ICompaniesRepository>(
+  'CompaniesRepository',
+  CompaniesRepository,
 );
 
 container.registerSingleton<ISpecificationsRepository>(
@@ -27,24 +71,19 @@ container.registerSingleton<ISpecificationsRepository>(
   SpecificationsRepository,
 );
 
-container.registerSingleton<IUsersRepository>(
-  'UsersRepository',
-  UsersRepository,
+container.registerSingleton<IProductsRepository>(
+  'ProductsRepository',
+  ProductsRepository,
 );
 
-container.registerSingleton<ICarsRepository>('CarsRepository', CarsRepository);
-
-container.registerSingleton<ICarsImagesRepository>(
-  'CarsImagesRepository',
-  CarsImagesRepository,
+container.registerSingleton<IProductsImagesRepository>(
+  'ProductsImagesRepository',
+  ProductsImagesRepository,
 );
 
-container.registerSingleton<IRentalsRepository>(
-  'RentalsRepository',
-  RentalsRepository,
+/*
+container.registerSingleton<IOrdersRepository>(
+  'OrdersRepository',
+  OrdersRepository,
 );
-
-container.registerSingleton<IUsersTokensRepository>(
-  'UsersTokensRepository',
-  UsersTokensRepository,
-);
+*/

@@ -1,5 +1,5 @@
-import { CreateUserController } from '@modules/accounts/usesCases/createUser/CreateUserController';
-import { UpdateUserAvatarController } from '@modules/accounts/usesCases/updateUserAvatar/UpdateUserAvatarController';
+import { CreateUserController } from '@modules/users/usesCases/createUser/CreateUserController';
+import { UpdateUserAvatarController } from '@modules/users/usesCases/updateUserAvatar/UpdateUserAvatarController';
 import { ensureAuthenticated } from '@shared/infra/http/middlewares/ensureAuthenticated';
 import { Router } from 'express';
 import multer from 'multer';
