@@ -1,88 +1,17 @@
-# Cadastro de carros
+REQUISITOS FUNCIONAIS 
 
-**RF**
-[ok]Deve ser possível cadastrar um novo carro.
+- Registro de usuários: o sistema deve permitir que os usuários criem uma conta com informações pessoais e de pagamento, para que possam realizar pedidos futuros sem a necessidade de inserir novamente esses dados.
 
-**RN**
-[ok]Não deve ser possível cadastrar um carro com placa já existente.
-[ok]O carro deve estar disponível por padrão.
-[ok]O usuário responsável pelo cadastro deve ser um administrador.
+- Busca e seleção de produtos: o sistema deve permitir que os usuários naveguem por uma lista de produtos e selecionem os itens que desejam comprar. Isso pode incluir a capacidade de filtrar produtos por categoria, marca, preço, entre outros.
 
-# Listagem de carros
+- Carrinho de compras: o sistema deve permitir que os usuários adicionem produtos ao carrinho de compras, visualizem os itens selecionados e editem ou removam produtos conforme necessário.
 
-**RF**
-[ok]Deve ser possível listar todos os carros disponíveis.
-[ok]Deve ser possível listar todos os carros disponíveis pelo nome da categoria.
-[ok]Deve ser possível listar todos os carros disponíveis pelo nome da marca.
-[ok]Deve ser possível listar todos os carros disponíveis pelo nome do carro.
+- Processamento de pagamentos: o sistema deve permitir que os usuários paguem por seus pedidos usando um método de pagamento seguro e confiável, como cartão de crédito, débito ou carteira virtual.
 
-**RN**
-[]O usuário não precisa estar logado no sistema.
+- Rastreamento de pedidos: o sistema deve permitir que os usuários rastreiem o status de seus pedidos em tempo real, desde o momento da confirmação do pedido até a entrega.
 
-# Cadastro de especificação no carro
+- Gerenciamento de entregas: o sistema deve permitir que os usuários selecionem um horário de entrega conveniente e rastreiem a localização do entregador em tempo real. Também deve permitir que os usuários entrem em contato com o entregador, caso necessário.
 
-**RF**
-[ok]Deve ser possível cadastrar uma especificação para um carro.
-[]Deve ser possível listar todas as especificações.
-[ok]Deve ser possível listar todos os carros.
+- Gerenciamento de estoque: o sistema deve manter um registro atualizado do estoque de produtos disponíveis para venda, atualizando em tempo real a disponibilidade de itens e notificando quando um produto está prestes a ficar fora de estoque.
 
-**RN**
-[]Não deve ser possível cadastrar uma especificação para um carro não cadastrado.
-[]Não deve ser possível cadastrar uma especificação já existente para o mesmo carro.
-[ok]O usuário responsável pelo cadastro deve ser um administrador.
-
-# Cadastro de imagens do carro
-
-**RF**
-[ok]Deve ser possível cadastrar a imagem do carro.
-
-**RNF**
-[ok]Utilizar o multer para upload de arquivos.
-
-**RN**
-[ok]O usuário pode cadastrar mais de uma imagem para o mesmo carro.
-[ok]O usuário responsável pelo cadastro deve ser um administrador.
-
-# Aluguel de carro
-
-**RF**
-[ok]Deve ser possível cadastrar um aluguel
-
-**RN**
-[]O aluguel deve ter duração mínima de 24h.
-[ok]Não deve ser possível cadastrar um novo aluguel caso já exista um aberto para o mesmo usuario.
-[ok]Não deve ser possível cadastrar um novo aluguel caso já exista um aberto para o mesmo carro.
-[ok] O usuário deve estar logado na aplicação
-[ok] Ao realizar o aluguel de um carro o status deverá ser alterado para indisponível.
-
-# Aluguel de carro
-
-**RF**
-[ok]Deve ser possível realizar a devolução de um carro
-
-**RN**
-[ok] Se o carro for devolvido com menos de 24h, deverá ser cobrado diária completa.
-[ok] Ao realizar a devolução, o carro deverá ser liberado para outro aluguel.
-[ok] Ao realizar a devolução, o usuário deverá ser liberado para outro aluguel.
-[ok] Ao realizar a devolução, deverá ser calculado o total do aluguel.
-[ok] Caso o horário de devolução seja superior ao horário previsto de entrega, deverá ser cobrado multa proporcional aos dias de atraso.
-[ok] Caso haja multa, deverá ser somado ao total do aluguel.
-
-# Listagem de alugueis para usuário
-
-**RF**
-[ok] Deve ser possível realizar a busca de todos os alugueis para o usuário.
-
-**RN**
-[ok] O usuário deve estar logado na aplicação.
-
-# Recuperar senha
-
-**RF**
-[] Deve ser possível o usuário recuperar senha usando o e-mail.
-[] O usuário deve receber um e-mail com o passo a passo para a recuperação da senha.
-[] O usuário deve conseguir inserir uma nova senha.
-
-**RN**
-[] O usuário precisa informar uma nova senha.
-[] O link enviado para a recuperação deve expirar em 3 horas.
+- Relatórios de vendas: o sistema deve gerar relatórios de vendas e transações, permitindo que os gerentes de supermercados visualizem o desempenho do negócio e tomem decisões informadas sobre compras futuras, promoções e outras estratégias de vendas.
