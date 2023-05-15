@@ -39,30 +39,3 @@ class OpeningHours {
   }
 }
 export { OpeningHours };
-
-/*
-    @ManyToOne(() => Banner)
-    @JoinColumn({ name: 'banner_id' })
-    banner: Banner;
-  
-    @Column()
-    banner_id: string;
-  */
-
-/*
-    @OneToMany(() => City)
-    @JoinColumn({ name: 'city_id' })
-    city: City;
-  
-    @Column()
-    city_id: string;
-  */
-
-/*
-    @OneToOne(() => Address)
-    @JoinColumn({ name: 'address_id' })
-    address: Address;
-  
-    @Column()
-    address_id: string;
-  */

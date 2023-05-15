@@ -10,6 +10,7 @@ export class CreateCompanies1683485851960 implements MigrationInterface {
             name: 'id',
             type: 'uuid',
             isPrimary: true,
+            isNullable: false,
           },
 
           {
@@ -61,6 +62,12 @@ export class CreateCompanies1683485851960 implements MigrationInterface {
           },
 
           {
+            name: 'openinghours_id',
+            type: 'uuid',
+            isNullable: false,
+          },
+
+          {
             name: 'tenant_id',
             type: 'uuid',
             isNullable: false,
@@ -88,6 +95,15 @@ export class CreateCompanies1683485851960 implements MigrationInterface {
             referencedTableName: 'banners',
             referencedColumnNames: ['id'],
             columnNames: ['banner_id'],
+            onDelete: 'SET NULL',
+            onUpdate: 'SET NULL',
+          },
+
+          {
+            name: 'FKOpeninghoursCompanies',
+            referencedTableName: 'openinghours',
+            referencedColumnNames: ['id'],
+            columnNames: ['openinghours_id'],
             onDelete: 'SET NULL',
             onUpdate: 'SET NULL',
           },

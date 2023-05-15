@@ -1,7 +1,6 @@
 interface ICreateCompanyDTO {
-  id?: string;
   name: string;
-  slug?: string;
+  slug: string;
   email: string;
   cnpj: string;
   phone: string;
@@ -10,6 +9,7 @@ interface ICreateCompanyDTO {
   address_id: string;
   banner_id: string;
   openinghours_id: string;
+  tenant_id: string;
 }
 export { ICreateCompanyDTO };
 

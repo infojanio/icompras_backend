@@ -39,13 +39,6 @@ class Store {
   @Column()
   isAdmin: boolean;
 
-  //1 cliente pode ter muitos endereços
-  @OneToMany(() => Address, (address) => address.store)
-  addresses: Address[];
-
-  @Column()
-  address_id: number;
-
   //cada 1 supermercado -> 1 horário de atendimento
   @OneToOne(() => Banner)
   @JoinColumn({ name: 'banner_id' })

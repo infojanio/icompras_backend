@@ -21,6 +21,11 @@ class Banner {
 
   @Column()
   image: string;
+
+  @OneToOne(() => Banner)
+  @JoinColumn({ name: 'banner_id' })
+  banner: Banner;
+
   @CreateDateColumn()
   created_at: Date;
 
@@ -31,30 +36,3 @@ class Banner {
   }
 }
 export { Banner };
-
-/*
-    @ManyToOne(() => Banner)
-    @JoinColumn({ name: 'banner_id' })
-    banner: Banner;
-  
-    @Column()
-    banner_id: string;
-  */
-
-/*
-    @OneToMany(() => City)
-    @JoinColumn({ name: 'city_id' })
-    city: City;
-  
-    @Column()
-    city_id: string;
-  */
-
-/*
-    @OneToOne(() => Address)
-    @JoinColumn({ name: 'address_id' })
-    address: Address;
-  
-    @Column()
-    address_id: string;
-  */

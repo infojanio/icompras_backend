@@ -49,19 +49,20 @@ class Company {
   banner: Banner;
 
   @Column()
-  banner_id: number;
+  banner_id: string;
 
+  /*
   //1 cliente pode ter muitos endereços
-  @OneToMany(() => Product, (product) => product.stores)
+  @OneToMany(() => Product, (product) => product.company)
   products: Product[];
-
+*/
   //cada 1 supermercado -> 1 horário de atendimento
   @OneToOne(() => OpeningHours)
-  @JoinColumn({ name: 'opening_hours_id' })
+  @JoinColumn({ name: 'openinghours_id' })
   opening_hours: OpeningHours;
 
   @Column()
-  opening_hours_id: string;
+  openinghours_id: string;
 
   @CreateDateColumn()
   created_at: Date;
@@ -73,30 +74,3 @@ class Company {
   }
 }
 export { Company };
-
-/*
-    @ManyToOne(() => Banner)
-    @JoinColumn({ name: 'banner_id' })
-    banner: Banner;
-  
-    @Column()
-    banner_id: string;
-  */
-
-/*
-    @OneToMany(() => City)
-    @JoinColumn({ name: 'city_id' })
-    city: City;
-  
-    @Column()
-    city_id: string;
-  */
-
-/*
-    @OneToOne(() => Address)
-    @JoinColumn({ name: 'address_id' })
-    address: Address;
-  
-    @Column()
-    address_id: string;
-  */
