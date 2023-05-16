@@ -14,6 +14,7 @@ import { Specification } from './Specification';
 
 import { Company } from '@modules/companies/infra/typeorm/entities/Company';
 import { SubCategory } from './SubCategory';
+import { Tenant } from '@modules/tenants/infra/typeorm/entities/Tenant';
 
 @Entity('products')
 class Product {
@@ -45,6 +46,14 @@ class Product {
 
   @Column()
   company_id: string;
+
+  //muitos produtos para 1 tipo de locatário
+  @ManyToOne(() => Tenant)
+  @JoinColumn({ name: 'tenant_id' })
+  tenant: Tenant;
+
+  @Column()
+  tenant_id: string;
 
   @CreateDateColumn()
   created_at: Date;

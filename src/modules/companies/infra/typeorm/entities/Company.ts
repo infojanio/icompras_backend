@@ -5,6 +5,7 @@ import {
   CreateDateColumn,
   Entity,
   JoinColumn,
+  ManyToOne,
   OneToMany,
   OneToOne,
   PrimaryColumn,
@@ -12,6 +13,7 @@ import {
 import { v4 as uuidV4 } from 'uuid';
 import { OpeningHours } from './OpeningHours';
 import { Banner } from './Banner';
+import { Tenant } from '@modules/tenants/infra/typeorm/entities/Tenant';
 
 @Entity('companies')
 class Company {
@@ -25,6 +27,9 @@ class Company {
   slug: string;
 
   @Column()
+  cnpj: string;
+
+  @Column()
   email: string;
 
   @Column()
@@ -33,15 +38,12 @@ class Company {
   @Column()
   isActive: boolean;
 
-  @Column()
-  isAdmin: boolean;
-
   //1 cliente pode ter muitos endereços
   @OneToMany(() => Address, (address) => address.company)
   addresses: Address[];
 
   @Column()
-  address_id: number;
+  address_id: string;
 
   //cada 1 supermercado -> 1 horário de atendimento
   @OneToOne(() => Banner)
@@ -62,6 +64,14 @@ class Company {
 
   @Column()
   openinghours_id: string;
+
+  //cada 1 supermercado -> 1 horário de atendimento
+  @ManyToOne(() => Tenant)
+  @JoinColumn({ name: 'tenant_id' })
+  tenant: Tenant;
+
+  @Column()
+  tenant_id: string;
 
   @CreateDateColumn()
   created_at: Date;
