@@ -34,13 +34,19 @@ export class CreateProducts1623701334584 implements MigrationInterface {
           },
 
           {
-            name: 'category_id',
+            name: 'subcategory_id',
             type: 'uuid',
             isNullable: true,
           },
 
           {
-            name: 'store_id',
+            name: 'company_id',
+            type: 'uuid',
+            isNullable: true,
+          },
+
+          {
+            name: 'tenant_id',
             type: 'uuid',
             isNullable: true,
           },
@@ -54,19 +60,28 @@ export class CreateProducts1623701334584 implements MigrationInterface {
 
         foreignKeys: [
           {
-            name: 'FKCategoryProduct',
-            referencedTableName: 'categories',
+            name: 'FKSubCategoryProduct',
+            referencedTableName: 'subcategories',
             referencedColumnNames: ['id'],
-            columnNames: ['category_id'],
+            columnNames: ['subcategory_id'],
             onDelete: 'SET NULL',
             onUpdate: 'SET NULL',
           },
 
           {
-            name: 'FKStoreProduct',
-            referencedTableName: 'stores',
+            name: 'FKCompanyProduct',
+            referencedTableName: 'companies',
             referencedColumnNames: ['id'],
-            columnNames: ['store_id'],
+            columnNames: ['company_id'],
+            onDelete: 'SET NULL',
+            onUpdate: 'SET NULL',
+          },
+
+          {
+            name: 'FKTenantCategory',
+            referencedTableName: 'tenants',
+            referencedColumnNames: ['id'],
+            columnNames: ['tenant_id'],
             onDelete: 'SET NULL',
             onUpdate: 'SET NULL',
           },

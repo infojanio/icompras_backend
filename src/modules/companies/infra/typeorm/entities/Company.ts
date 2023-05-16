@@ -51,15 +51,14 @@ class Company {
   @Column()
   banner_id: string;
 
-  /*
-  //1 cliente pode ter muitos endereços
+  //1 empresa pode ter muitos produtos
   @OneToMany(() => Product, (product) => product.company)
   products: Product[];
-*/
+
   //cada 1 supermercado -> 1 horário de atendimento
   @OneToOne(() => OpeningHours)
   @JoinColumn({ name: 'openinghours_id' })
-  opening_hours: OpeningHours;
+  openinghours: OpeningHours;
 
   @Column()
   openinghours_id: string;

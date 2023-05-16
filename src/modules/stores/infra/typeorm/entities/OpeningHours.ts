@@ -1,10 +1,9 @@
-import { Address } from '@modules/address/infra/typeorm/entities/Address';
-import { Product } from '@modules/products/infra/typeorm/entities/Product';
 import {
   Column,
   CreateDateColumn,
   Entity,
   OneToMany,
+  OneToOne,
   PrimaryColumn,
 } from 'typeorm';
 import { v4 as uuidV4 } from 'uuid';

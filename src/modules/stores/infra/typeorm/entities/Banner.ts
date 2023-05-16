@@ -11,7 +11,7 @@ import {
 } from 'typeorm';
 import { v4 as uuidV4 } from 'uuid';
 
-@Entity('banner')
+@Entity('banners')
 class Banner {
   @PrimaryColumn()
   id: string;

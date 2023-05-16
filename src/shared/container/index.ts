@@ -27,9 +27,9 @@ import { ProductsRepository } from '@modules/products/infra/typeorm/repositories
 
 import { IOrdersRepository } from '@modules/orders/repositories/IOrdersRepository';
 import { OrdersRepository } from '@modules/orders/infra/typeorm/repositories/OrdersRepository';
-import { StoreRepository } from '@modules/stores/infra/typeorm/repositories/StoreRepository';
-import { IStoresRepository } from '@modules/stores/repositories/IStoresRepository';
+
 import { ICompaniesRepository } from '@modules/companies/repositories/ICompaniesRepository';
+import { CompaniesRepository } from '@modules/companies/infra/typeorm/repositories/CompaniesRepository';
 
 container.registerSingleton<IUsersRepository>(
   'UsersRepository',
@@ -54,11 +54,6 @@ container.registerSingleton<ISubCategoriesRepository>(
 container.registerSingleton<ICitiesRepository>(
   'CitiesRepository',
   CitiesRepository,
-);
-
-container.registerSingleton<IStoresRepository>(
-  'StoreRepository',
-  StoreRepository,
 );
 
 container.registerSingleton<ICompaniesRepository>(

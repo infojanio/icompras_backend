@@ -1,6 +1,5 @@
 import { City } from '@modules/cities/infra/typeorm/entities/City';
 import { Company } from '@modules/companies/infra/typeorm/entities/Company';
-import { Store } from '@modules/stores/infra/typeorm/entities/Store';
 import { User } from '@modules/users/infra/typeorm/entities/User';
 import {
   Column,
@@ -13,7 +12,7 @@ import {
 } from 'typeorm';
 import { v4 as uuidV4 } from 'uuid';
 
-@Entity('addresses')
+@Entity('address')
 class Address {
   @PrimaryColumn()
   id: string;

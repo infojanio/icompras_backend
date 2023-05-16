@@ -51,14 +51,14 @@ class Store {
   @OneToMany(() => Product, (product) => product.stores)
   products: Product[];
 
-  //cada 1 supermercado -> 1 horário de atendimento
+  /*cada 1 supermercado -> 1 horário de atendimento
   @OneToOne(() => OpeningHours)
   @JoinColumn({ name: 'opening_hours_id' })
   opening_hours: OpeningHours;
 
   @Column()
   opening_hours_id: string;
-
+*/
   @CreateDateColumn()
   created_at: Date;
 

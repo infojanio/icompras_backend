@@ -4,11 +4,13 @@ import {
   Entity,
   JoinColumn,
   ManyToOne,
+  OneToMany,
   PrimaryColumn,
 } from 'typeorm';
 import { v4 as uuidV4 } from 'uuid';
 import { Category } from './Category';
 import { Tenant } from '@modules/tenants/infra/typeorm/entities/Tenant';
+import { Product } from './Product';
 
 @Entity('subcategories')
 class SubCategory {
@@ -28,6 +30,10 @@ class SubCategory {
 
   @Column()
   category_id: string;
+
+  //1 subcategoria pode ter muitos produtos
+  @OneToMany(() => Product, (product) => product.subcategory)
+  products: Product[];
 
   //muitas subcategorias para 1 estabelecimento
   @ManyToOne(() => Tenant)

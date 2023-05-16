@@ -20,6 +20,7 @@ class CompaniesRepository implements ICompaniesRepository {
     isAdmin,
     address_id,
     banner_id,
+    tenant_id,
     openinghours_id,
   }: ICreateCompanyDTO): Promise<void> {
     const company = this.repository.create({
@@ -32,6 +33,7 @@ class CompaniesRepository implements ICompaniesRepository {
       isAdmin,
       address_id,
       banner_id,
+      tenant_id,
       openinghours_id,
     });
     await this.repository.save(company);

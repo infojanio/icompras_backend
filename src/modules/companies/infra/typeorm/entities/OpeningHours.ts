@@ -1,13 +1,13 @@
-import { Address } from '@modules/address/infra/typeorm/entities/Address';
-import { Product } from '@modules/products/infra/typeorm/entities/Product';
 import {
   Column,
   CreateDateColumn,
   Entity,
   OneToMany,
+  OneToOne,
   PrimaryColumn,
 } from 'typeorm';
 import { v4 as uuidV4 } from 'uuid';
+import { Company } from './Company';
 
 @Entity('opening_hours')
 class OpeningHours {
@@ -28,6 +28,9 @@ class OpeningHours {
 
   @Column()
   isActive: boolean;
+
+  @OneToOne(() => Company, (company) => company.openinghours)
+  company: Company;
 
   @CreateDateColumn()
   created_at: Date;

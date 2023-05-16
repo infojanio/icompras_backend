@@ -11,7 +11,9 @@ import {
 import { v4 as uuidV4 } from 'uuid';
 import { Category } from './Category';
 import { Specification } from './Specification';
-import { Store } from '@modules/stores/infra/typeorm/entities/Store';
+
+import { Company } from '@modules/companies/infra/typeorm/entities/Company';
+import { SubCategory } from './SubCategory';
 
 @Entity('products')
 class Product {
@@ -31,18 +33,18 @@ class Product {
   quantity: number;
 
   // muitos endereços para 1 cliente
-  @ManyToOne(() => Category, (category) => category.products)
-  categories: Category;
+  @ManyToOne(() => SubCategory, (subcategory) => subcategory.products)
+  subcategory: SubCategory;
 
   @Column()
-  category_id: string;
+  subcategory_id: string;
 
   // muitos endereços para 1 cliente
-  @ManyToOne(() => Store, (store) => store.products)
-  stores: Store;
+  @ManyToOne(() => Company, (company) => company.products)
+  company: Company;
 
   @Column()
-  store_id: string;
+  company_id: string;
 
   @CreateDateColumn()
   created_at: Date;

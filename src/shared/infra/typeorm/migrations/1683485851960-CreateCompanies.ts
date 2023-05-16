@@ -83,7 +83,7 @@ export class CreateCompanies1683485851960 implements MigrationInterface {
         foreignKeys: [
           {
             name: 'FKAddressCompanies',
-            referencedTableName: 'addresses',
+            referencedTableName: 'address',
             referencedColumnNames: ['id'],
             columnNames: ['address_id'],
             onDelete: 'SET NULL',
@@ -100,8 +100,8 @@ export class CreateCompanies1683485851960 implements MigrationInterface {
           },
 
           {
-            name: 'FKOpeninghoursCompanies',
-            referencedTableName: 'openinghours',
+            name: 'FKOpeningHoursCompanies',
+            referencedTableName: 'opening_hours',
             referencedColumnNames: ['id'],
             columnNames: ['openinghours_id'],
             onDelete: 'SET NULL',
