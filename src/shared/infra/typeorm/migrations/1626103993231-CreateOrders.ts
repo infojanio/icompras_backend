@@ -9,9 +9,7 @@ export class CreateOrders1626103993231 implements MigrationInterface {
           {
             name: 'id',
             type: 'uuid',
-            isPrimary: true,
-            generationStrategy: 'uuid',
-            default: 'uuid_generate_v4()',
+            isPrimary: true, // definição da chave primária
           },
           {
             name: 'user_id',
@@ -22,8 +20,8 @@ export class CreateOrders1626103993231 implements MigrationInterface {
             type: 'uuid',
           },
           {
-            name: 'delivery_status_id',
-            type: 'uuid',
+            name: 'delivery_status',
+            type: 'varchar',
           },
           {
             name: 'payment_type',
@@ -98,15 +96,6 @@ export class CreateOrders1626103993231 implements MigrationInterface {
             referencedTableName: 'companies',
             referencedColumnNames: ['id'],
             columnNames: ['company_id'],
-            onDelete: 'SET NULL',
-            onUpdate: 'SET NULL',
-          },
-
-          {
-            name: 'FKDeliveryStatusOrder',
-            referencedTableName: 'delivery_status',
-            referencedColumnNames: ['id'],
-            columnNames: ['delivery_status_id'],
             onDelete: 'SET NULL',
             onUpdate: 'SET NULL',
           },

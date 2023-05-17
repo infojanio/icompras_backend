@@ -32,23 +32,11 @@ class Order {
   @Column()
   company_id: string;
 
-  /*
-  //1 pedido pode ter 1 status
-  @OneToOne(() => DeliveryStatus)
-  @JoinColumn({ name: 'delivery_status_id' })
-  delivery_status: DeliveryStatus;
+  @Column()
+  delivery_status: string;
 
   @Column()
-  delivery_status_id: string;
-  
-  //1 pedido pode ter 1 tipo pagamento
-  @OneToOne(() => Payment)
-  @JoinColumn({ name: 'payment_id' })
-  payment: Payment;
-    
-  @Column()
   payment_type: string;
-  */
 
   @Column()
   change: number;
