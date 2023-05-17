@@ -1,9 +1,8 @@
-/*
 import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 
 export class CreateOrders1626103993231 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
-    queryRunner.createTable(
+    await queryRunner.createTable(
       new Table({
         name: 'orders',
         columns: [
@@ -11,39 +10,64 @@ export class CreateOrders1626103993231 implements MigrationInterface {
             name: 'id',
             type: 'uuid',
             isPrimary: true,
+            generationStrategy: 'uuid',
+            default: 'uuid_generate_v4()',
           },
-
-          {
-            name: 'product_id',
-            type: 'uuid',
-          },
-
           {
             name: 'user_id',
             type: 'uuid',
           },
-
           {
-            name: 'start_date',
-            type: 'timestamp',
-            default: 'now()',
+            name: 'company_id',
+            type: 'uuid',
+          },
+          {
+            name: 'delivery_status_id',
+            type: 'uuid',
+          },
+          {
+            name: 'payment_type',
+            type: 'varchar',
           },
 
           {
-            name: 'end_date',
-            type: 'timestamp',
-            isNullable: true,
+            name: 'change', //troco em dinheiro
+            type: 'decimal',
+            precision: 10,
+            scale: 2,
           },
 
           {
-            name: 'expected_return_date',
-            type: 'timestamp',
+            name: 'freight', //frete
+            type: 'decimal',
+            precision: 10,
+            scale: 2,
+          },
+
+          {
+            name: 'discount', //desconto
+            type: 'decimal',
+            precision: 10,
+            scale: 2,
+          },
+
+          {
+            name: 'subtotal',
+            type: 'decimal',
+            precision: 10,
+            scale: 2,
           },
 
           {
             name: 'total',
-            type: 'numeric',
-            isNullable: true,
+            type: 'decimal',
+            precision: 10,
+            scale: 2,
+          },
+          {
+            name: 'order_date',
+            type: 'timestamp',
+            default: 'now()',
           },
 
           {
@@ -61,19 +85,28 @@ export class CreateOrders1626103993231 implements MigrationInterface {
 
         foreignKeys: [
           {
-            name: 'FKProductOrder',
-            referencedTableName: 'products',
+            name: 'FKUserOrder',
+            referencedTableName: 'users',
             referencedColumnNames: ['id'],
-            columnNames: ['product_id'],
+            columnNames: ['user_id'],
             onDelete: 'SET NULL',
             onUpdate: 'SET NULL',
           },
 
           {
-            name: 'FKUserOrder',
-            referencedTableName: 'users',
+            name: 'FKCompanyOrder',
+            referencedTableName: 'companies',
             referencedColumnNames: ['id'],
-            columnNames: ['user_id'],
+            columnNames: ['company_id'],
+            onDelete: 'SET NULL',
+            onUpdate: 'SET NULL',
+          },
+
+          {
+            name: 'FKDeliveryStatusOrder',
+            referencedTableName: 'delivery_status',
+            referencedColumnNames: ['id'],
+            columnNames: ['delivery_status_id'],
             onDelete: 'SET NULL',
             onUpdate: 'SET NULL',
           },
@@ -86,4 +119,3 @@ export class CreateOrders1626103993231 implements MigrationInterface {
     await queryRunner.dropTable('orders');
   }
 }
-*/

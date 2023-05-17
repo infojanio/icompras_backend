@@ -1,3 +1,4 @@
+import { Company } from '@modules/companies/infra/typeorm/entities/Company';
 import { User } from '@modules/users/infra/typeorm/entities/User';
 import {
   Column,
@@ -23,17 +24,31 @@ class Order {
   @Column()
   user_id: string;
 
-  @Column()
-  store_id: string;
+  //muitos pedidos são feitos em 1 loja
+  @ManyToOne(() => Company)
+  @JoinColumn({ name: 'company_id' })
+  company: Company;
 
   @Column()
-  address_id: string;
+  company_id: string;
+
+  /*
+  //1 pedido pode ter 1 status
+  @OneToOne(() => DeliveryStatus)
+  @JoinColumn({ name: 'delivery_status_id' })
+  delivery_status: DeliveryStatus;
 
   @Column()
-  product_id: string;
-
+  delivery_status_id: string;
+  
+  //1 pedido pode ter 1 tipo pagamento
+  @OneToOne(() => Payment)
+  @JoinColumn({ name: 'payment_id' })
+  payment: Payment;
+    
   @Column()
-  form_payment: string;
+  payment_type: string;
+  */
 
   @Column()
   change: number;

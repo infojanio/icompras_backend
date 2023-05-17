@@ -1,5 +1,6 @@
 import { Address } from '@modules/address/infra/typeorm/entities/Address';
 import { MapLocation } from '@modules/maplocations/infra/typeorm/entities/MapLocation';
+import { Order } from '@modules/orders/infra/typeorm/entities/Order';
 import {
   Column,
   CreateDateColumn,
@@ -42,6 +43,10 @@ class User {
   //1 cliente pode ter muitos endereços
   @OneToMany(() => Address, (address) => address.user)
   addresses: Address[];
+
+  //1 cliente pode fazer muitos pedidos
+  @OneToMany(() => Order, (order) => order.user)
+  orders: Order[];
 
   //1 cliente pode ter muitos endereços
   @OneToMany(() => MapLocation, (maplocation) => maplocation.user)
