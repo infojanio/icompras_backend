@@ -1,0 +1,16 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.orderRoutes = void 0;
+var ListOrdersByUserController_1 = require("@modules/orders/listOrdersByUser/ListOrdersByUserController");
+var CreateOrderController_1 = require("@modules/orders/usesCases/createOrder/CreateOrderController");
+var DevolutionOrderController_1 = require("@modules/orders/usesCases/devolutionOrder/DevolutionOrderController");
+var express_1 = require("express");
+var ensureAuthenticated_1 = require("../middlewares/ensureAuthenticated");
+var orderRoutes = express_1.Router();
+exports.orderRoutes = orderRoutes;
+var createOrderController = new CreateOrderController_1.CreateOrderController();
+var devolutionOrderController = new DevolutionOrderController_1.DevolutionOrderController();
+var listOrdersByUserController = new ListOrdersByUserController_1.ListOrdersByUserController();
+orderRoutes.post('/', ensureAuthenticated_1.ensureAuthenticated, createOrderController.handle);
+orderRoutes.post('/devolution/:id', ensureAuthenticated_1.ensureAuthenticated, devolutionOrderController.handle);
+orderRoutes.get('/user', ensureAuthenticated_1.ensureAuthenticated, listOrdersByUserController.handle);

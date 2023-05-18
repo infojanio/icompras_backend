@@ -1,0 +1,26 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.productsRoutes = void 0;
+var express_1 = require("express");
+var multer_1 = __importDefault(require("multer"));
+var upload_1 = __importDefault(require("@config/upload"));
+var ensureAdmin_1 = require("../middlewares/ensureAdmin");
+var ensureAuthenticated_1 = require("../middlewares/ensureAuthenticated");
+var CreateProductController_1 = require("@modules/products/useCases/createProduct/CreateProductController");
+var CreateProductSpecificationController_1 = require("@modules/products/useCases/createProductSpecification/CreateProductSpecificationController");
+var ListAvailableController_1 = require("@modules/products/useCases/lisAvailableProducts/ListAvailableController");
+var UploadProductImagesController_1 = require("@modules/products/useCases/uploadProductImages/UploadProductImagesController");
+var productsRoutes = express_1.Router();
+exports.productsRoutes = productsRoutes;
+var createProductController = new CreateProductController_1.CreateProductController();
+var listAvailableController = new ListAvailableController_1.ListAvailableController();
+var createProductSpecificationController = new CreateProductSpecificationController_1.CreateProductSpecificationController();
+var uploadProductImagesController = new UploadProductImagesController_1.UploadProductImagesController();
+var upload = multer_1.default(upload_1.default.upload('./tmp/cars'));
+productsRoutes.post('/', ensureAuthenticated_1.ensureAuthenticated, ensureAdmin_1.ensureAdmin, createProductController.handle);
+productsRoutes.get('/available', listAvailableController.handle);
+productsRoutes.post('/specifications/:id', ensureAuthenticated_1.ensureAuthenticated, ensureAdmin_1.ensureAdmin, createProductSpecificationController.handle);
+productsRoutes.post('/images/:id', ensureAuthenticated_1.ensureAuthenticated, ensureAdmin_1.ensureAdmin, upload.array('images'), uploadProductImagesController.handle);

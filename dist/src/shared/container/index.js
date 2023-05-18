@@ -1,0 +1,29 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var tsyringe_1 = require("tsyringe");
+require("@shared/container/providers");
+var UsersRepository_1 = require("@modules/users/infra/typeorm/repositories/UsersRepository");
+var CategoriesRepository_1 = require("@modules/products/infra/typeorm/repositories/CategoriesRepository");
+var SubCategoriesRepository_1 = require("@modules/products/infra/typeorm/repositories/SubCategoriesRepository");
+var ProductsImagesRepository_1 = require("@modules/products/infra/typeorm/repositories/ProductsImagesRepository");
+var UsersTokensRepository_1 = require("@modules/users/infra/typeorm/repositories/UsersTokensRepository");
+var CitiesRepository_1 = require("@modules/cities/infra/typeorm/repositories/CitiesRepository");
+var SpecificationsRepository_1 = require("@modules/products/infra/typeorm/repositories/SpecificationsRepository");
+var ProductsRepository_1 = require("@modules/products/infra/typeorm/repositories/ProductsRepository");
+var StoreRepository_1 = require("@modules/stores/infra/typeorm/repositories/StoreRepository");
+tsyringe_1.container.registerSingleton('UsersRepository', UsersRepository_1.UsersRepository);
+tsyringe_1.container.registerSingleton('UsersTokensRepository', UsersTokensRepository_1.UsersTokensRepository);
+tsyringe_1.container.registerSingleton('CategoriesRepository', CategoriesRepository_1.CategoriesRepository);
+tsyringe_1.container.registerSingleton('SubCategoriesRepository', SubCategoriesRepository_1.SubCategoriesRepository);
+tsyringe_1.container.registerSingleton('CitiesRepository', CitiesRepository_1.CitiesRepository);
+tsyringe_1.container.registerSingleton('StoreRepository', StoreRepository_1.StoreRepository);
+tsyringe_1.container.registerSingleton('CompaniesRepository', CompaniesRepository);
+tsyringe_1.container.registerSingleton('SpecificationsRepository', SpecificationsRepository_1.SpecificationsRepository);
+tsyringe_1.container.registerSingleton('ProductsRepository', ProductsRepository_1.ProductsRepository);
+tsyringe_1.container.registerSingleton('ProductsImagesRepository', ProductsImagesRepository_1.ProductsImagesRepository);
+/*
+container.registerSingleton<IOrdersRepository>(
+  'OrdersRepository',
+  OrdersRepository,
+);
+*/
