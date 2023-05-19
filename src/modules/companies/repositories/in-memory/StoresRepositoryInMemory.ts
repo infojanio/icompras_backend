@@ -1,6 +1,6 @@
 import { ICreateStoreDTO } from '@modules/store/dtos/ICreateStoreDTO';
 import { Store } from '@modules/store/infra/typeorm/entities/Store';
-import { IStoresRepository } from '../IStoresRepository';
+import { IStoresRepository } from '../ICompaniesRepository';
 
 class StoresRepositoryInMemory implements IStoresRepository {
   stores: Store[] = [];

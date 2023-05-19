@@ -21,25 +21,31 @@ export class CreateCompanies1683485851960 implements MigrationInterface {
           {
             name: 'slug',
             type: 'varchar',
-            isNullable: true,
+           
           },
 
           {
             name: 'email',
             type: 'varchar',
-            isNullable: true,
+           
           },
 
           {
             name: 'cnpj',
             type: 'varchar',
-            isNullable: true,
+           
+          },
+
+          {
+            name: 'logo',
+            type: 'varchar',
+           
           },
 
           {
             name: 'phone',
             type: 'varchar',
-            isNullable: true,
+           
           },
 
           {
@@ -48,16 +54,11 @@ export class CreateCompanies1683485851960 implements MigrationInterface {
             default: true,
           },
 
+     
           {
-            name: 'address_id',
+            name: 'openinghours_id',
             type: 'uuid',
-            isNullable: true,
-          },
-
-          {
-            name: 'banner_id',
-            type: 'uuid',
-            isNullable: true,
+           
           },
 
           {
@@ -75,24 +76,15 @@ export class CreateCompanies1683485851960 implements MigrationInterface {
 
         foreignKeys: [
           {
-            name: 'FKAddressCompanies',
-            referencedTableName: 'addresses',
+            name: 'FKOpeningHoursCompanies',
+            referencedTableName: 'opening_hours',
             referencedColumnNames: ['id'],
-            columnNames: ['address_id'],
+            columnNames: ['openinghours_id'],
             onDelete: 'SET NULL',
             onUpdate: 'SET NULL',
           },
 
-          {
-            name: 'FKBannerCompanies',
-            referencedTableName: 'banners',
-            referencedColumnNames: ['id'],
-            columnNames: ['banner_id'],
-            onDelete: 'SET NULL',
-            onUpdate: 'SET NULL',
-          },
-
-          {
+              {
             name: 'FKTenantCompanies',
             referencedTableName: 'tenants',
             referencedColumnNames: ['id'],

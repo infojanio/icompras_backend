@@ -12,6 +12,7 @@ import {
 import { v4 as uuidV4 } from 'uuid';
 import { OpeningHours } from './OpeningHours';
 import { Banner } from './Banner';
+import { MapLocation } from '@modules/maplocations/infra/typeorm/entities/MapLocation';
 
 @Entity('companies')
 class Company {
@@ -28,37 +29,30 @@ class Company {
   email: string;
 
   @Column()
+  cnpj: string;
+
+  @Column()
   phone: string;
+
+  @Column()
+  logo: string;
 
   @Column()
   isActive: boolean;
 
-  @Column()
-  isAdmin: boolean;
+    //1 supermercado pode ter muitas localizações
+    @OneToMany(() => MapLocation, (maplocation) => maplocation.company)
+    maplocations: MapLocation[];
 
-  //1 cliente pode ter muitos endereços
+  //1 supermercado pode ter muitos endereços
   @OneToMany(() => Address, (address) => address.company)
   addresses: Address[];
-
-  @Column()
-  address_id: number;
-
-  //cada 1 supermercado -> 1 horário de atendimento
-  @OneToOne(() => Banner)
-  @JoinColumn({ name: 'banner_id' })
-  banner: Banner;
-
-  @Column()
-  banner_id: number;
-
   
   //cada 1 supermercado -> 1 horário de atendimento
   @OneToOne(() => OpeningHours)
-  @JoinColumn({ name: 'opening_hours_id' })
-  opening_hours: OpeningHours;
+  @JoinColumn({ name: 'openinghours_id' })
+  openinghours: OpeningHours
 
-  @Column()
-  opening_hours_id: string;
 
   @CreateDateColumn()
   created_at: Date;
