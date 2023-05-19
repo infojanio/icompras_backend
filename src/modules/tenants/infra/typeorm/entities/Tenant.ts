@@ -1,3 +1,6 @@
+import { Category } from '@modules/products/infra/typeorm/entities/Category';
+import { Product } from '@modules/products/infra/typeorm/entities/Product';
+import { SubCategory } from '@modules/products/infra/typeorm/entities/SubCategory';
 import {
   Column,
   CreateDateColumn,
@@ -21,10 +24,19 @@ class Tenant {
   @Column()
   isActive: boolean;
 
-  /*1 cidade tem muitos endereços
-  @OneToMany(() => Address, (address) => address.city)
-  addresses: Address[];
- */
+  //1 locatário tem várias subcategorias
+   @OneToMany(() => SubCategory, (subcategory) => subcategory.tenant)
+  subcategories: SubCategory[]
+
+
+//1 locatário tem várias categorias
+  @OneToMany(() => Category, (category) => category.tenant)
+  categories: Category[]
+
+    //1 locatário tem vários produtos
+    @OneToMany(() => Product, (product) => product.tenant)
+    products: Product[]
+
 
   @CreateDateColumn()
   created_at: Date;

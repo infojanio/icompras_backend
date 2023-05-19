@@ -1,10 +1,11 @@
+
 import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 
-export class CreateProducts1623701334584 implements MigrationInterface {
+export class CreateOrders1626103993231 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.createTable(
+    queryRunner.createTable(
       new Table({
-        name: 'products',
+        name: 'orders',
         columns: [
           {
             name: 'id',
@@ -13,40 +14,40 @@ export class CreateProducts1623701334584 implements MigrationInterface {
           },
 
           {
-            name: 'name',
+            name: 'date_order',
+            type: 'timestamp',
+            default: 'now()',
+          },
+
+          {
+            name: 'total_price',
+            type: 'numeric',
+          },
+
+          {
+            name: 'form_payment',
             type: 'varchar',
           },
 
           {
-            name: 'available',
-            type: 'boolean',
-            default: true,
-          },
-
-          {
-            name: 'price',
-            type: 'numeric',
-          },
-
-          {
-            name: 'quantity',
-            type: 'numeric',
-          },
-
-          {
-            name: 'category_id',
+            name: 'company_id',
             type: 'uuid',
-            isNullable: true,
           },
 
           {
-            name: 'store_id',
+            name: 'user_id',
             type: 'uuid',
-            isNullable: true,
-          },
+          },       
+
 
           {
             name: 'created_at',
+            type: 'timestamp',
+            default: 'now()',
+          },
+
+          {
+            name: 'updated_at',
             type: 'timestamp',
             default: 'now()',
           },
@@ -54,19 +55,19 @@ export class CreateProducts1623701334584 implements MigrationInterface {
 
         foreignKeys: [
           {
-            name: 'FKCategoryProduct',
-            referencedTableName: 'categories',
+            name: 'FKCompanyOrder',
+            referencedTableName: 'companies',
             referencedColumnNames: ['id'],
-            columnNames: ['category_id'],
+            columnNames: ['company_id'],
             onDelete: 'SET NULL',
             onUpdate: 'SET NULL',
           },
 
           {
-            name: 'FKStoreProduct',
-            referencedTableName: 'stores',
+            name: 'FKUserOrder',
+            referencedTableName: 'users',
             referencedColumnNames: ['id'],
-            columnNames: ['store_id'],
+            columnNames: ['user_id'],
             onDelete: 'SET NULL',
             onUpdate: 'SET NULL',
           },
@@ -76,6 +77,7 @@ export class CreateProducts1623701334584 implements MigrationInterface {
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable('products');
+    await queryRunner.dropTable('orders');
   }
 }
+

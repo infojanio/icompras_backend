@@ -24,13 +24,7 @@ class Order {
   user_id: string;
 
   @Column()
-  store_id: string;
-
-  @Column()
-  address_id: string;
-
-  @Column()
-  product_id: string;
+  company_id: string;
 
   @Column()
   form_payment: string;

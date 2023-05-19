@@ -1,10 +1,10 @@
 import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 
-export class CreateAddress1682171132547 implements MigrationInterface {
+export class CreateAddresses1682171132547 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'address',
+        name: 'addresses',
         columns: [
           {
             name: 'id',
@@ -28,13 +28,19 @@ export class CreateAddress1682171132547 implements MigrationInterface {
           },
 
           {
-            name: 'isActive',
-            type: 'boolean',
-            default: true,
+            name: 'city_id',
+            type: 'uuid',
+            isNullable: true,
           },
 
           {
-            name: 'city_id',
+            name: 'user_id',
+            type: 'uuid',
+            isNullable: true,
+          },
+
+          {
+            name: 'company_id',
             type: 'uuid',
             isNullable: true,
           },
@@ -55,12 +61,30 @@ export class CreateAddress1682171132547 implements MigrationInterface {
             onDelete: 'SET NULL',
             onUpdate: 'SET NULL',
           },
+
+          {
+            name: 'FKUserAddress',
+            referencedTableName: 'users',
+            referencedColumnNames: ['id'],
+            columnNames: ['user_id'],
+            onDelete: 'SET NULL',
+            onUpdate: 'SET NULL',
+          },
+
+          {
+            name: 'FKCompanyAddress',
+            referencedTableName: 'companies',
+            referencedColumnNames: ['id'],
+            columnNames: ['company_id'],
+            onDelete: 'SET NULL',
+            onUpdate: 'SET NULL',
+          },
         ],
       }),
     );
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable('address');
+    await queryRunner.dropTable('addresses');
   }
 }

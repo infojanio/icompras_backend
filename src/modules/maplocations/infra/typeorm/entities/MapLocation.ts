@@ -31,18 +31,21 @@ class MapLocation {
 
   //várias localizações tem um cliente
   @ManyToOne(() => User, (user) => user.maplocations)
+  @JoinColumn({ name: 'user_id' })
   user: User
 
   @Column()
   user_id: string;
 
+
     //várias localizações tem um supermercado
     @ManyToOne(() => Company, (company) => company.maplocations)
-    company: Company
-  
+    @JoinColumn({ name: 'company_id' })
+    company: Company  
+    
     @Column()
     company_id: string;
-  
+
   @CreateDateColumn()
   created_at: Date;
 

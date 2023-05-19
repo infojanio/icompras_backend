@@ -13,8 +13,8 @@ class Specification {
   @Column()
   description: string;
 
-  @CreateDateColumn()
-  expiration_date;
+  @Column('date')
+  expiration_date: Date;
 
   @Column()
   unity: string;

@@ -1,6 +1,7 @@
 import { Address } from '@modules/address/infra/typeorm/entities/Address';
 import { OpeningHours } from '@modules/companies/infra/typeorm/entities/OpeningHours';
 import { MapLocation } from '@modules/maplocations/infra/typeorm/entities/MapLocation';
+import { Score } from '@modules/products/infra/typeorm/entities/Scores';
 import {
   Column,
   CreateDateColumn,
@@ -48,6 +49,10 @@ class User {
   //1 cliente pode ter muitas localizações
   @OneToMany(() => MapLocation, (maplocation) => maplocation.user)
   maplocations: MapLocation[];
+
+  //1 usuário fará varias avaliações
+  @OneToMany(() => Score, (score) => score.user)
+  scores: Score[]
 
 
   @CreateDateColumn()
