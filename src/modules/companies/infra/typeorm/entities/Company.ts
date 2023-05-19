@@ -51,10 +51,7 @@ class Company {
   @Column()
   banner_id: number;
 
-  //1 cliente pode ter muitos endereços
-  @OneToMany(() => Product, (product) => product.stores)
-  products: Product[];
-
+  
   //cada 1 supermercado -> 1 horário de atendimento
   @OneToOne(() => OpeningHours)
   @JoinColumn({ name: 'opening_hours_id' })

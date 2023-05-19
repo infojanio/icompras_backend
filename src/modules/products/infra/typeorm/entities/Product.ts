@@ -11,7 +11,7 @@ import {
 import { v4 as uuidV4 } from 'uuid';
 import { Category } from './Category';
 import { Specification } from './Specification';
-import { Store } from '@modules/stores/infra/typeorm/entities/Store';
+
 
 @Entity('products')
 class Product {
@@ -37,13 +37,7 @@ class Product {
   @Column()
   category_id: string;
 
-  // muitos endereços para 1 cliente
-  @ManyToOne(() => Store, (store) => store.products)
-  stores: Store;
-
-  @Column()
-  store_id: string;
-
+ 
   @CreateDateColumn()
   created_at: Date;
 

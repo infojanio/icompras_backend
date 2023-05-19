@@ -18,18 +18,15 @@ export class CreateMapLocations1683402902675 implements MigrationInterface {
           {
             name: 'avatar',
             type: 'varchar',
-            isNullable: true,
           },
 
           {
             name: 'longitude',
-            type: 'numeric',
-            isNullable: true,
+            type: 'numeric', 
           },
           {
             name: 'latitude',
-            type: 'numeric',
-            isNullable: true,
+            type: 'numeric', 
           },
 
           {
@@ -41,7 +38,11 @@ export class CreateMapLocations1683402902675 implements MigrationInterface {
           {
             name: 'user_id',
             type: 'uuid',
-            isNullable: true,
+          },
+
+          {
+            name: 'company_id',
+            type: 'uuid',
           },
 
           {
@@ -53,10 +54,19 @@ export class CreateMapLocations1683402902675 implements MigrationInterface {
 
         foreignKeys: [
           {
-            name: 'FKUserMapLocation',
+            name: 'FKUserMapLocations',
             referencedTableName: 'users',
             referencedColumnNames: ['id'],
             columnNames: ['user_id'],
+            onDelete: 'SET NULL',
+            onUpdate: 'SET NULL',
+          },
+
+          {
+            name: 'FKCompanyMapLocations',
+            referencedTableName: 'companies',
+            referencedColumnNames: ['id'],
+            columnNames: ['company_id'],
             onDelete: 'SET NULL',
             onUpdate: 'SET NULL',
           },
