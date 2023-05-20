@@ -13,7 +13,7 @@ export class CreateScores1684522749351 implements MigrationInterface {
                   isPrimary: true,
                   isNullable: false,
                 },
-      
+         
                 {
                   name: 'star',
                   type: 'numeric',
