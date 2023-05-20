@@ -1,4 +1,3 @@
-import { Company } from '@modules/companies/infra/typeorm/entities/Company';
 import { User } from '@modules/users/infra/typeorm/entities/User';
 import {
   Column,
@@ -24,19 +23,11 @@ class Order {
   @Column()
   user_id: string;
 
-  //muitos pedidos são feitos em 1 loja
-  @ManyToOne(() => Company)
-  @JoinColumn({ name: 'company_id' })
-  company: Company;
-
   @Column()
   company_id: string;
 
   @Column()
-  delivery_status: string;
-
-  @Column()
-  payment_type: string;
+  form_payment: string;
 
   @Column()
   change: number;

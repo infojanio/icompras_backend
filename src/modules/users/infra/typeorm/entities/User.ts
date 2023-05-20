@@ -1,10 +1,12 @@
 import { Address } from '@modules/address/infra/typeorm/entities/Address';
+import { OpeningHours } from '@modules/companies/infra/typeorm/entities/OpeningHours';
 import { MapLocation } from '@modules/maplocations/infra/typeorm/entities/MapLocation';
-import { Order } from '@modules/orders/infra/typeorm/entities/Order';
+import { Score } from '@modules/products/infra/typeorm/entities/Scores';
 import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
   OneToMany,
   OneToOne,
   PrimaryColumn,
@@ -44,13 +46,14 @@ class User {
   @OneToMany(() => Address, (address) => address.user)
   addresses: Address[];
 
-  //1 cliente pode fazer muitos pedidos
-  @OneToMany(() => Order, (order) => order.user)
-  orders: Order[];
-
-  //1 cliente pode ter muitos endereços
+  //1 cliente pode ter muitas localizações
   @OneToMany(() => MapLocation, (maplocation) => maplocation.user)
   maplocations: MapLocation[];
+
+  //1 usuário fará varias avaliações
+  @OneToMany(() => Score, (score) => score.user)
+  scores: Score[]
+
 
   @CreateDateColumn()
   created_at: Date;

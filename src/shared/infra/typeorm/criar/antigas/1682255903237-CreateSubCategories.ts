@@ -1,15 +1,15 @@
 import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 
-export class CreateProducts1623701334584 implements MigrationInterface {
+export class CreateSubCategories1682255903237 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'products',
+        name: 'subcategories',
         columns: [
           {
             name: 'id',
             type: 'uuid',
-            isPrimary: true,
+            isPrimary: true, // definição da chave primária
           },
 
           {
@@ -18,37 +18,20 @@ export class CreateProducts1623701334584 implements MigrationInterface {
           },
 
           {
-            name: 'price',
-            type: 'numeric',
+            name: 'image',
+            type: 'varchar',
           },
 
           {
-            name: 'quantity',
-            type: 'numeric',
-          },
-
-          {
-            name: 'available',
-            type: 'boolean',
-            default: true,
-          },
-
-          {
-            name: 'subcategory_id',
+            name: 'category_id',
             type: 'uuid',
-            isNullable: false,
-          },
-
-          {
-            name: 'company_id',
-            type: 'uuid',
-            isNullable: false,
+            isNullable: true,
           },
 
           {
             name: 'tenant_id',
             type: 'uuid',
-            isNullable: false,
+            isNullable: true,
           },
 
           {
@@ -60,25 +43,16 @@ export class CreateProducts1623701334584 implements MigrationInterface {
 
         foreignKeys: [
           {
-            name: 'FKSubCategoryProduct',
-            referencedTableName: 'subcategories',
+            name: 'FKCategorySubCategory',
+            referencedTableName: 'categories',
             referencedColumnNames: ['id'],
-            columnNames: ['subcategory_id'],
+            columnNames: ['category_id'],
             onDelete: 'SET NULL',
             onUpdate: 'SET NULL',
           },
 
           {
-            name: 'FKCompanyProduct',
-            referencedTableName: 'companies',
-            referencedColumnNames: ['id'],
-            columnNames: ['company_id'],
-            onDelete: 'SET NULL',
-            onUpdate: 'SET NULL',
-          },
-
-          {
-            name: 'FKTenantProduct',
+            name: 'FKTenantCategory',
             referencedTableName: 'tenants',
             referencedColumnNames: ['id'],
             columnNames: ['tenant_id'],
@@ -91,6 +65,6 @@ export class CreateProducts1623701334584 implements MigrationInterface {
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable('products');
+    await queryRunner.dropTable('subcategories');
   }
 }

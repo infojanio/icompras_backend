@@ -1,3 +1,4 @@
+import { Company } from '@modules/companies/infra/typeorm/entities/Company';
 import { User } from '@modules/users/infra/typeorm/entities/User';
 import {
   Column,
@@ -28,13 +29,22 @@ class MapLocation {
   @Column()
   isActive: boolean;
 
-  //muitas localizações tem um cliente
-  @ManyToOne(() => User)
+  //várias localizações tem um cliente
+  @ManyToOne(() => User, (user) => user.maplocations)
   @JoinColumn({ name: 'user_id' })
-  user: User;
+  user: User
 
   @Column()
   user_id: string;
+
+
+    //várias localizações tem um supermercado
+    @ManyToOne(() => Company, (company) => company.maplocations)
+    @JoinColumn({ name: 'company_id' })
+    company: Company  
+    
+    @Column()
+    company_id: string;
 
   @CreateDateColumn()
   created_at: Date;

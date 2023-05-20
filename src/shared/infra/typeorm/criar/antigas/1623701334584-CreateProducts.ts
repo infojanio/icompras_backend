@@ -18,6 +18,12 @@ export class CreateProducts1623701334584 implements MigrationInterface {
           },
 
           {
+            name: 'available',
+            type: 'boolean',
+            default: true,
+          },
+
+          {
             name: 'price',
             type: 'numeric',
           },
@@ -28,27 +34,21 @@ export class CreateProducts1623701334584 implements MigrationInterface {
           },
 
           {
-            name: 'available',
-            type: 'boolean',
-            default: true,
-          },
-
-          {
             name: 'subcategory_id',
             type: 'uuid',
-            isNullable: false,
+            isNullable: true,
           },
 
           {
             name: 'company_id',
             type: 'uuid',
-            isNullable: false,
+            isNullable: true,
           },
 
           {
             name: 'tenant_id',
             type: 'uuid',
-            isNullable: false,
+            isNullable: true,
           },
 
           {
@@ -78,7 +78,7 @@ export class CreateProducts1623701334584 implements MigrationInterface {
           },
 
           {
-            name: 'FKTenantProduct',
+            name: 'FKTenantCategory',
             referencedTableName: 'tenants',
             referencedColumnNames: ['id'],
             columnNames: ['tenant_id'],

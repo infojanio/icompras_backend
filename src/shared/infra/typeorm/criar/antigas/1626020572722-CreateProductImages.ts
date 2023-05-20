@@ -1,36 +1,26 @@
+import { query } from 'express';
 import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 
-export class CreateTenants1683399216010 implements MigrationInterface {
+export class CreateProductImages1626020572722 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'tenants',
+        name: 'products_image',
         columns: [
           {
             name: 'id',
             type: 'uuid',
             isPrimary: true,
-            isNullable: false,
-            //   generationStrategy: "uuid",
-            //   default: "uuid_generate_v4()"
           },
 
           {
-            name: 'name',
+            name: 'product_id',
+            type: 'uuid',
+          },
+
+          {
+            name: 'image_name',
             type: 'varchar',
-            isNullable: false,
-          },
-
-          {
-            name: 'image',
-            type: 'varchar',
-         
-          },
-
-          {
-            name: 'isActive',
-            type: 'boolean',
-            default: true,
           },
 
           {
@@ -39,11 +29,22 @@ export class CreateTenants1683399216010 implements MigrationInterface {
             default: 'now()',
           },
         ],
+
+        foreignKeys: [
+          {
+            name: 'FKProductImage',
+            referencedTableName: 'products',
+            referencedColumnNames: ['id'],
+            columnNames: ['product_id'],
+            onDelete: 'SET NULL',
+            onUpdate: 'SET NULL',
+          },
+        ],
       }),
     );
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable('tenants');
+    await queryRunner.dropTable('products_image');
   }
 }

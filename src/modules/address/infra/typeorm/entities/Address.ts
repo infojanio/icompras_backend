@@ -12,7 +12,7 @@ import {
 } from 'typeorm';
 import { v4 as uuidV4 } from 'uuid';
 
-@Entity('address')
+@Entity('addresses')
 class Address {
   @PrimaryColumn()
   id: string;
@@ -26,13 +26,25 @@ class Address {
   @Column()
   complement: string;
 
+ 
+  
   // muitos endereços para 1 cliente
   @ManyToOne(() => User, (user) => user.addresses)
-  user: User;
-
+  @JoinColumn({ name: 'user_id' })
+  user: User
+  
+  @Column()
+  user_id: string;
+  
+  
   // muitos endereços para 1 loja
   @ManyToOne(() => Company, (company) => company.addresses)
-  company: Company;
+  @JoinColumn({ name: 'company_id' })
+  company: Company  
+  
+  @Column()
+  company_id: string;
+
 
   // muitos endereços para 1 cidade
   @ManyToOne(() => City, (city) => city.addresses)

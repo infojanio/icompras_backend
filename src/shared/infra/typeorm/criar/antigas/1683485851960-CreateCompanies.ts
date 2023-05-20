@@ -1,46 +1,68 @@
 import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 
-export class CreateProducts1623701334584 implements MigrationInterface {
+export class CreateCompanies1683485851960 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'products',
+        name: 'companies',
         columns: [
           {
             name: 'id',
             type: 'uuid',
             isPrimary: true,
+            isNullable: false,
           },
 
           {
             name: 'name',
             type: 'varchar',
+            isNullable: false,
           },
 
           {
-            name: 'price',
-            type: 'numeric',
+            name: 'slug',
+            type: 'varchar',
+            isNullable: true,
           },
 
           {
-            name: 'quantity',
-            type: 'numeric',
+            name: 'email',
+            type: 'varchar',
+            isNullable: true,
           },
 
           {
-            name: 'available',
+            name: 'cnpj',
+            type: 'varchar',
+            isNullable: true,
+          },
+
+          {
+            name: 'phone',
+            type: 'varchar',
+            isNullable: true,
+          },
+
+          {
+            name: 'isActive',
             type: 'boolean',
             default: true,
           },
 
           {
-            name: 'subcategory_id',
+            name: 'address_id',
             type: 'uuid',
-            isNullable: false,
+            isNullable: true,
           },
 
           {
-            name: 'company_id',
+            name: 'banner_id',
+            type: 'uuid',
+            isNullable: true,
+          },
+
+          {
+            name: 'openinghours_id',
             type: 'uuid',
             isNullable: false,
           },
@@ -60,25 +82,34 @@ export class CreateProducts1623701334584 implements MigrationInterface {
 
         foreignKeys: [
           {
-            name: 'FKSubCategoryProduct',
-            referencedTableName: 'subcategories',
+            name: 'FKAddressCompanies',
+            referencedTableName: 'address',
             referencedColumnNames: ['id'],
-            columnNames: ['subcategory_id'],
+            columnNames: ['address_id'],
             onDelete: 'SET NULL',
             onUpdate: 'SET NULL',
           },
 
           {
-            name: 'FKCompanyProduct',
-            referencedTableName: 'companies',
+            name: 'FKBannerCompanies',
+            referencedTableName: 'banners',
             referencedColumnNames: ['id'],
-            columnNames: ['company_id'],
+            columnNames: ['banner_id'],
             onDelete: 'SET NULL',
             onUpdate: 'SET NULL',
           },
 
           {
-            name: 'FKTenantProduct',
+            name: 'FKOpeningHoursCompanies',
+            referencedTableName: 'opening_hours',
+            referencedColumnNames: ['id'],
+            columnNames: ['openinghours_id'],
+            onDelete: 'SET NULL',
+            onUpdate: 'SET NULL',
+          },
+
+          {
+            name: 'FKTenantCompanies',
             referencedTableName: 'tenants',
             referencedColumnNames: ['id'],
             columnNames: ['tenant_id'],
@@ -91,6 +122,6 @@ export class CreateProducts1623701334584 implements MigrationInterface {
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable('products');
+    await queryRunner.dropTable('companies');
   }
 }

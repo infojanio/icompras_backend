@@ -10,7 +10,6 @@ export class CreateCompanies1683485851960 implements MigrationInterface {
             name: 'id',
             type: 'uuid',
             isPrimary: true,
-            isNullable: false,
           },
 
           {
@@ -22,25 +21,31 @@ export class CreateCompanies1683485851960 implements MigrationInterface {
           {
             name: 'slug',
             type: 'varchar',
-            isNullable: true,
+           
           },
 
           {
             name: 'email',
             type: 'varchar',
-            isNullable: true,
+           
           },
 
           {
             name: 'cnpj',
             type: 'varchar',
-            isNullable: true,
+           
+          },
+
+          {
+            name: 'logo',
+            type: 'varchar',
+           
           },
 
           {
             name: 'phone',
             type: 'varchar',
-            isNullable: true,
+           
           },
 
           {
@@ -49,22 +54,11 @@ export class CreateCompanies1683485851960 implements MigrationInterface {
             default: true,
           },
 
-          {
-            name: 'address_id',
-            type: 'uuid',
-            isNullable: true,
-          },
-
-          {
-            name: 'banner_id',
-            type: 'uuid',
-            isNullable: true,
-          },
-
+     
           {
             name: 'openinghours_id',
             type: 'uuid',
-            isNullable: false,
+           
           },
 
           {
@@ -82,24 +76,6 @@ export class CreateCompanies1683485851960 implements MigrationInterface {
 
         foreignKeys: [
           {
-            name: 'FKAddressCompanies',
-            referencedTableName: 'address',
-            referencedColumnNames: ['id'],
-            columnNames: ['address_id'],
-            onDelete: 'SET NULL',
-            onUpdate: 'SET NULL',
-          },
-
-          {
-            name: 'FKBannerCompanies',
-            referencedTableName: 'banners',
-            referencedColumnNames: ['id'],
-            columnNames: ['banner_id'],
-            onDelete: 'SET NULL',
-            onUpdate: 'SET NULL',
-          },
-
-          {
             name: 'FKOpeningHoursCompanies',
             referencedTableName: 'opening_hours',
             referencedColumnNames: ['id'],
@@ -108,7 +84,7 @@ export class CreateCompanies1683485851960 implements MigrationInterface {
             onUpdate: 'SET NULL',
           },
 
-          {
+              {
             name: 'FKTenantCompanies',
             referencedTableName: 'tenants',
             referencedColumnNames: ['id'],

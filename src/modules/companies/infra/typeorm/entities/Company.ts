@@ -5,7 +5,6 @@ import {
   CreateDateColumn,
   Entity,
   JoinColumn,
-  ManyToOne,
   OneToMany,
   OneToOne,
   PrimaryColumn,
@@ -13,7 +12,7 @@ import {
 import { v4 as uuidV4 } from 'uuid';
 import { OpeningHours } from './OpeningHours';
 import { Banner } from './Banner';
-import { Tenant } from '@modules/tenants/infra/typeorm/entities/Tenant';
+import { MapLocation } from '@modules/maplocations/infra/typeorm/entities/MapLocation';
 
 @Entity('companies')
 class Company {
@@ -27,51 +26,33 @@ class Company {
   slug: string;
 
   @Column()
-  cnpj: string;
+  email: string;
 
   @Column()
-  email: string;
+  cnpj: string;
 
   @Column()
   phone: string;
 
   @Column()
+  logo: string;
+
+  @Column()
   isActive: boolean;
 
-  //1 cliente pode ter muitos endereços
+    //1 supermercado pode ter muitas localizações
+    @OneToMany(() => MapLocation, (maplocation) => maplocation.company)
+    maplocations: MapLocation[];
+
+  //1 supermercado pode ter muitos endereços
   @OneToMany(() => Address, (address) => address.company)
   addresses: Address[];
-
-  @Column()
-  address_id: string;
-
-  //cada 1 supermercado -> 1 horário de atendimento
-  @OneToOne(() => Banner)
-  @JoinColumn({ name: 'banner_id' })
-  banner: Banner;
-
-  @Column()
-  banner_id: string;
-
-  //1 empresa pode ter muitos produtos
-  @OneToMany(() => Product, (product) => product.company)
-  products: Product[];
-
+  
   //cada 1 supermercado -> 1 horário de atendimento
   @OneToOne(() => OpeningHours)
   @JoinColumn({ name: 'openinghours_id' })
-  openinghours: OpeningHours;
+  openinghours: OpeningHours
 
-  @Column()
-  openinghours_id: string;
-
-  //cada 1 supermercado -> 1 horário de atendimento
-  @ManyToOne(() => Tenant)
-  @JoinColumn({ name: 'tenant_id' })
-  tenant: Tenant;
-
-  @Column()
-  tenant_id: string;
 
   @CreateDateColumn()
   created_at: Date;
@@ -83,3 +64,30 @@ class Company {
   }
 }
 export { Company };
+
+/*
+    @ManyToOne(() => Banner)
+    @JoinColumn({ name: 'banner_id' })
+    banner: Banner;
+  
+    @Column()
+    banner_id: string;
+  */
+
+/*
+    @OneToMany(() => City)
+    @JoinColumn({ name: 'city_id' })
+    city: City;
+  
+    @Column()
+    city_id: string;
+  */
+
+/*
+    @OneToOne(() => Address)
+    @JoinColumn({ name: 'address_id' })
+    address: Address;
+  
+    @Column()
+    address_id: string;
+  */
