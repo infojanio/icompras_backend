@@ -16,10 +16,9 @@ class UsersRepository implements IUsersRepository {
     phone,
     password,
     avatar,
+    type,
     isActive,
     isAdmin,
-    address_id,
-    id,
   }: ICreateUserDTO): Promise<void> {
     const user = this.repository.create({
       name,
@@ -27,27 +26,25 @@ class UsersRepository implements IUsersRepository {
       phone,
       password,
       avatar,
+      type,
       isActive,
       isAdmin,
-      address_id,
-      id,
     });
     await this.repository.save(user);
   }
 
-  // método encontrar usuário por email
-  public async findByEmail(email: string): Promise<User | undefined> {
+  public async findByName(name: string): Promise<User | undefined> {
     const user = await this.repository.findOne({
-      where: { email },
+      where: { name },
     });
     console.log(user);
     return user;
   }
 
-  // método encontrar usuário por telefone
-  public async findByPhone(phone: string): Promise<User | undefined> {
+  //método encontrar usuário por email
+  public async findByEmail(email: string): Promise<User | undefined> {
     const user = await this.repository.findOne({
-      where: { phone },
+      where: { email },
     });
     console.log(user);
     return user;
@@ -59,3 +56,15 @@ class UsersRepository implements IUsersRepository {
   }
 }
 export { UsersRepository };
+
+/* 
+
+  // método encontrar usuário por telefone
+  public async findByPhone(phone: string): Promise<User | undefined> {
+    const user = await this.repository.findOne({
+      where: { phone },
+    });
+    console.log(user);
+    return user;
+  }
+  */

@@ -21,9 +21,6 @@ class DeliveryStatusLog {
   status: string;
 
   @Column()
-  date: Date;
-
-  @Column()
   notes: string;
 
   @CreateDateColumn()
@@ -31,10 +28,15 @@ class DeliveryStatusLog {
 
   @UpdateDateColumn()
   updated_at: Date;
-  /*
-  @ManyToOne(() => Order, (order) => order.deliveryStatusLogs)
+
+  // muitos status para 1 pedido
+  @ManyToOne(() => Order, (order) => order.deliverystatuslogs)
+  @JoinColumn({ name: 'order_id' })
   order: Order;
-*/
+
+  @Column()
+  order_id: string;
+
   constructor() {
     if (!this.id) {
       this.id = uuidV4();

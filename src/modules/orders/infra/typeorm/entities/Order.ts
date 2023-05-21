@@ -5,10 +5,14 @@ import {
   Entity,
   JoinColumn,
   ManyToOne,
+  OneToMany,
   PrimaryColumn,
   UpdateDateColumn,
 } from 'typeorm';
 import { v4 as uuidV4 } from 'uuid';
+import { DeliveryStatusLog } from './DeliveryStatusLog';
+import { Company } from '@modules/companies/infra/typeorm/entities/Company';
+import { OrderItem } from './OrderItem';
 
 @Entity('orders')
 class Order {
@@ -23,29 +27,25 @@ class Order {
   @Column()
   user_id: string;
 
+  //muitos pedidos para 1 loja
+  @JoinColumn({ name: 'company_id' })
+  company: Company;
+
   @Column()
   company_id: string;
 
-  @Column()
-  form_payment: string;
+  //1 pedido pode ter muitos status log
+  @OneToMany(
+    () => DeliveryStatusLog,
+    (deliverystatuslog) => deliverystatuslog.order,
+  )
+  deliverystatuslogs: DeliveryStatusLog[];
 
   @Column()
-  change: number;
+  deliverystatus_id: string;
 
-  @Column()
-  freight: number;
-
-  @Column()
-  discount: number;
-
-  @Column()
-  subtotal: number;
-
-  @Column()
-  total: number;
-
-  @Column()
-  order_date: Date;
+  @OneToMany(() => OrderItem, (orderItem) => orderItem.order)
+  orderItems: OrderItem[];
 
   @CreateDateColumn()
   created_at: Date;

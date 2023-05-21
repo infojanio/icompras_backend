@@ -1,43 +1,33 @@
-
 import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 
-export class CreateOrders1626103993231 implements MigrationInterface {
+export class CreateDeliveryStatusLogs1684363617635
+  implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
-    queryRunner.createTable(
+    await queryRunner.createTable(
       new Table({
-        name: 'orders',
+        name: 'delivery_status_logs',
         columns: [
           {
             name: 'id',
             type: 'uuid',
             isPrimary: true,
+            isNullable: false,
           },
-
           {
-            name: 'date_order',
-            type: 'timestamp',
-            default: 'now()',
-          },
-
-          {
-            name: 'total_price',
-            type: 'numeric',
-          },
-
-          {
-            name: 'form_payment',
+            name: 'status',
             type: 'varchar',
           },
 
           {
-            name: 'company_id',
-            type: 'uuid',
+            name: 'notes',
+            type: 'varchar',
+            isNullable: true,
           },
-
           {
-            name: 'user_id',
+            name: 'order_id',
             type: 'uuid',
-          },       
+            isNullable: false,
+          },
 
           {
             name: 'created_at',
@@ -54,19 +44,10 @@ export class CreateOrders1626103993231 implements MigrationInterface {
 
         foreignKeys: [
           {
-            name: 'FKCompanyOrder',
-            referencedTableName: 'companies',
+            name: 'FKOrderDeliveryStatusLogs',
+            referencedTableName: 'orders',
             referencedColumnNames: ['id'],
-            columnNames: ['company_id'],
-            onDelete: 'SET NULL',
-            onUpdate: 'SET NULL',
-          },
-
-          {
-            name: 'FKUserOrder',
-            referencedTableName: 'users',
-            referencedColumnNames: ['id'],
-            columnNames: ['user_id'],
+            columnNames: ['order_id'],
             onDelete: 'SET NULL',
             onUpdate: 'SET NULL',
           },
@@ -74,9 +55,7 @@ export class CreateOrders1626103993231 implements MigrationInterface {
       }),
     );
   }
-
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable('orders');
+    await queryRunner.dropTable('delivery_status_logs');
   }
 }
-
