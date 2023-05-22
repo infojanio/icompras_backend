@@ -7,6 +7,6 @@ interface IUsersRepository {
   findByName(name: string): Promise<User | undefined>;
   findByEmail(email: string): Promise<User | undefined>;
   findById(id: string): Promise<User | undefined>;
-  //findByPhone(phone: string): Promise<User | undefined>;
+  list(): Promise<User[]>;
 }
 export { IUsersRepository };
