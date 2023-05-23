@@ -58,7 +58,7 @@ class Company {
   tenant_id: string;
 
   //muitos supermercados -> 1 cidade
-  @ManyToOne(() => City)
+  @ManyToOne(() => City, (city) => city.companies)
   @JoinColumn({ name: 'city_id' })
   city: City;
 
