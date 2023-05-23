@@ -4,15 +4,26 @@ import { ensureAuthenticated } from '@shared/infra/http/middlewares/ensureAuthen
 import { Router } from 'express';
 import multer from 'multer';
 import uploadConfig from '@config/upload';
+import { ListUsersController } from '@modules/users/usesCases/listUsers/ListUsersController';
+import { ensureAdmin } from '../middlewares/ensureAdmin';
 
 const usersRoutes = Router();
 
 const uploadAvatar = multer(uploadConfig.upload('./tmp/avatar'));
 
 const createUserController = new CreateUserController();
+const listUsersController = new ListUsersController();
+
 const updateUserAvatarController = new UpdateUserAvatarController();
 
-usersRoutes.post('/', createUserController.handle);
+usersRoutes.post(
+  '/',
+  ensureAuthenticated,
+  ensureAdmin,
+  createUserController.handle,
+);
+
+usersRoutes.get('/', listUsersController.handle); //não necessita estar logado
 
 usersRoutes.patch(
   '/avatar',

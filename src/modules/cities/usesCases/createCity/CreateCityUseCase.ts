@@ -11,14 +11,7 @@ class CreateCityUseCase {
     private citiesRepository: ICitiesRepository,
   ) {}
 
-  async execute({
-    name,
-    uf,
-    cep,
-    longitude,
-    latitude,
-    isActive,
-  }: ICreateCityDTO): Promise<void> {
+  async execute({ name, uf, cep, isActive }: ICreateCityDTO): Promise<void> {
     //Não permitir cadastrar usuário com mesmo email
     const cityAlreadyExists = await this.citiesRepository.findByName(name);
 
@@ -30,8 +23,6 @@ class CreateCityUseCase {
       name,
       uf,
       cep,
-      longitude,
-      latitude,
       isActive,
     });
   }

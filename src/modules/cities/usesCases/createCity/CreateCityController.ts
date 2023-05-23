@@ -11,8 +11,6 @@ class CreateCityController {
       name,
       uf,
       cep,
-      longitude,
-      latitude,
       isActive,
     });
     return response.status(201).send();

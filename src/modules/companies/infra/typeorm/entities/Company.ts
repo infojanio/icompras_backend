@@ -13,6 +13,7 @@ import { v4 as uuidV4 } from 'uuid';
 import { OpeningHours } from './OpeningHours';
 import { MapLocation } from '@modules/maplocations/infra/typeorm/entities/MapLocation';
 import { Tenant } from '@modules/tenants/infra/typeorm/entities/Tenant';
+import { City } from '@modules/cities/infra/typeorm/entities/City';
 
 @Entity('companies')
 class Company {
@@ -49,12 +50,20 @@ class Company {
   openinghours_id: string;
 
   //muitos supermercados -> 1 empresa locatária
-  @ManyToOne(() => Tenant)
+  @ManyToOne(() => Tenant, (tenant) => tenant.companies)
   @JoinColumn({ name: 'tenant_id' })
   tenant: Tenant;
 
   @Column()
   tenant_id: string;
+
+  //muitos supermercados -> 1 cidade
+  @ManyToOne(() => City)
+  @JoinColumn({ name: 'city_id' })
+  city: City;
+
+  @Column()
+  city_id: string;
 
   //1 supermercado pode ter muitas localizações
   @OneToMany(() => MapLocation, (maplocation) => maplocation.company)

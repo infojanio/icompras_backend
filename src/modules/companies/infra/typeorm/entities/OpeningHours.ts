@@ -1,9 +1,4 @@
-import {
-  Column,
-  CreateDateColumn,
-  Entity,
-  PrimaryColumn,
-} from 'typeorm';
+import { Column, CreateDateColumn, Entity, PrimaryColumn } from 'typeorm';
 import { v4 as uuidV4 } from 'uuid';
 
 @Entity('opening_hours')
@@ -24,6 +19,9 @@ class OpeningHours {
   notice: string;
 
   @Column()
+  status: string;
+
+  @Column()
   isActive: boolean;
 
   @CreateDateColumn()
@@ -36,4 +34,3 @@ class OpeningHours {
   }
 }
 export { OpeningHours };
-

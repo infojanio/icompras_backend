@@ -6,21 +6,13 @@ class CitiesRepositoryInMemory implements ICitiesRepository {
   cities: City[] = [];
 
   //1. teste de criação do usuário
-  async create({
-    name,
-    uf,
-    cep,
-    longitude,
-    latitude,
-  }: ICreateCityDTO): Promise<void> {
+  async create({ name, uf, cep }: ICreateCityDTO): Promise<void> {
     const city = new City();
 
     Object.assign(city, {
       name,
       uf,
       cep,
-      longitude,
-      latitude,
     });
     this.cities.push(city);
   }

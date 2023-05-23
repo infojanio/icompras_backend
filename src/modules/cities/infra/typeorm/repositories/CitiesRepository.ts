@@ -10,20 +10,11 @@ class CitiesRepository implements ICitiesRepository {
     this.repository = getRepository(City);
   }
 
-  async create({
-    name,
-    uf,
-    cep,
-    longitude,
-    latitude,
-    isActive,
-  }: ICreateCityDTO): Promise<void> {
+  async create({ name, uf, cep, isActive }: ICreateCityDTO): Promise<void> {
     const city = this.repository.create({
       name,
       uf,
       cep,
-      longitude,
-      latitude,
       isActive,
     });
     await this.repository.save(city);

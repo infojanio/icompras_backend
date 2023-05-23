@@ -1,9 +1,8 @@
-/*
 import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 
 export class CreateOrders1626103993231 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
-    queryRunner.createTable(
+    await queryRunner.createTable(
       new Table({
         name: 'orders',
         columns: [
@@ -14,36 +13,13 @@ export class CreateOrders1626103993231 implements MigrationInterface {
           },
 
           {
-            name: 'product_id',
-            type: 'uuid',
-          },
-
-          {
             name: 'user_id',
             type: 'uuid',
           },
 
           {
-            name: 'start_date',
-            type: 'timestamp',
-            default: 'now()',
-          },
-
-          {
-            name: 'end_date',
-            type: 'timestamp',
-            isNullable: true,
-          },
-
-          {
-            name: 'expected_return_date',
-            type: 'timestamp',
-          },
-
-          {
-            name: 'total',
-            type: 'numeric',
-            isNullable: true,
+            name: 'company_id',
+            type: 'uuid',
           },
 
           {
@@ -61,13 +37,24 @@ export class CreateOrders1626103993231 implements MigrationInterface {
 
         foreignKeys: [
           {
-            name: 'FKProductOrder',
-            referencedTableName: 'products',
+            name: 'FKCompanyOrder',
+            referencedTableName: 'companies',
             referencedColumnNames: ['id'],
-            columnNames: ['product_id'],
+            columnNames: ['company_id'],
             onDelete: 'SET NULL',
             onUpdate: 'SET NULL',
           },
+
+          /*
+          {
+            name: 'FKPaymentOrder',
+            referencedTableName: 'payments',
+            referencedColumnNames: ['id'],
+            columnNames: ['payment_id'],
+            onDelete: 'SET NULL',
+            onUpdate: 'SET NULL',
+          },
+          */
 
           {
             name: 'FKUserOrder',
@@ -86,4 +73,3 @@ export class CreateOrders1626103993231 implements MigrationInterface {
     await queryRunner.dropTable('orders');
   }
 }
-*/
