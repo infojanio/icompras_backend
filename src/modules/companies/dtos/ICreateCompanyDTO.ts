@@ -4,12 +4,11 @@ interface ICreateCompanyDTO {
   slug?: string;
   email: string;
   cnpj: string;
+  logo?: string;
   phone: string;
   isActive: boolean;
-  isAdmin: boolean;
-  address_id: string;
-  banner_id: string;
   openinghours_id: string;
+  tenant_id: string;
 }
 export { ICreateCompanyDTO };
 

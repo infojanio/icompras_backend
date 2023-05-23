@@ -15,9 +15,8 @@
     "./src/modules/maplocations/infra/typeorm/entities/**.ts",
     "./src/modules/orders/infra/typeorm/entities/**.ts",
     "./src/modules/products/infra/typeorm/entities/**.ts",
-    "./src/modules/stores/infra/typeorm/entities/**.ts",
-    "./src/modules/users/infra/typeorm/entities/**.ts",
-    "./src/modules/tenants/infra/typeorm/entities/**.ts"
+    "./src/modules/tenants/infra/typeorm/entities/**.ts",
+    "./src/modules/users/infra/typeorm/entities/**.ts"
   ],
 
   "cli": {

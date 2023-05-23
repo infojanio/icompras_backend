@@ -1,13 +1,12 @@
 interface ICreateUserDTO {
+  id?: string;
   name: string;
   email: string;
-  phone: string;
+  phone?: string;
   password: string;
   avatar?: string;
-  isActive: boolean;
-  isAdmin: boolean;
-  address_id: string;
-
-  id?: string;
+  type?: string;
+  isActive?: boolean;
+  isAdmin?: boolean;
 }
 export { ICreateUserDTO };

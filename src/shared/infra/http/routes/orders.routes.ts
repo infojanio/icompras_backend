@@ -4,24 +4,24 @@ import { DevolutionOrderController } from '@modules/orders/usesCases/devolutionO
 import { Router } from 'express';
 import { ensureAuthenticated } from '../middlewares/ensureAuthenticated';
 
-const orderRoutes = Router();
+const ordersRoutes = Router();
 
 const createOrderController = new CreateOrderController();
 const devolutionOrderController = new DevolutionOrderController();
 const listOrdersByUserController = new ListOrdersByUserController();
 
-orderRoutes.post('/', ensureAuthenticated, createOrderController.handle);
+ordersRoutes.post('/', ensureAuthenticated, createOrderController.handle);
 
-orderRoutes.post(
+ordersRoutes.post(
   '/devolution/:id',
   ensureAuthenticated,
   devolutionOrderController.handle,
 );
 
-orderRoutes.get(
+ordersRoutes.get(
   '/user',
   ensureAuthenticated,
   listOrdersByUserController.handle,
 );
 
-export { orderRoutes };
+export { ordersRoutes };

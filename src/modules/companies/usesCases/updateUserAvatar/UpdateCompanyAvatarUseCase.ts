@@ -1,30 +1,30 @@
-import { IUsersRepository } from '@modules/users/repositories/IUsersRepository';
+import { ICompaniesRepository } from '@modules/companies/repositories/ICompaniesRepository';
 import { deleteFile } from '@utils/file';
 import { inject, injectable } from 'tsyringe';
 
 interface IRequest {
-  user_id: string;
-  avatar_file: string;
+  company_id: string;
+  logo_file: string;
 }
 //faz a atualização do avata do usuário
 @injectable()
-class UpdateUserAvatarUseCase {
+class UpdateCompanyAvatarUseCase {
   constructor(
-    @inject('UsersRepository')
-    private usersRepository: IUsersRepository,
+    @inject('CompaniesRepository')
+    private companiesRepository: ICompaniesRepository,
   ) {}
 
-  async execute({ user_id, avatar_file }: IRequest): Promise<void> {
+  async execute({ company_id, logo_file }: IRequest): Promise<void> {
     //const usersRepository = getRepository(User);
-    const user = await this.usersRepository.findById(user_id);
+    const company = await this.companiesRepository.findById(company_id);
 
-    await deleteFile(`./tmp/avatar/${user.avatar}`);
-    user.avatar = avatar_file; //não pode ser acesso
+    await deleteFile(`./tmp/logo/${company.logo}`);
+    company.logo = logo_file; //não pode ser acesso
 
-    await this.usersRepository.create(user);
+    await this.companiesRepository.create(company);
   }
 }
-export { UpdateUserAvatarUseCase };
+export { UpdateCompanyAvatarUseCase };
 
 /*
       const userAvatarFilePath = path.join(uploadConfig.directory, user.avatar);

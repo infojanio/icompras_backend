@@ -1,15 +1,42 @@
 import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 
-export class CreateOrders1626103993231 implements MigrationInterface {
+export class CreatePayments1684606575963 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'orders',
+        name: 'payments',
         columns: [
           {
             name: 'id',
             type: 'uuid',
             isPrimary: true,
+            isNullable: false,
+          },
+
+          {
+            name: 'date_payment',
+            type: 'timestamp',
+            default: 'now()',
+          },
+
+          {
+            name: 'value',
+            type: 'numeric',
+          },
+
+          {
+            name: 'payment_form',
+            type: 'varchar',
+          },
+
+          {
+            name: 'status',
+            type: 'varchar',
+          },
+
+          {
+            name: 'comment',
+            type: 'varchar',
           },
 
           {
@@ -23,13 +50,12 @@ export class CreateOrders1626103993231 implements MigrationInterface {
           },
 
           {
-            name: 'created_at',
-            type: 'timestamp',
-            default: 'now()',
+            name: 'order_id',
+            type: 'uuid',
           },
 
           {
-            name: 'updated_at',
+            name: 'created_at',
             type: 'timestamp',
             default: 'now()',
           },
@@ -37,30 +63,19 @@ export class CreateOrders1626103993231 implements MigrationInterface {
 
         foreignKeys: [
           {
-            name: 'FKCompanyOrder',
-            referencedTableName: 'companies',
-            referencedColumnNames: ['id'],
-            columnNames: ['company_id'],
-            onDelete: 'SET NULL',
-            onUpdate: 'SET NULL',
-          },
-
-          /*
-          {
-            name: 'FKPaymentOrder',
-            referencedTableName: 'payments',
-            referencedColumnNames: ['id'],
-            columnNames: ['payment_id'],
-            onDelete: 'SET NULL',
-            onUpdate: 'SET NULL',
-          },
-          */
-
-          {
-            name: 'FKUserOrder',
+            name: 'FKUserScores',
             referencedTableName: 'users',
             referencedColumnNames: ['id'],
             columnNames: ['user_id'],
+            onDelete: 'SET NULL',
+            onUpdate: 'SET NULL',
+          },
+
+          {
+            name: 'FKProductScores',
+            referencedTableName: 'products',
+            referencedColumnNames: ['id'],
+            columnNames: ['product_id'],
             onDelete: 'SET NULL',
             onUpdate: 'SET NULL',
           },
@@ -68,8 +83,7 @@ export class CreateOrders1626103993231 implements MigrationInterface {
       }),
     );
   }
-
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable('orders');
+    await queryRunner.dropTable('payments');
   }
 }

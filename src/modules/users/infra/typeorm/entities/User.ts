@@ -1,14 +1,11 @@
 import { Address } from '@modules/address/infra/typeorm/entities/Address';
-import { OpeningHours } from '@modules/companies/infra/typeorm/entities/OpeningHours';
 import { MapLocation } from '@modules/maplocations/infra/typeorm/entities/MapLocation';
 import { Score } from '@modules/products/infra/typeorm/entities/Scores';
 import {
   Column,
   CreateDateColumn,
   Entity,
-  JoinColumn,
   OneToMany,
-  OneToOne,
   PrimaryColumn,
 } from 'typeorm';
 import { v4 as uuidV4 } from 'uuid';
@@ -34,10 +31,11 @@ class User {
   avatar: string;
 
   @Column()
-  type: 'funcionario' | 'cliente';
+  type: string;
 
   @Column()
   isActive: boolean;
+  default: true;
 
   @Column()
   isAdmin: boolean;
@@ -52,8 +50,7 @@ class User {
 
   //1 usuário fará varias avaliações
   @OneToMany(() => Score, (score) => score.user)
-  scores: Score[]
-
+  scores: Score[];
 
   @CreateDateColumn()
   created_at: Date;

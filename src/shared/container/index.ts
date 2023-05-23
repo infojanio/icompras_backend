@@ -28,8 +28,8 @@ import { ProductsRepository } from '@modules/products/infra/typeorm/repositories
 import { IOrdersRepository } from '@modules/orders/repositories/IOrdersRepository';
 import { OrdersRepository } from '@modules/orders/infra/typeorm/repositories/OrdersRepository';
 
-import { CompaniesRepository } from '@modules/companies/infra/typeorm/repositories/CompaniesRepository';
 import { ICompaniesRepository } from '@modules/companies/repositories/ICompaniesRepository';
+import { CompaniesRepository } from '@modules/companies/infra/typeorm/repositories/CompaniesRepository';
 
 container.registerSingleton<IUsersRepository>(
   'UsersRepository',
@@ -55,8 +55,6 @@ container.registerSingleton<ICitiesRepository>(
   'CitiesRepository',
   CitiesRepository,
 );
-
-
 
 container.registerSingleton<ICompaniesRepository>(
   'CompaniesRepository',

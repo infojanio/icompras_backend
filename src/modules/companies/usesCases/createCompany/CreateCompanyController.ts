@@ -1,36 +1,35 @@
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
-import { CreateStoreUseCase } from './CreateStoreUseCase';
+import { CreateCompanyUseCase } from './CreateCompanyUseCase';
 
-class CreateStoreController {
+class CreateCompanyController {
   async handle(request: Request, response: Response): Promise<Response> {
     const {
       name,
       slug,
       email,
-      password,
+      cnpj,
+      logo,
       phone,
       isActive,
-      isAdmin,
-      address_id,
-      banner_id,
       openinghours_id,
+      tenant_id,
     } = request.body;
 
-    const createStoreUseCase = container.resolve(CreateStoreUseCase);
-    await createStoreUseCase.execute({
+    const createCompanyUseCase = container.resolve(CreateCompanyUseCase);
+
+    await createCompanyUseCase.execute({
       name,
       slug,
       email,
-      password,
+      cnpj,
+      logo,
       phone,
       isActive,
-      isAdmin,
-      address_id,
-      banner_id,
       openinghours_id,
+      tenant_id,
     });
     return response.status(201).send();
   }
 }
-export { CreateStoreController };
+export { CreateCompanyController };
