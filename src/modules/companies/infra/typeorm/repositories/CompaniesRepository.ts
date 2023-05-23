@@ -15,27 +15,27 @@ class CompaniesRepository implements ICompaniesRepository {
     slug,
     email,
     cnpj,
+    logo,
     phone,
     isActive,
-    address_id,
-    banner_id,
     openinghours_id,
+    tenant_id,
   }: ICreateCompanyDTO): Promise<void> {
     const company = this.repository.create({
       name,
       slug,
       email,
       cnpj,
+      logo,
       phone,
       isActive,
-      address_id,
-      banner_id,
       openinghours_id,
+      tenant_id,
     });
     await this.repository.save(company);
   }
 
-  // método encontrar usuário por email
+  // método encontrar usuário por nome
   public async findByName(name: string): Promise<Company | undefined> {
     const company = await this.repository.findOne({
       where: { name },
@@ -44,9 +44,23 @@ class CompaniesRepository implements ICompaniesRepository {
     return company;
   }
 
+  // método encontrar usuário por email
+  public async findByEmail(email: string): Promise<Company | undefined> {
+    const company = await this.repository.findOne({
+      where: { email },
+    });
+    console.log(company);
+    return company;
+  }
+
   async findById(id: string): Promise<Company | undefined> {
     const company = await this.repository.findOne(id);
     return company;
+  }
+
+  async list(): Promise<Company[]> {
+    const companies = await this.repository.find();
+    return companies;
   }
 }
 export { CompaniesRepository };

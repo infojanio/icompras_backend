@@ -24,7 +24,7 @@ export class CreateTenants1683399216010 implements MigrationInterface {
           {
             name: 'image',
             type: 'varchar',
-            isNullable: true,
+         
           },
 
           {

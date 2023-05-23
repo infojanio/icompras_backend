@@ -3,15 +3,16 @@ import {
   CreateDateColumn,
   Entity,
   JoinColumn,
-  JoinTable,
-  ManyToMany,
   ManyToOne,
+  OneToMany,
   PrimaryColumn,
 } from 'typeorm';
 import { v4 as uuidV4 } from 'uuid';
-import { Category } from './Category';
-import { Specification } from './Specification';
-import { Store } from '@modules/stores/infra/typeorm/entities/Store';
+import { SubCategory } from './SubCategory';
+import { Company } from '@modules/companies/infra/typeorm/entities/Company';
+import { Tenant } from '@modules/tenants/infra/typeorm/entities/Tenant';
+import { Score } from './Scores';
+import { OrderItem } from '@modules/orders/infra/typeorm/entities/OrderItem';
 
 @Entity('products')
 class Product {
@@ -30,19 +31,37 @@ class Product {
   @Column()
   quantity: number;
 
-  // muitos endereços para 1 cliente
-  @ManyToOne(() => Category, (category) => category.products)
-  categories: Category;
+  //1 produto pode estar em vários itens pedidos
+  @OneToMany(() => OrderItem, (orderItem) => orderItem.product)
+  orderItems: OrderItem[];
+
+  //vários produtos pertecem 1 subcategoria
+  @ManyToOne(() => SubCategory)
+  @JoinColumn({ name: 'subcategory_id' })
+  subcategory: SubCategory;
 
   @Column()
-  category_id: string;
+  subcategory_id: string;
 
-  // muitos endereços para 1 cliente
-  @ManyToOne(() => Store, (store) => store.products)
-  stores: Store;
+  //vários produtos pertecem 1 loja
+  @ManyToOne(() => Company)
+  @JoinColumn({ name: 'company_id' })
+  company: Company;
 
   @Column()
-  store_id: string;
+  company_id: string;
+
+  //vários produtos para 1 estabelecimento
+  @ManyToOne(() => Tenant)
+  @JoinColumn({ name: 'tenant_id' })
+  tenant: Tenant;
+
+  @Column()
+  tenant_id: string;
+
+  //1 produto terá varias avaliações
+  @OneToMany(() => Score, (score) => score.product)
+  scores: Score[];
 
   @CreateDateColumn()
   created_at: Date;
@@ -55,23 +74,3 @@ class Product {
   }
 }
 export { Product };
-
-/*
-  //Muitos produtos para 1 categoria
-  @ManyToOne(() => Category)
-  @JoinColumn({ name: 'category_id' })
-  category: Category;
-
-  @Column()
-  category_id: string;
-  */
-
-/*
-  @ManyToOne(() => Specification)
-  @JoinTable({
-    name: 'specifications_products',
-    joinColumns: [{ name: 'product_id' }],
-    inverseJoinColumns: [{ name: 'specification_id' }],
-  })
-  specifications: Specification[];
-*/

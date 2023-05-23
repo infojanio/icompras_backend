@@ -11,6 +11,7 @@ export class CreateUsers1622312830649 implements MigrationInterface {
             type: 'uuid',
             isPrimary: true,
             isNullable: false,
+
             //   generationStrategy: "uuid",
             //   default: "uuid_generate_v4()"
           },
@@ -31,7 +32,7 @@ export class CreateUsers1622312830649 implements MigrationInterface {
           {
             name: 'phone',
             type: 'varchar',
-            isNullable: false,
+           
           },
 
           {
@@ -42,13 +43,13 @@ export class CreateUsers1622312830649 implements MigrationInterface {
           {
             name: 'avatar',
             type: 'varchar',
-            isNullable: true,
+            
           },
 
           {
             name: 'type',
             type: 'varchar',
-            isNullable: false,
+           
           },
 
           {

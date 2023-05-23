@@ -1,6 +1,5 @@
 import { City } from '@modules/cities/infra/typeorm/entities/City';
 import { Company } from '@modules/companies/infra/typeorm/entities/Company';
-import { Store } from '@modules/stores/infra/typeorm/entities/Store';
 import { User } from '@modules/users/infra/typeorm/entities/User';
 import {
   Column,
@@ -27,13 +26,25 @@ class Address {
   @Column()
   complement: string;
 
+ 
+  
   // muitos endereços para 1 cliente
   @ManyToOne(() => User, (user) => user.addresses)
-  user: User;
-
+  @JoinColumn({ name: 'user_id' })
+  user: User
+  
+  @Column()
+  user_id: string;
+  
+  
   // muitos endereços para 1 loja
   @ManyToOne(() => Company, (company) => company.addresses)
-  company: Company;
+  @JoinColumn({ name: 'company_id' })
+  company: Company  
+  
+  @Column()
+  company_id: string;
+
 
   // muitos endereços para 1 cidade
   @ManyToOne(() => City, (city) => city.addresses)

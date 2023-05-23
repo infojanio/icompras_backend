@@ -1,4 +1,5 @@
 import { Address } from '@modules/address/infra/typeorm/entities/Address';
+import { Company } from '@modules/companies/infra/typeorm/entities/Company';
 import {
   Column,
   CreateDateColumn,
@@ -28,6 +29,10 @@ class City {
   //1 cidade tem muitos endereços
   @OneToMany(() => Address, (address) => address.city)
   addresses: Address[];
+
+  //1 cidade tem muitos supermercados
+  @OneToMany(() => Company, (company) => company.city)
+  companies: Company[];
 
   @CreateDateColumn()
   created_at: Date;

@@ -10,9 +10,9 @@ class CreateUserController {
       phone,
       password,
       avatar,
+      type,
       isActive,
       isAdmin,
-      address_id,
     } = request.body;
 
     const createUserUseCase = container.resolve(CreateUserUseCase);
@@ -22,9 +22,9 @@ class CreateUserController {
       phone,
       password,
       avatar,
+      type,
       isActive,
       isAdmin,
-      address_id,
     });
     return response.status(201).send();
   }

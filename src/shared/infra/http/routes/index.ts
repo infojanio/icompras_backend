@@ -6,9 +6,11 @@ import { subcategoriesRoutes } from './subcategories.routes';
 import { specificationsRoutes } from './specifications.routes';
 import { usersRoutes } from './users.routes';
 import { productsRoutes } from './products.routes';
-import { orderRoutes } from './orders.routes';
+import { ordersRoutes } from './orders.routes';
 import { passwordRoutes } from './password.routes';
 import { citiesRoutes } from './cities.routes';
+import { companiesRoutes } from './companies.routes';
+import { tenantsRoutes } from './tenants.routes';
 
 const router = Router();
 
@@ -17,9 +19,10 @@ router.use('/subcategories', subcategoriesRoutes);
 router.use('/specifications', specificationsRoutes);
 router.use('/users', usersRoutes);
 router.use('/cities', citiesRoutes);
-router.use('/stores', storesRoutes);
+router.use('/companies', companiesRoutes);
+router.use('/orders', ordersRoutes);
 router.use('/products', productsRoutes);
-router.use('/orders', orderRoutes);
+router.use('/tenants', tenantsRoutes);
 router.use('/password', passwordRoutes);
 router.use(authenticateRoutes); // assim passa com "/"
 
