@@ -8,7 +8,7 @@ import createConnection from '@shared/infra/typeorm';
 
 let connection: Connection;
 
-describe('Create List All Cities', () => {
+describe('Create List All Tenants', () => {
   //roda antes de tudo
   beforeAll(async () => {
     connection = await createConnection();
@@ -39,22 +39,22 @@ describe('Create List All Cities', () => {
     const { token } = responseToken.body;
 
     await request(app)
-      .post('/cities')
+      .post('/tenants')
       .send({
-        name: 'City Supertest',
-        image: 'City Supertest',
+        name: 'Tenant Supertest',
+        image: 'Teanant Supertest',
       })
       .set({
         Authorization: `Bearer ${token}`,
       });
 
-    const response = await request(app).get('/cities');
+    const response = await request(app).get('/tenants');
 
     console.log(response.body);
 
     expect(response.status).toBe(201); //201 permitiu a listagem de categorias
     expect(response.body.length).toBe(1); //retorna 1 array
     expect(response.body[0]).toHaveProperty('id');
-    expect(response.body[0].name).toEqual('City Supertest');
+    expect(response.body[0].name).toEqual('Tenants Supertest');
   });
 });

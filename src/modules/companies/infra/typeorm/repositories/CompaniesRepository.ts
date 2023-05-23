@@ -57,5 +57,10 @@ class CompaniesRepository implements ICompaniesRepository {
     const company = await this.repository.findOne(id);
     return company;
   }
+
+  async list(): Promise<Company[]> {
+    const companies = await this.repository.find();
+    return companies;
+  }
 }
 export { CompaniesRepository };

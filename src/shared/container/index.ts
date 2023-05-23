@@ -30,6 +30,8 @@ import { OrdersRepository } from '@modules/orders/infra/typeorm/repositories/Ord
 
 import { ICompaniesRepository } from '@modules/companies/repositories/ICompaniesRepository';
 import { CompaniesRepository } from '@modules/companies/infra/typeorm/repositories/CompaniesRepository';
+import { ITenantsRepository } from '@modules/tenants/repositories/ITenantsRepository';
+import { TenantsRepository } from '@modules/tenants/infra/typeorm/repositories/TenantsRepository';
 
 container.registerSingleton<IUsersRepository>(
   'UsersRepository',
@@ -76,9 +78,7 @@ container.registerSingleton<IProductsImagesRepository>(
   ProductsImagesRepository,
 );
 
-/*
-container.registerSingleton<IOrdersRepository>(
-  'OrdersRepository',
-  OrdersRepository,
+container.registerSingleton<ITenantsRepository>(
+  'TenantsRepository',
+  TenantsRepository,
 );
-*/
