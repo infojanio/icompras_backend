@@ -21,6 +21,7 @@ class CreateCompanyUseCase {
     isActive,
     openinghours_id,
     tenant_id,
+    city_id,
   }: ICreateCompanyDTO): Promise<void> {
     //Não permitir cadastrar empresa com mesmo email
     const companyAlreadyExists = await this.companiesRepository.findByEmail(
@@ -41,6 +42,7 @@ class CreateCompanyUseCase {
       isActive,
       openinghours_id,
       tenant_id,
+      city_id,
     });
   }
 }

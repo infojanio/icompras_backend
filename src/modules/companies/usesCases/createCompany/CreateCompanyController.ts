@@ -14,6 +14,7 @@ class CreateCompanyController {
       isActive,
       openinghours_id,
       tenant_id,
+      city_id,
     } = request.body;
 
     const createCompanyUseCase = container.resolve(CreateCompanyUseCase);
@@ -28,6 +29,7 @@ class CreateCompanyController {
       isActive,
       openinghours_id,
       tenant_id,
+      city_id,
     });
     return response.status(201).send();
   }
