@@ -26,6 +26,7 @@ router.use('/openinghours', openinghoursRoutes);
 router.use('/products', productsRoutes);
 router.use('/tenants', tenantsRoutes);
 router.use('/password', passwordRoutes);
+router.use('/sessions', authenticateRoutes);
 router.use(authenticateRoutes); // assim passa com "/"
 
 export { router };
