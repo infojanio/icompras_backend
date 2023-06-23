@@ -4,12 +4,13 @@ import { Specification } from '../infra/typeorm/entities/Specification';
 interface ICreateProductDTO {
   id?: string;
   name: string;
-  available: boolean;
   price: Double;
   quantity: Double;
-  category_id: string;
-  store_id: string;
-  specifications?: Specification[];
+  available: boolean;
+  subcategory_id: string;
+  company_id: string;
+  tenant_id: string;
+  //  specifications?: Specification[];
 }
 
 export { ICreateProductDTO };

@@ -1,10 +1,11 @@
+import { verify } from 'jsonwebtoken';
 import { AppError } from '@shared/errors/AppError';
+import auth from '../../../../config/auth';
+import authConfig from '../../../../config/auth';
+
 import { UsersRepository } from '@modules/users/infra/typeorm/repositories/UsersRepository';
 import { NextFunction, Request, Response } from 'express';
-import { verify } from 'jsonwebtoken';
-import authConfig from '../../../../config/auth';
 import { UsersTokensRepository } from '@modules/users/infra/typeorm/repositories/UsersTokensRepository';
-import auth from '../../../../config/auth';
 
 interface ITokenPayLoad {
   iat: number;
@@ -24,7 +25,7 @@ export async function ensureAuthenticated(
   //dispara o erro caso o token não seja válido
   if (!authHeader) {
     // throw new Error('JWT token is missing!');
-    throw new AppError('JWT token is missing!', 401);
+    throw new AppError('JWT token não informado!', 401);
   }
 
   const [, token] = authHeader.split(' ');

@@ -27,6 +27,12 @@ productsRoutes.post(
 
 productsRoutes.get('/available', listAvailableController.handle);
 
+productsRoutes.get(
+  '/products/:id',
+  ensureAuthenticated,
+  createProductSpecificationController.handle,
+);
+
 productsRoutes.post(
   '/specifications/:id',
   ensureAuthenticated,
