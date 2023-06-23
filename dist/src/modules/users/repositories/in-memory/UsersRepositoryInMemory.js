@@ -60,6 +60,13 @@ var UsersRepositoryInMemory = /** @class */ (function () {
             });
         });
     };
+    UsersRepositoryInMemory.prototype.findByName = function (name) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                return [2 /*return*/, this.users.find(function (user) { return user.email === name; })];
+            });
+        });
+    };
     //2. teste de verificação de cadastro de usuário já existente
     UsersRepositoryInMemory.prototype.findByEmail = function (email) {
         return __awaiter(this, void 0, void 0, function () {
@@ -68,7 +75,7 @@ var UsersRepositoryInMemory = /** @class */ (function () {
             });
         });
     };
-    //3. teste de verificação de
+    //3. teste de verificação
     UsersRepositoryInMemory.prototype.findById = function (id) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
@@ -76,14 +83,13 @@ var UsersRepositoryInMemory = /** @class */ (function () {
             });
         });
     };
-    //2. teste de verificação de cadastro de usuário já existente
-    UsersRepositoryInMemory.prototype.findByPhone = function (phone) {
-        return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                return [2 /*return*/, this.users.find(function (user) { return user.phone === phone; })];
-            });
-        });
-    };
     return UsersRepositoryInMemory;
 }());
 exports.UsersRepositoryInMemory = UsersRepositoryInMemory;
+/*
+
+  //2. teste de verificação de cadastro de usuário já existente
+  async findByPhone(phone: string): Promise<User | undefined> {
+    return this.users.find((user) => user.phone === phone);
+  }
+*/

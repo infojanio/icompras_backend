@@ -54,8 +54,6 @@ var CreateCityController = /** @class */ (function () {
                                 name: name,
                                 uf: uf,
                                 cep: cep,
-                                longitude: longitude,
-                                latitude: latitude,
                                 isActive: isActive,
                             })];
                     case 1:

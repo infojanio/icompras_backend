@@ -59,17 +59,14 @@ var CreateMapLocations1683402902675 = /** @class */ (function () {
                                 {
                                     name: 'avatar',
                                     type: 'varchar',
-                                    isNullable: true,
                                 },
                                 {
                                     name: 'longitude',
                                     type: 'numeric',
-                                    isNullable: true,
                                 },
                                 {
                                     name: 'latitude',
                                     type: 'numeric',
-                                    isNullable: true,
                                 },
                                 {
                                     name: 'isActive',
@@ -79,7 +76,10 @@ var CreateMapLocations1683402902675 = /** @class */ (function () {
                                 {
                                     name: 'user_id',
                                     type: 'uuid',
-                                    isNullable: true,
+                                },
+                                {
+                                    name: 'company_id',
+                                    type: 'uuid',
                                 },
                                 {
                                     name: 'created_at',
@@ -89,10 +89,18 @@ var CreateMapLocations1683402902675 = /** @class */ (function () {
                             ],
                             foreignKeys: [
                                 {
-                                    name: 'FKUserMapLocation',
+                                    name: 'FKUserMapLocations',
                                     referencedTableName: 'users',
                                     referencedColumnNames: ['id'],
                                     columnNames: ['user_id'],
+                                    onDelete: 'SET NULL',
+                                    onUpdate: 'SET NULL',
+                                },
+                                {
+                                    name: 'FKCompanyMapLocations',
+                                    referencedTableName: 'companies',
+                                    referencedColumnNames: ['id'],
+                                    columnNames: ['company_id'],
                                     onDelete: 'SET NULL',
                                     onUpdate: 'SET NULL',
                                 },

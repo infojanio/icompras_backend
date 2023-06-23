@@ -10,20 +10,15 @@ var UsersTokensRepository_1 = require("@modules/users/infra/typeorm/repositories
 var CitiesRepository_1 = require("@modules/cities/infra/typeorm/repositories/CitiesRepository");
 var SpecificationsRepository_1 = require("@modules/products/infra/typeorm/repositories/SpecificationsRepository");
 var ProductsRepository_1 = require("@modules/products/infra/typeorm/repositories/ProductsRepository");
-var StoreRepository_1 = require("@modules/stores/infra/typeorm/repositories/StoreRepository");
+var CompaniesRepository_1 = require("@modules/companies/infra/typeorm/repositories/CompaniesRepository");
+var TenantsRepository_1 = require("@modules/tenants/infra/typeorm/repositories/TenantsRepository");
 tsyringe_1.container.registerSingleton('UsersRepository', UsersRepository_1.UsersRepository);
 tsyringe_1.container.registerSingleton('UsersTokensRepository', UsersTokensRepository_1.UsersTokensRepository);
 tsyringe_1.container.registerSingleton('CategoriesRepository', CategoriesRepository_1.CategoriesRepository);
 tsyringe_1.container.registerSingleton('SubCategoriesRepository', SubCategoriesRepository_1.SubCategoriesRepository);
 tsyringe_1.container.registerSingleton('CitiesRepository', CitiesRepository_1.CitiesRepository);
-tsyringe_1.container.registerSingleton('StoreRepository', StoreRepository_1.StoreRepository);
-tsyringe_1.container.registerSingleton('CompaniesRepository', CompaniesRepository);
+tsyringe_1.container.registerSingleton('CompaniesRepository', CompaniesRepository_1.CompaniesRepository);
 tsyringe_1.container.registerSingleton('SpecificationsRepository', SpecificationsRepository_1.SpecificationsRepository);
 tsyringe_1.container.registerSingleton('ProductsRepository', ProductsRepository_1.ProductsRepository);
 tsyringe_1.container.registerSingleton('ProductsImagesRepository', ProductsImagesRepository_1.ProductsImagesRepository);
-/*
-container.registerSingleton<IOrdersRepository>(
-  'OrdersRepository',
-  OrdersRepository,
-);
-*/
+tsyringe_1.container.registerSingleton('TenantsRepository', TenantsRepository_1.TenantsRepository);

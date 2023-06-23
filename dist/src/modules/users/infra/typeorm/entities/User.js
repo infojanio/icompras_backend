@@ -12,6 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.User = void 0;
 var Address_1 = require("@modules/address/infra/typeorm/entities/Address");
 var MapLocation_1 = require("@modules/maplocations/infra/typeorm/entities/MapLocation");
+var Scores_1 = require("@modules/products/infra/typeorm/entities/Scores");
 var typeorm_1 = require("typeorm");
 var uuid_1 = require("uuid");
 var User = /** @class */ (function () {
@@ -64,6 +65,10 @@ var User = /** @class */ (function () {
         typeorm_1.OneToMany(function () { return MapLocation_1.MapLocation; }, function (maplocation) { return maplocation.user; }),
         __metadata("design:type", Array)
     ], User.prototype, "maplocations", void 0);
+    __decorate([
+        typeorm_1.OneToMany(function () { return Scores_1.Score; }, function (score) { return score.user; }),
+        __metadata("design:type", Array)
+    ], User.prototype, "scores", void 0);
     __decorate([
         typeorm_1.CreateDateColumn(),
         __metadata("design:type", Date)

@@ -57,7 +57,7 @@ var CreateUserUseCase = /** @class */ (function () {
         this.usersRepository = usersRepository;
     }
     CreateUserUseCase.prototype.execute = function (_a) {
-        var name = _a.name, email = _a.email, phone = _a.phone, password = _a.password, avatar = _a.avatar, isActive = _a.isActive, isAdmin = _a.isAdmin, address_id = _a.address_id;
+        var name = _a.name, email = _a.email, phone = _a.phone, password = _a.password, avatar = _a.avatar, type = _a.type, isActive = _a.isActive, isAdmin = _a.isAdmin;
         return __awaiter(this, void 0, void 0, function () {
             var userAlreadyExists, passwordHash;
             return __generator(this, function (_b) {
@@ -77,9 +77,9 @@ var CreateUserUseCase = /** @class */ (function () {
                                 phone: phone,
                                 password: passwordHash,
                                 avatar: avatar,
+                                type: type,
                                 isActive: isActive,
                                 isAdmin: isAdmin,
-                                address_id: address_id,
                             })];
                     case 3:
                         _b.sent();

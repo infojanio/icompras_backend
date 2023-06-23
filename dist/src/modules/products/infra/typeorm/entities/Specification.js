@@ -31,8 +31,8 @@ var Specification = /** @class */ (function () {
         __metadata("design:type", String)
     ], Specification.prototype, "description", void 0);
     __decorate([
-        typeorm_1.CreateDateColumn(),
-        __metadata("design:type", Object)
+        typeorm_1.Column('date'),
+        __metadata("design:type", Date)
     ], Specification.prototype, "expiration_date", void 0);
     __decorate([
         typeorm_1.Column(),

@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.City = void 0;
 var Address_1 = require("@modules/address/infra/typeorm/entities/Address");
+var Company_1 = require("@modules/companies/infra/typeorm/entities/Company");
 var typeorm_1 = require("typeorm");
 var uuid_1 = require("uuid");
 var City = /** @class */ (function () {
@@ -43,6 +44,10 @@ var City = /** @class */ (function () {
         typeorm_1.OneToMany(function () { return Address_1.Address; }, function (address) { return address.city; }),
         __metadata("design:type", Array)
     ], City.prototype, "addresses", void 0);
+    __decorate([
+        typeorm_1.OneToMany(function () { return Company_1.Company; }, function (company) { return company.city; }),
+        __metadata("design:type", Array)
+    ], City.prototype, "companies", void 0);
     __decorate([
         typeorm_1.CreateDateColumn(),
         __metadata("design:type", Date)

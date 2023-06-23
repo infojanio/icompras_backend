@@ -10,10 +10,14 @@ var ensureAuthenticated_1 = require("@shared/infra/http/middlewares/ensureAuthen
 var express_1 = require("express");
 var multer_1 = __importDefault(require("multer"));
 var upload_1 = __importDefault(require("@config/upload"));
+var ListUsersController_1 = require("@modules/users/usesCases/listUsers/ListUsersController");
+var ensureAdmin_1 = require("../middlewares/ensureAdmin");
 var usersRoutes = express_1.Router();
 exports.usersRoutes = usersRoutes;
 var uploadAvatar = multer_1.default(upload_1.default.upload('./tmp/avatar'));
 var createUserController = new CreateUserController_1.CreateUserController();
+var listUsersController = new ListUsersController_1.ListUsersController();
 var updateUserAvatarController = new UpdateUserAvatarController_1.UpdateUserAvatarController();
-usersRoutes.post('/', createUserController.handle);
+usersRoutes.post('/', ensureAuthenticated_1.ensureAuthenticated, ensureAdmin_1.ensureAdmin, createUserController.handle);
+usersRoutes.get('/', listUsersController.handle); //não necessita estar logado
 usersRoutes.patch('/avatar', ensureAuthenticated_1.ensureAuthenticated, uploadAvatar.single('avatar'), updateUserAvatarController.handle);

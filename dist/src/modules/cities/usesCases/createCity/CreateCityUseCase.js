@@ -56,7 +56,7 @@ var CreateCityUseCase = /** @class */ (function () {
         this.citiesRepository = citiesRepository;
     }
     CreateCityUseCase.prototype.execute = function (_a) {
-        var name = _a.name, uf = _a.uf, cep = _a.cep, longitude = _a.longitude, latitude = _a.latitude, isActive = _a.isActive;
+        var name = _a.name, uf = _a.uf, cep = _a.cep, isActive = _a.isActive;
         return __awaiter(this, void 0, void 0, function () {
             var cityAlreadyExists;
             return __generator(this, function (_b) {
@@ -71,8 +71,6 @@ var CreateCityUseCase = /** @class */ (function () {
                                 name: name,
                                 uf: uf,
                                 cep: cep,
-                                longitude: longitude,
-                                latitude: latitude,
                                 isActive: isActive,
                             })];
                     case 2:

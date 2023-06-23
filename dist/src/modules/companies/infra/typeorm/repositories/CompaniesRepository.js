@@ -44,7 +44,7 @@ var CompaniesRepository = /** @class */ (function () {
         this.repository = typeorm_1.getRepository(Company_1.Company);
     }
     CompaniesRepository.prototype.create = function (_a) {
-        var name = _a.name, slug = _a.slug, email = _a.email, cnpj = _a.cnpj, phone = _a.phone, isActive = _a.isActive, address_id = _a.address_id, banner_id = _a.banner_id, openinghours_id = _a.openinghours_id;
+        var name = _a.name, slug = _a.slug, email = _a.email, cnpj = _a.cnpj, logo = _a.logo, phone = _a.phone, isActive = _a.isActive, openinghours_id = _a.openinghours_id, tenant_id = _a.tenant_id;
         return __awaiter(this, void 0, void 0, function () {
             var company;
             return __generator(this, function (_b) {
@@ -55,11 +55,11 @@ var CompaniesRepository = /** @class */ (function () {
                             slug: slug,
                             email: email,
                             cnpj: cnpj,
+                            logo: logo,
                             phone: phone,
                             isActive: isActive,
-                            address_id: address_id,
-                            banner_id: banner_id,
                             openinghours_id: openinghours_id,
+                            tenant_id: tenant_id,
                         });
                         return [4 /*yield*/, this.repository.save(company)];
                     case 1:
@@ -69,7 +69,7 @@ var CompaniesRepository = /** @class */ (function () {
             });
         });
     };
-    // método encontrar usuário por email
+    // método encontrar usuário por nome
     CompaniesRepository.prototype.findByName = function (name) {
         return __awaiter(this, void 0, void 0, function () {
             var company;
@@ -77,6 +77,23 @@ var CompaniesRepository = /** @class */ (function () {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, this.repository.findOne({
                             where: { name: name },
+                        })];
+                    case 1:
+                        company = _a.sent();
+                        console.log(company);
+                        return [2 /*return*/, company];
+                }
+            });
+        });
+    };
+    // método encontrar usuário por email
+    CompaniesRepository.prototype.findByEmail = function (email) {
+        return __awaiter(this, void 0, void 0, function () {
+            var company;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.repository.findOne({
+                            where: { email: email },
                         })];
                     case 1:
                         company = _a.sent();
@@ -95,6 +112,19 @@ var CompaniesRepository = /** @class */ (function () {
                     case 1:
                         company = _a.sent();
                         return [2 /*return*/, company];
+                }
+            });
+        });
+    };
+    CompaniesRepository.prototype.list = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var companies;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.repository.find()];
+                    case 1:
+                        companies = _a.sent();
+                        return [2 /*return*/, companies];
                 }
             });
         });

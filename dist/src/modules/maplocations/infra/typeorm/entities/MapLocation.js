@@ -10,6 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.MapLocation = void 0;
+var Company_1 = require("@modules/companies/infra/typeorm/entities/Company");
 var User_1 = require("@modules/users/infra/typeorm/entities/User");
 var typeorm_1 = require("typeorm");
 var uuid_1 = require("uuid");
@@ -40,7 +41,7 @@ var MapLocation = /** @class */ (function () {
         __metadata("design:type", Boolean)
     ], MapLocation.prototype, "isActive", void 0);
     __decorate([
-        typeorm_1.ManyToOne(function () { return User_1.User; }),
+        typeorm_1.ManyToOne(function () { return User_1.User; }, function (user) { return user.maplocations; }),
         typeorm_1.JoinColumn({ name: 'user_id' }),
         __metadata("design:type", User_1.User)
     ], MapLocation.prototype, "user", void 0);
@@ -48,6 +49,15 @@ var MapLocation = /** @class */ (function () {
         typeorm_1.Column(),
         __metadata("design:type", String)
     ], MapLocation.prototype, "user_id", void 0);
+    __decorate([
+        typeorm_1.ManyToOne(function () { return Company_1.Company; }, function (company) { return company.maplocations; }),
+        typeorm_1.JoinColumn({ name: 'company_id' }),
+        __metadata("design:type", Company_1.Company)
+    ], MapLocation.prototype, "company", void 0);
+    __decorate([
+        typeorm_1.Column(),
+        __metadata("design:type", String)
+    ], MapLocation.prototype, "company_id", void 0);
     __decorate([
         typeorm_1.CreateDateColumn(),
         __metadata("design:type", Date)

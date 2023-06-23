@@ -2,9 +2,9 @@ import { ICreateProductDTO } from '@modules/products/dtos/ICreateProductDTO';
 import { Product } from '@modules/products/infra/typeorm/entities/Product';
 
 interface IProductsRepository {
-  create(data: ICreateProductDTO): Promise<Product>;
+  create({name, available, price, quantity, company_id, subcategory_id, specifications}: ICreateProductDTO): Promise<Product>;
 
-  //findByLicensePlate(license_plate: string): Promise<Product | undefined>;
+  findBySubCategory(subcategory_id: string): Promise<Product | undefined>;
 
   findAvailable(
     brand?: string,

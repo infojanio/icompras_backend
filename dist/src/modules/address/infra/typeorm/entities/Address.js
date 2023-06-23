@@ -39,12 +39,22 @@ var Address = /** @class */ (function () {
     ], Address.prototype, "complement", void 0);
     __decorate([
         typeorm_1.ManyToOne(function () { return User_1.User; }, function (user) { return user.addresses; }),
+        typeorm_1.JoinColumn({ name: 'user_id' }),
         __metadata("design:type", User_1.User)
     ], Address.prototype, "user", void 0);
     __decorate([
+        typeorm_1.Column(),
+        __metadata("design:type", String)
+    ], Address.prototype, "user_id", void 0);
+    __decorate([
         typeorm_1.ManyToOne(function () { return Company_1.Company; }, function (company) { return company.addresses; }),
+        typeorm_1.JoinColumn({ name: 'company_id' }),
         __metadata("design:type", Company_1.Company)
     ], Address.prototype, "company", void 0);
+    __decorate([
+        typeorm_1.Column(),
+        __metadata("design:type", String)
+    ], Address.prototype, "company_id", void 0);
     __decorate([
         typeorm_1.ManyToOne(function () { return City_1.City; }, function (city) { return city.addresses; }),
         __metadata("design:type", City_1.City)

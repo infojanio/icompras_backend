@@ -40,6 +40,10 @@ var OpeningHours = /** @class */ (function () {
     ], OpeningHours.prototype, "notice", void 0);
     __decorate([
         typeorm_1.Column(),
+        __metadata("design:type", String)
+    ], OpeningHours.prototype, "status", void 0);
+    __decorate([
+        typeorm_1.Column(),
         __metadata("design:type", Boolean)
     ], OpeningHours.prototype, "isActive", void 0);
     __decorate([
@@ -53,27 +57,3 @@ var OpeningHours = /** @class */ (function () {
     return OpeningHours;
 }());
 exports.OpeningHours = OpeningHours;
-/*
-    @ManyToOne(() => Banner)
-    @JoinColumn({ name: 'banner_id' })
-    banner: Banner;
-  
-    @Column()
-    banner_id: string;
-  */
-/*
-    @OneToMany(() => City)
-    @JoinColumn({ name: 'city_id' })
-    city: City;
-  
-    @Column()
-    city_id: string;
-  */
-/*
-    @OneToOne(() => Address)
-    @JoinColumn({ name: 'address_id' })
-    address: Address;
-  
-    @Column()
-    address_id: string;
-  */

@@ -44,7 +44,7 @@ var CitiesRepository = /** @class */ (function () {
         this.repository = typeorm_1.getRepository(City_1.City);
     }
     CitiesRepository.prototype.create = function (_a) {
-        var name = _a.name, uf = _a.uf, cep = _a.cep, longitude = _a.longitude, latitude = _a.latitude, isActive = _a.isActive;
+        var name = _a.name, uf = _a.uf, cep = _a.cep, isActive = _a.isActive;
         return __awaiter(this, void 0, void 0, function () {
             var city;
             return __generator(this, function (_b) {
@@ -54,8 +54,6 @@ var CitiesRepository = /** @class */ (function () {
                             name: name,
                             uf: uf,
                             cep: cep,
-                            longitude: longitude,
-                            latitude: latitude,
                             isActive: isActive,
                         });
                         return [4 /*yield*/, this.repository.save(city)];

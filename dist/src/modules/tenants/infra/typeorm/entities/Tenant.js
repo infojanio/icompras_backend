@@ -10,6 +10,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Tenant = void 0;
+var Company_1 = require("@modules/companies/infra/typeorm/entities/Company");
+var Category_1 = require("@modules/products/infra/typeorm/entities/Category");
+var Product_1 = require("@modules/products/infra/typeorm/entities/Product");
+var SubCategory_1 = require("@modules/products/infra/typeorm/entities/SubCategory");
 var typeorm_1 = require("typeorm");
 var uuid_1 = require("uuid");
 var Tenant = /** @class */ (function () {
@@ -35,11 +39,27 @@ var Tenant = /** @class */ (function () {
         __metadata("design:type", Boolean)
     ], Tenant.prototype, "isActive", void 0);
     __decorate([
+        typeorm_1.OneToMany(function () { return SubCategory_1.SubCategory; }, function (subcategory) { return subcategory.tenant; }),
+        __metadata("design:type", Array)
+    ], Tenant.prototype, "subcategories", void 0);
+    __decorate([
+        typeorm_1.OneToMany(function () { return Category_1.Category; }, function (category) { return category.tenant; }),
+        __metadata("design:type", Array)
+    ], Tenant.prototype, "categories", void 0);
+    __decorate([
+        typeorm_1.OneToMany(function () { return Company_1.Company; }, function (company) { return company.tenant; }),
+        __metadata("design:type", Array)
+    ], Tenant.prototype, "companies", void 0);
+    __decorate([
+        typeorm_1.OneToMany(function () { return Product_1.Product; }, function (product) { return product.tenant; }),
+        __metadata("design:type", Array)
+    ], Tenant.prototype, "products", void 0);
+    __decorate([
         typeorm_1.CreateDateColumn(),
         __metadata("design:type", Date)
     ], Tenant.prototype, "created_at", void 0);
     Tenant = __decorate([
-        typeorm_1.Entity('tenant'),
+        typeorm_1.Entity('tenants'),
         __metadata("design:paramtypes", [])
     ], Tenant);
     return Tenant;

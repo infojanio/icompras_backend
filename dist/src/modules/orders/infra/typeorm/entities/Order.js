@@ -13,6 +13,9 @@ exports.Order = void 0;
 var User_1 = require("@modules/users/infra/typeorm/entities/User");
 var typeorm_1 = require("typeorm");
 var uuid_1 = require("uuid");
+var DeliveryStatusLog_1 = require("./DeliveryStatusLog");
+var Company_1 = require("@modules/companies/infra/typeorm/entities/Company");
+var OrderItem_1 = require("./OrderItem");
 var Order = /** @class */ (function () {
     function Order() {
         if (!this.id) {
@@ -33,45 +36,25 @@ var Order = /** @class */ (function () {
         __metadata("design:type", String)
     ], Order.prototype, "user_id", void 0);
     __decorate([
-        typeorm_1.Column(),
-        __metadata("design:type", String)
-    ], Order.prototype, "store_id", void 0);
+        typeorm_1.JoinColumn({ name: 'company_id' }),
+        __metadata("design:type", Company_1.Company)
+    ], Order.prototype, "company", void 0);
     __decorate([
         typeorm_1.Column(),
         __metadata("design:type", String)
-    ], Order.prototype, "address_id", void 0);
+    ], Order.prototype, "company_id", void 0);
+    __decorate([
+        typeorm_1.OneToMany(function () { return DeliveryStatusLog_1.DeliveryStatusLog; }, function (deliverystatuslog) { return deliverystatuslog.order; }),
+        __metadata("design:type", Array)
+    ], Order.prototype, "deliverystatuslogs", void 0);
     __decorate([
         typeorm_1.Column(),
         __metadata("design:type", String)
-    ], Order.prototype, "product_id", void 0);
+    ], Order.prototype, "deliverystatus_id", void 0);
     __decorate([
-        typeorm_1.Column(),
-        __metadata("design:type", String)
-    ], Order.prototype, "form_payment", void 0);
-    __decorate([
-        typeorm_1.Column(),
-        __metadata("design:type", Number)
-    ], Order.prototype, "change", void 0);
-    __decorate([
-        typeorm_1.Column(),
-        __metadata("design:type", Number)
-    ], Order.prototype, "freight", void 0);
-    __decorate([
-        typeorm_1.Column(),
-        __metadata("design:type", Number)
-    ], Order.prototype, "discount", void 0);
-    __decorate([
-        typeorm_1.Column(),
-        __metadata("design:type", Number)
-    ], Order.prototype, "subtotal", void 0);
-    __decorate([
-        typeorm_1.Column(),
-        __metadata("design:type", Number)
-    ], Order.prototype, "total", void 0);
-    __decorate([
-        typeorm_1.Column(),
-        __metadata("design:type", Date)
-    ], Order.prototype, "order_date", void 0);
+        typeorm_1.OneToMany(function () { return OrderItem_1.OrderItem; }, function (orderItem) { return orderItem.order; }),
+        __metadata("design:type", Array)
+    ], Order.prototype, "orderItems", void 0);
     __decorate([
         typeorm_1.CreateDateColumn(),
         __metadata("design:type", Date)

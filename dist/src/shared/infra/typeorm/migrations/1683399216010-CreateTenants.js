@@ -64,7 +64,6 @@ var CreateTenants1683399216010 = /** @class */ (function () {
                                 {
                                     name: 'image',
                                     type: 'varchar',
-                                    isNullable: true,
                                 },
                                 {
                                     name: 'isActive',

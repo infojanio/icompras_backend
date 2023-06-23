@@ -44,7 +44,7 @@ var UsersRepository = /** @class */ (function () {
         this.repository = typeorm_1.getRepository(User_1.User);
     }
     UsersRepository.prototype.create = function (_a) {
-        var name = _a.name, email = _a.email, phone = _a.phone, password = _a.password, avatar = _a.avatar, isActive = _a.isActive, isAdmin = _a.isAdmin, address_id = _a.address_id, id = _a.id;
+        var name = _a.name, email = _a.email, phone = _a.phone, password = _a.password, avatar = _a.avatar, type = _a.type, isActive = _a.isActive, isAdmin = _a.isAdmin;
         return __awaiter(this, void 0, void 0, function () {
             var user;
             return __generator(this, function (_b) {
@@ -56,10 +56,9 @@ var UsersRepository = /** @class */ (function () {
                             phone: phone,
                             password: password,
                             avatar: avatar,
+                            type: type,
                             isActive: isActive,
                             isAdmin: isAdmin,
-                            address_id: address_id,
-                            id: id,
                         });
                         return [4 /*yield*/, this.repository.save(user)];
                     case 1:
@@ -69,14 +68,13 @@ var UsersRepository = /** @class */ (function () {
             });
         });
     };
-    // método encontrar usuário por email
-    UsersRepository.prototype.findByEmail = function (email) {
+    UsersRepository.prototype.findByName = function (name) {
         return __awaiter(this, void 0, void 0, function () {
             var user;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, this.repository.findOne({
-                            where: { email: email },
+                            where: { name: name },
                         })];
                     case 1:
                         user = _a.sent();
@@ -86,14 +84,14 @@ var UsersRepository = /** @class */ (function () {
             });
         });
     };
-    // método encontrar usuário por telefone
-    UsersRepository.prototype.findByPhone = function (phone) {
+    //método encontrar usuário por email
+    UsersRepository.prototype.findByEmail = function (email) {
         return __awaiter(this, void 0, void 0, function () {
             var user;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, this.repository.findOne({
-                            where: { phone: phone },
+                            where: { email: email },
                         })];
                     case 1:
                         user = _a.sent();
@@ -116,6 +114,30 @@ var UsersRepository = /** @class */ (function () {
             });
         });
     };
+    UsersRepository.prototype.list = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var users;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.repository.find()];
+                    case 1:
+                        users = _a.sent();
+                        return [2 /*return*/, users];
+                }
+            });
+        });
+    };
     return UsersRepository;
 }());
 exports.UsersRepository = UsersRepository;
+/*
+
+  // método encontrar usuário por telefone
+  public async findByPhone(phone: string): Promise<User | undefined> {
+    const user = await this.repository.findOne({
+      where: { phone },
+    });
+    console.log(user);
+    return user;
+  }
+  */

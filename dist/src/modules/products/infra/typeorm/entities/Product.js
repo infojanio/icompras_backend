@@ -12,8 +12,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Product = void 0;
 var typeorm_1 = require("typeorm");
 var uuid_1 = require("uuid");
-var Category_1 = require("./Category");
-var Store_1 = require("@modules/stores/infra/typeorm/entities/Store");
+var SubCategory_1 = require("./SubCategory");
+var Company_1 = require("@modules/companies/infra/typeorm/entities/Company");
+var Tenant_1 = require("@modules/tenants/infra/typeorm/entities/Tenant");
+var Scores_1 = require("./Scores");
+var OrderItem_1 = require("@modules/orders/infra/typeorm/entities/OrderItem");
 var Product = /** @class */ (function () {
     function Product() {
         if (!this.id) {
@@ -42,21 +45,40 @@ var Product = /** @class */ (function () {
         __metadata("design:type", Number)
     ], Product.prototype, "quantity", void 0);
     __decorate([
-        typeorm_1.ManyToOne(function () { return Category_1.Category; }, function (category) { return category.products; }),
-        __metadata("design:type", Category_1.Category)
-    ], Product.prototype, "categories", void 0);
+        typeorm_1.OneToMany(function () { return OrderItem_1.OrderItem; }, function (orderItem) { return orderItem.product; }),
+        __metadata("design:type", Array)
+    ], Product.prototype, "orderItems", void 0);
+    __decorate([
+        typeorm_1.ManyToOne(function () { return SubCategory_1.SubCategory; }),
+        typeorm_1.JoinColumn({ name: 'subcategory_id' }),
+        __metadata("design:type", SubCategory_1.SubCategory)
+    ], Product.prototype, "subcategory", void 0);
     __decorate([
         typeorm_1.Column(),
         __metadata("design:type", String)
-    ], Product.prototype, "category_id", void 0);
+    ], Product.prototype, "subcategory_id", void 0);
     __decorate([
-        typeorm_1.ManyToOne(function () { return Store_1.Store; }, function (store) { return store.products; }),
-        __metadata("design:type", Store_1.Store)
-    ], Product.prototype, "stores", void 0);
+        typeorm_1.ManyToOne(function () { return Company_1.Company; }),
+        typeorm_1.JoinColumn({ name: 'company_id' }),
+        __metadata("design:type", Company_1.Company)
+    ], Product.prototype, "company", void 0);
     __decorate([
         typeorm_1.Column(),
         __metadata("design:type", String)
-    ], Product.prototype, "store_id", void 0);
+    ], Product.prototype, "company_id", void 0);
+    __decorate([
+        typeorm_1.ManyToOne(function () { return Tenant_1.Tenant; }),
+        typeorm_1.JoinColumn({ name: 'tenant_id' }),
+        __metadata("design:type", Tenant_1.Tenant)
+    ], Product.prototype, "tenant", void 0);
+    __decorate([
+        typeorm_1.Column(),
+        __metadata("design:type", String)
+    ], Product.prototype, "tenant_id", void 0);
+    __decorate([
+        typeorm_1.OneToMany(function () { return Scores_1.Score; }, function (score) { return score.product; }),
+        __metadata("design:type", Array)
+    ], Product.prototype, "scores", void 0);
     __decorate([
         typeorm_1.CreateDateColumn(),
         __metadata("design:type", Date)
@@ -68,21 +90,3 @@ var Product = /** @class */ (function () {
     return Product;
 }());
 exports.Product = Product;
-/*
-  //Muitos produtos para 1 categoria
-  @ManyToOne(() => Category)
-  @JoinColumn({ name: 'category_id' })
-  category: Category;
-
-  @Column()
-  category_id: string;
-  */
-/*
-  @ManyToOne(() => Specification)
-  @JoinTable({
-    name: 'specifications_products',
-    joinColumns: [{ name: 'product_id' }],
-    inverseJoinColumns: [{ name: 'specification_id' }],
-  })
-  specifications: Specification[];
-*/

@@ -44,7 +44,7 @@ var CitiesRepositoryInMemory = /** @class */ (function () {
     }
     //1. teste de criação do usuário
     CitiesRepositoryInMemory.prototype.create = function (_a) {
-        var name = _a.name, uf = _a.uf, cep = _a.cep, longitude = _a.longitude, latitude = _a.latitude;
+        var name = _a.name, uf = _a.uf, cep = _a.cep;
         return __awaiter(this, void 0, void 0, function () {
             var city;
             return __generator(this, function (_b) {
@@ -53,8 +53,6 @@ var CitiesRepositoryInMemory = /** @class */ (function () {
                     name: name,
                     uf: uf,
                     cep: cep,
-                    longitude: longitude,
-                    latitude: latitude,
                 });
                 this.cities.push(city);
                 return [2 /*return*/];

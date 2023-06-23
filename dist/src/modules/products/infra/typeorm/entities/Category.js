@@ -13,7 +13,6 @@ exports.Category = void 0;
 var typeorm_1 = require("typeorm");
 var uuid_1 = require("uuid");
 var SubCategory_1 = require("./SubCategory");
-var Product_1 = require("./Product");
 var Tenant_1 = require("@modules/tenants/infra/typeorm/entities/Tenant");
 var Category = /** @class */ (function () {
     //cria o id
@@ -34,10 +33,6 @@ var Category = /** @class */ (function () {
         typeorm_1.Column(),
         __metadata("design:type", String)
     ], Category.prototype, "image", void 0);
-    __decorate([
-        typeorm_1.OneToMany(function () { return Product_1.Product; }, function (product) { return product.categories; }),
-        __metadata("design:type", Array)
-    ], Category.prototype, "products", void 0);
     __decorate([
         typeorm_1.OneToMany(function () { return SubCategory_1.SubCategory; }, function (subcategory) { return subcategory.category; }),
         __metadata("design:type", Array)

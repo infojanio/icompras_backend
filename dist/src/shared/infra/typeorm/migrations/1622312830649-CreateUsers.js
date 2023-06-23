@@ -70,7 +70,6 @@ var CreateUsers1622312830649 = /** @class */ (function () {
                                 {
                                     name: 'phone',
                                     type: 'varchar',
-                                    isNullable: false,
                                 },
                                 {
                                     name: 'password',
@@ -80,12 +79,10 @@ var CreateUsers1622312830649 = /** @class */ (function () {
                                 {
                                     name: 'avatar',
                                     type: 'varchar',
-                                    isNullable: true,
                                 },
                                 {
                                     name: 'type',
                                     type: 'varchar',
-                                    isNullable: false,
                                 },
                                 {
                                     name: 'isActive',

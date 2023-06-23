@@ -11,11 +11,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Company = void 0;
 var Address_1 = require("@modules/address/infra/typeorm/entities/Address");
-var Product_1 = require("@modules/products/infra/typeorm/entities/Product");
 var typeorm_1 = require("typeorm");
 var uuid_1 = require("uuid");
 var OpeningHours_1 = require("./OpeningHours");
-var Banner_1 = require("./Banner");
+var MapLocation_1 = require("@modules/maplocations/infra/typeorm/entities/MapLocation");
+var Tenant_1 = require("@modules/tenants/infra/typeorm/entities/Tenant");
+var City_1 = require("@modules/cities/infra/typeorm/entities/City");
 var Company = /** @class */ (function () {
     function Company() {
         if (!this.id) {
@@ -41,45 +42,54 @@ var Company = /** @class */ (function () {
     __decorate([
         typeorm_1.Column(),
         __metadata("design:type", String)
+    ], Company.prototype, "cnpj", void 0);
+    __decorate([
+        typeorm_1.Column(),
+        __metadata("design:type", String)
+    ], Company.prototype, "logo", void 0);
+    __decorate([
+        typeorm_1.Column(),
+        __metadata("design:type", String)
     ], Company.prototype, "phone", void 0);
     __decorate([
         typeorm_1.Column(),
         __metadata("design:type", Boolean)
     ], Company.prototype, "isActive", void 0);
     __decorate([
+        typeorm_1.OneToOne(function () { return OpeningHours_1.OpeningHours; }),
+        typeorm_1.JoinColumn({ name: 'openinghours_id' }),
+        __metadata("design:type", OpeningHours_1.OpeningHours)
+    ], Company.prototype, "openinghours", void 0);
+    __decorate([
         typeorm_1.Column(),
-        __metadata("design:type", Boolean)
-    ], Company.prototype, "isAdmin", void 0);
+        __metadata("design:type", String)
+    ], Company.prototype, "openinghours_id", void 0);
+    __decorate([
+        typeorm_1.ManyToOne(function () { return Tenant_1.Tenant; }, function (tenant) { return tenant.companies; }),
+        typeorm_1.JoinColumn({ name: 'tenant_id' }),
+        __metadata("design:type", Tenant_1.Tenant)
+    ], Company.prototype, "tenant", void 0);
+    __decorate([
+        typeorm_1.Column(),
+        __metadata("design:type", String)
+    ], Company.prototype, "tenant_id", void 0);
+    __decorate([
+        typeorm_1.ManyToOne(function () { return City_1.City; }),
+        typeorm_1.JoinColumn({ name: 'city_id' }),
+        __metadata("design:type", City_1.City)
+    ], Company.prototype, "city", void 0);
+    __decorate([
+        typeorm_1.Column(),
+        __metadata("design:type", String)
+    ], Company.prototype, "city_id", void 0);
+    __decorate([
+        typeorm_1.OneToMany(function () { return MapLocation_1.MapLocation; }, function (maplocation) { return maplocation.company; }),
+        __metadata("design:type", Array)
+    ], Company.prototype, "maplocations", void 0);
     __decorate([
         typeorm_1.OneToMany(function () { return Address_1.Address; }, function (address) { return address.company; }),
         __metadata("design:type", Array)
     ], Company.prototype, "addresses", void 0);
-    __decorate([
-        typeorm_1.Column(),
-        __metadata("design:type", Number)
-    ], Company.prototype, "address_id", void 0);
-    __decorate([
-        typeorm_1.OneToOne(function () { return Banner_1.Banner; }),
-        typeorm_1.JoinColumn({ name: 'banner_id' }),
-        __metadata("design:type", Banner_1.Banner)
-    ], Company.prototype, "banner", void 0);
-    __decorate([
-        typeorm_1.Column(),
-        __metadata("design:type", Number)
-    ], Company.prototype, "banner_id", void 0);
-    __decorate([
-        typeorm_1.OneToMany(function () { return Product_1.Product; }, function (product) { return product.stores; }),
-        __metadata("design:type", Array)
-    ], Company.prototype, "products", void 0);
-    __decorate([
-        typeorm_1.OneToOne(function () { return OpeningHours_1.OpeningHours; }),
-        typeorm_1.JoinColumn({ name: 'opening_hours_id' }),
-        __metadata("design:type", OpeningHours_1.OpeningHours)
-    ], Company.prototype, "opening_hours", void 0);
-    __decorate([
-        typeorm_1.Column(),
-        __metadata("design:type", String)
-    ], Company.prototype, "opening_hours_id", void 0);
     __decorate([
         typeorm_1.CreateDateColumn(),
         __metadata("design:type", Date)
