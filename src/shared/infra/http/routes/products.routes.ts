@@ -9,11 +9,13 @@ import { CreateProductSpecificationController } from '@modules/products/useCases
 import { ListAvailableProductsController } from '@modules/products/useCases/listAvailableProducts/ListAvailableProductsController';
 import { UploadProductImagesController } from '@modules/products/useCases/uploadProductImages/UploadProductImagesController';
 import { ListProductsController } from '@modules/products/useCases/listProducts/ListProductsController';
+import { ListBySubCategoryProductsController } from '@modules/products/useCases/listBySubCategoryProducts/ListBySubCategoryProductsController';
 
 const productsRoutes = Router();
 
 const createProductController = new CreateProductController();
 const listProductsController = new ListProductsController();
+const listBySubCategoryProductsController = new ListBySubCategoryProductsController();
 const listAvailableProductsController = new ListAvailableProductsController();
 const createProductSpecificationController = new CreateProductSpecificationController();
 const uploadProductImagesController = new UploadProductImagesController();
@@ -44,7 +46,10 @@ productsRoutes.post(
 
 productsRoutes.get('/', listProductsController.handle); //products
 
-productsRoutes.get('/products/:name', listProductsController.handle); //products
+productsRoutes.get(
+  '/products/:subcategory_id',
+  listBySubCategoryProductsController.handle,
+); //products
 
 productsRoutes.get('/available', listAvailableProductsController.handle);
 

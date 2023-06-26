@@ -9,8 +9,10 @@ class ListBySubCategoryProductsUseCase {
     private productsRepository: IProductsRepository,
   ) {}
 
-  async execute({ name }): Promise<Product[]> {
-    const products = await this.productsRepository.listBySubCategory(name);
+  async execute({ subcategory_id }): Promise<Product[]> {
+    const products = await this.productsRepository.listBySubCategory(
+      subcategory_id,
+    );
     return products;
   }
 }

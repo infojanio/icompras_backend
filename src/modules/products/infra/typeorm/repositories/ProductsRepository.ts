@@ -37,9 +37,7 @@ class ProductsRepository implements IProductsRepository {
   async findBySubCategory(
     subcategory_id: string,
   ): Promise<Product | undefined> {
-    const product = await this.repository.findOne({
-      subcategory_id,
-    });
+    const product = await this.repository.findOne({ where: subcategory_id });
     return product;
   }
 

@@ -5,13 +5,14 @@ import { ListBySubCategoryProductsUseCase } from './ListBySubCategoryProductsUse
 class ListBySubCategoryProductsController {
   async handle(request: Request, response: Response): Promise<Response> {
     try {
-      const { name } = request.query;
+      const { subcategory_id } = request.query;
 
       const listBySubCategoryProductsUseCase = container.resolve(
         ListBySubCategoryProductsUseCase,
       );
+
       const products = await listBySubCategoryProductsUseCase.execute({
-        name,
+        subcategory_id,
       });
       return response.status(201).json(products);
     } catch (error) {

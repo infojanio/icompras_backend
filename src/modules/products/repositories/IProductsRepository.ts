@@ -6,7 +6,7 @@ interface IProductsRepository {
 
   findByName(name: string): Promise<Product | undefined>;
 
-  findBySubCategory(subcategory_id: string): Promise<Product | undefined>;
+  findBySubCategory(name: string): Promise<Product | undefined>;
 
   findAvailable(
     id?: string,
