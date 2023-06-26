@@ -7,50 +7,50 @@ class ProductsRepositoryInMemory implements IProductsRepository {
 
   async create({
     name,
-    description,
-    brand,
-    category_id,
-    daily_rate,
-    fine_amount,
-    license_plate,
-    id,
+    price,
+    quantity,
+    available,
+    subcategory_id,
+    company_id,
+    tenant_id,
   }: ICreateProductDTO): Promise<Product> {
     const product = new Product();
 
     Object.assign(product, {
       name,
-      description,
-      brand,
-      category_id,
-      daily_rate,
-      fine_amount,
-      license_plate,
-      id,
+      price,
+      quantity,
+      available,
+      subcategory_id,
+      company_id,
+      tenant_id,
     });
     this.products.push(product);
     console.log(product);
     return product;
   }
 
-  async findByLicensePlate(
-    license_plate: string,
+  async findBySubCategory(
+    subcategory_id: string,
   ): Promise<Product | undefined> {
     return this.products.find(
-      (product) => product.license_plate === license_plate,
+      (product) => product.subcategory_id === subcategory_id,
     );
   }
 
+  async findByName(name: string): Promise<Product | undefined> {
+    return this.products.find((product) => product.name === name);
+  }
+
   async findAvailable(
-    category_id?: string,
-    brand?: string,
+    subcategory_id?: string,
     name?: string,
   ): Promise<Product[]> {
     //o uso do filter retorna uma lista de objetos, o find retorna apenas 1 objeto
     const Allproducts = this.products.filter((product) => {
       if (
         product.available === true || //todos carros disponíveis
-        (category_id && product.category_id === category_id) || //productros disponíveis pelo nome da categoria.
-        (brand && product.brand === brand) || //productros disponíveis pela marca
+        (subcategory_id && product.subcategory_id === subcategory_id) || //productros disponíveis pelo nome da subcategoria.
         (name && product.name === name) //productros disponíveis pelo nome
       ) {
         return product;
@@ -63,6 +63,11 @@ class ProductsRepositoryInMemory implements IProductsRepository {
 
   async findById(id: string): Promise<Product | undefined> {
     return this.products.find((product) => product.id === id);
+  }
+
+  async list(): Promise<Product[]> {
+    const all = this.products;
+    return all;
   }
 
   //atualizar status do productro após ser reservado ou devolvido

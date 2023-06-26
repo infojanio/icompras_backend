@@ -33,7 +33,7 @@ class ProductsRepository implements IProductsRepository {
     return product;
   }
 
-  //Encontra carro por placa
+  //Encontrar por subcategoria
   async findBySubCategory(
     subcategory_id: string,
   ): Promise<Product | undefined> {
@@ -41,6 +41,21 @@ class ProductsRepository implements IProductsRepository {
       subcategory_id,
     });
     return product;
+  }
+
+  async findByName(name: string): Promise<Product | undefined> {
+    const product = await this.repository.findOne({ name });
+    return product;
+  }
+
+  async list(): Promise<Product[]> {
+    const products = await this.repository.find();
+    return products;
+  }
+
+  async listBySubCategory(name?: string): Promise<Product[]> {
+    const products = await this.repository.find({ name });
+    return products;
   }
 
   //ATENÇÃO: O método findAvailable retorna o filtro no console.log, mas não retorna no Insominia
@@ -54,18 +69,12 @@ class ProductsRepository implements IProductsRepository {
       .createQueryBuilder('c')
       .where('available = :available', { available: true });
 
-    /*busca por marca
-    if (brand) {
-      carsQuery.andWhere('brand = :brand', { brand });
-    }
-    */
-
-    //busca por nome
+    //busca produtos disponíveis pelo nome
     if (name) {
       productsQuery.andWhere('name = :name', { name });
     }
 
-    //busca por subcategoria
+    //busca produtos disponíveis pela subcategoria
     if (subcategory_id) {
       productsQuery.andWhere('subcategory_id = :subcategory_id', {
         subcategory_id,
@@ -73,8 +82,8 @@ class ProductsRepository implements IProductsRepository {
     }
 
     const products = await productsQuery.getMany();
+    // console.log(products); //No insominia não retorna os dados filtrados
     return products;
-    //console.log(cars); No insominia não retorna os dados filtrados
   }
 
   async findById(id: string): Promise<Product | undefined> {
