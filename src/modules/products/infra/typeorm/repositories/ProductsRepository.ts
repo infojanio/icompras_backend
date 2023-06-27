@@ -51,12 +51,32 @@ class ProductsRepository implements IProductsRepository {
     return products;
   }
 
-  async listBySubCategory(name?: string): Promise<Product[]> {
-    const products = await this.repository.find({ name });
+  //ATENÇÃO: O método findAvailable retorna o filtro no console.log, mas não retorna no Insominia
+  async listBySubCategory(
+    name?: string,
+    subcategory_id?: string,
+  ): Promise<Product[]> {
+    // const products = await this.repository.find({ subcategory_id });
+    const productsQuery = await this.repository
+      .createQueryBuilder('c')
+      .where('available = :available', { available: true });
+
+    //busca produtos disponíveis pelo nome
+    if (name) {
+      productsQuery.andWhere('name = :name', { name });
+    }
+
+    //busca produtos disponíveis pela subcategoria
+    if (subcategory_id) {
+      productsQuery.andWhere('subcategory_id = :subcategory_id', {
+        subcategory_id,
+      });
+    }
+
+    const products = await productsQuery.getMany();
+    // console.log(products); //No insominia não retorna os dados filtrados
     return products;
   }
-
-  //ATENÇÃO: O método findAvailable retorna o filtro no console.log, mas não retorna no Insominia
 
   // Encontra todos os produtos disponíveis
   async findAvailable(

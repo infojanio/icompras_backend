@@ -46,10 +46,7 @@ productsRoutes.post(
 
 productsRoutes.get('/', listProductsController.handle); //products
 
-productsRoutes.get(
-  '/products/:subcategory_id',
-  listBySubCategoryProductsController.handle,
-); //products
+productsRoutes.get('/subcategory', listBySubCategoryProductsController.handle); //products
 
 productsRoutes.get('/available', listAvailableProductsController.handle);
 
@@ -59,9 +56,4 @@ productsRoutes.get(
   createProductSpecificationController.handle,
 );
 
-productsRoutes.get(
-  '/available',
-  ensureAuthenticated,
-  listAvailableProductsController.handle,
-);
 export { productsRoutes };

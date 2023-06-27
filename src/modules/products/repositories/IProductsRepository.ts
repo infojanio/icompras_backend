@@ -8,6 +8,12 @@ interface IProductsRepository {
 
   findBySubCategory(name: string): Promise<Product | undefined>;
 
+  listBySubCategory(
+    id?: string,
+    name?: string,
+    subcategory_id?: string,
+  ): Promise<Product[]>;
+
   findAvailable(
     id?: string,
     name?: string,
@@ -16,10 +22,8 @@ interface IProductsRepository {
 
   list(): Promise<Product[]>;
 
-  listBySubCategory(subcategory_id: string): Promise<Product[]>;
+  updateAvailable(id: string, available: boolean): Promise<void>;
 
   findById(id: string): Promise<Product | undefined>;
-
-  updateAvailable(id: string, available: boolean): Promise<void>;
 }
 export { IProductsRepository };
