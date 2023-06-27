@@ -9,12 +9,7 @@ class ListAvailableProductsController {
     const listAvailableProductsUseCase = container.resolve(
       ListAvailableProductsUseCase,
     );
-<<<<<<< HEAD:src/modules/products/useCases/lisAvailableProducts/ListAvailableController.ts
-    const products = listAvalableProductsUseCase.execute({
-     // brand: brand as string,
-=======
     const products = listAvailableProductsUseCase.execute({
->>>>>>> dev:src/modules/products/useCases/listAvailableProducts/ListAvailableProductsController.ts
       name: name as string,
       subcategory_id: subcategory_id as string,
     });
@@ -24,10 +19,4 @@ class ListAvailableProductsController {
 
 
 }
-<<<<<<< HEAD:src/modules/products/useCases/lisAvailableProducts/ListAvailableController.ts
-
-
-export { ListAvailableController };
-=======
 export { ListAvailableProductsController };
->>>>>>> dev:src/modules/products/useCases/listAvailableProducts/ListAvailableProductsController.ts

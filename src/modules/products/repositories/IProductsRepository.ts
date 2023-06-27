@@ -4,9 +4,6 @@ import { Product } from '@modules/products/infra/typeorm/entities/Product';
 interface IProductsRepository {
   create({name, available, price, quantity, company_id, subcategory_id, specifications}: ICreateProductDTO): Promise<Product>;
 
-<<<<<<< HEAD
-  findBySubCategory(subcategory_id: string): Promise<Product | undefined>;
-=======
   findByName(name: string): Promise<Product | undefined>;
 
   findBySubCategory(name: string): Promise<Product | undefined>;
@@ -16,7 +13,6 @@ interface IProductsRepository {
     name?: string,
     subcategory_id?: string,
   ): Promise<Product[]>;
->>>>>>> dev
 
   findAvailable(
     id?: string,

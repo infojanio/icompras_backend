@@ -11,25 +11,6 @@ class ProductsRepository implements IProductsRepository {
   }
 
   //Deve ser possível cadastrar um novo Productro
-<<<<<<< HEAD
-  async create({ 
-    name, 
-    available, 
-    price, 
-    quantity, 
-    company_id, 
-    subcategory_id, 
-    }: ICreateProductDTO): Promise<Product> {
-    
-      const product = this.repository.create({
-      name, 
-      available, 
-      price, 
-      quantity, 
-      company_id, 
-      subcategory_id, 
- 
-=======
   async create({
     name,
     price,
@@ -47,7 +28,6 @@ class ProductsRepository implements IProductsRepository {
       subcategory_id,
       company_id,
       tenant_id,
->>>>>>> dev
     });
 
     await this.repository.save(product);
@@ -55,35 +35,6 @@ class ProductsRepository implements IProductsRepository {
   }
 
   //Encontra produto por subcategoria
-  async findBySubCategory(subcategory_id: string): Promise<Product | undefined> {
-    const product = await this.repository.findOne({
-      subcategory_id,
-    });
-    return product;
-  }
-
-<<<<<<< HEAD
-
-  //ATENÇÃO: O método findAvailable retorna o filtro no console.log, mas não retorna no Insominia
-
-  // Encontra todos os produtos disponíveis
-  async findAvailable(
-   // brand?: string,
-   subcategory_id?: string,
-    name?: string,
-  ): Promise<Product[]> {
-    const productsQuery = await this.repository
-      .createQueryBuilder('p')
-      .where('available = :available', { available: true });
-
-    //busca por marca
-    if (subcategory_id) {
-      productsQuery.andWhere('subcategory_id = :subcategory_id', { subcategory_id });
-    }
-
-    //busca por nome
-=======
-  //Encontrar por subcategoria
   async findBySubCategory(
     subcategory_id: string,
   ): Promise<Product | undefined> {
@@ -112,15 +63,10 @@ class ProductsRepository implements IProductsRepository {
       .where('available = :available', { available: true });
 
     //busca produtos disponíveis pelo nome
->>>>>>> dev
     if (name) {
       productsQuery.andWhere('name = :name', { name });
     }
 
-<<<<<<< HEAD
-
-    const products = await productsQuery.getMany();
-=======
     //busca produtos disponíveis pela subcategoria
     if (subcategory_id) {
       productsQuery.andWhere('subcategory_id = :subcategory_id', {
@@ -156,7 +102,6 @@ class ProductsRepository implements IProductsRepository {
 
     const products = await productsQuery.getMany();
     // console.log(products); //No insominia não retorna os dados filtrados
->>>>>>> dev
     return products;
   }
 

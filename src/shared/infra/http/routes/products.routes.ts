@@ -29,13 +29,6 @@ productsRoutes.post(
   createProductController.handle,
 );
 
-<<<<<<< HEAD
-productsRoutes.get('/available', listAvailableController.handle);
-
-//productsRoutes.get("/subcategory/:subcategory_id", productsController.index);
-
-=======
->>>>>>> dev
 productsRoutes.post(
   '/specifications/:id',
   ensureAuthenticated,
