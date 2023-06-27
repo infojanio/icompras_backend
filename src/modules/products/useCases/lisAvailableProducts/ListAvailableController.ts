@@ -17,5 +17,9 @@ class ListAvailableController {
     console.log('controller=', products);
     return response.json(products);
   }
+
+
 }
+
+
 export { ListAvailableController };

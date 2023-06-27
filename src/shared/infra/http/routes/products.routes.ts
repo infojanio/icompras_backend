@@ -27,6 +27,8 @@ productsRoutes.post(
 
 productsRoutes.get('/available', listAvailableController.handle);
 
+//productsRoutes.get("/subcategory/:subcategory_id", productsController.index);
+
 productsRoutes.post(
   '/specifications/:id',
   ensureAuthenticated,
