@@ -4,12 +4,12 @@ import { CreateCategoryUseCase } from './CreateCategoryUseCase';
 
 class CreateCategoryController {
   async handle(request: Request, response: Response): Promise<Response> {
-    const { name, image } = request.body;
+    const { name, image, tenant_id } = request.body;
 
     //injeção de dependências
     const createCategoryUseCase = container.resolve(CreateCategoryUseCase);
 
-    await createCategoryUseCase.execute({ name, image });
+    await createCategoryUseCase.execute({ name, image, tenant_id });
 
     return response.status(201).send();
   }

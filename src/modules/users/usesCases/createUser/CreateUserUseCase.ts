@@ -30,6 +30,7 @@ class CreateUserUseCase {
 
     //cryptografia da senha
     const passwordHash = await hash(password, 8);
+    const client = 'cliente'; //passa cliente como default
 
     await this.usersRepository.create({
       name,
@@ -37,7 +38,7 @@ class CreateUserUseCase {
       phone,
       password: passwordHash,
       avatar,
-      type,
+      type: client,
       isActive,
       isAdmin,
     });

@@ -26,29 +26,28 @@ class Address {
   @Column()
   complement: string;
 
- 
-  
   // muitos endereços para 1 cliente
   @ManyToOne(() => User, (user) => user.addresses)
   @JoinColumn({ name: 'user_id' })
-  user: User
-  
+  user: User;
+
   @Column()
   user_id: string;
-  
-  
+
   // muitos endereços para 1 loja
   @ManyToOne(() => Company, (company) => company.addresses)
   @JoinColumn({ name: 'company_id' })
-  company: Company  
-  
+  company: Company;
+
   @Column()
   company_id: string;
-
 
   // muitos endereços para 1 cidade
   @ManyToOne(() => City, (city) => city.addresses)
   city: City;
+
+  @Column()
+  city_id: string;
 
   @CreateDateColumn()
   created_at: Date;

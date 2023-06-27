@@ -16,11 +16,13 @@ class SubCategoriesRepository implements ISubCategoriesRepository {
     name,
     image,
     category_id,
+    tenant_id,
   }: ICreateSubCategoryDTO): Promise<void> {
     const subcategory = this.repository.create({
       name,
       image,
       category_id,
+      tenant_id,
     });
 
     await this.repository.save(subcategory);

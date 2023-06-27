@@ -3,7 +3,10 @@ import { IProductsRepository } from '@modules/products/repositories/IProductsRep
 import { inject, injectable } from 'tsyringe';
 
 interface IRequest {
+<<<<<<< HEAD:src/modules/products/useCases/lisAvailableProducts/ListAvailableProductsUseCase.ts
  // brand?: string;
+=======
+>>>>>>> dev:src/modules/products/useCases/listAvailableProducts/ListAvailableProductsUseCase.ts
   name?: string;
   subcategory_id?: string;
 }
@@ -16,7 +19,10 @@ class ListAvailableProductsUseCase {
 
   async execute({ name, subcategory_id }: IRequest): Promise<Product[]> {
     const products = await this.productsRepository.findAvailable(
+<<<<<<< HEAD:src/modules/products/useCases/lisAvailableProducts/ListAvailableProductsUseCase.ts
       //brand,
+=======
+>>>>>>> dev:src/modules/products/useCases/listAvailableProducts/ListAvailableProductsUseCase.ts
       name,
       subcategory_id,
     );

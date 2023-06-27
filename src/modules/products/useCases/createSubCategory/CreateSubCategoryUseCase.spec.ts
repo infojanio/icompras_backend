@@ -18,11 +18,15 @@ describe('Create SubCategory', () => {
     const subcategory = {
       name: 'SubCategory test',
       image: 'image.png',
+      category_id: '24412214fdfdf2221',
+      tenant_id: '24412214fdfdf2421',
     };
 
     await createSubCategoryUseCase.execute({
       name: subcategory.name,
       image: subcategory.image,
+      category_id: subcategory.category_id,
+      tenant_id: subcategory.tenant_id,
     });
 
     const subcategoryCreated = await subcategoriesRepositoryInMemory.findByName(
@@ -38,12 +42,16 @@ describe('Create SubCategory', () => {
     const subcategory = {
       name: 'SubCategory test',
       image: 'image.png',
+      category_id: '24412214fdfdf2221',
+      tenant_id: '24412214fdfdf2421',
     };
 
     //salva a primeira vez
     await createSubCategoryUseCase.execute({
       name: subcategory.name,
       image: subcategory.image,
+      category_id: subcategory.category_id,
+      tenant_id: subcategory.tenant_id,
     });
 
     await expect(
@@ -51,6 +59,8 @@ describe('Create SubCategory', () => {
       createSubCategoryUseCase.execute({
         name: subcategory.name,
         image: subcategory.image,
+        category_id: subcategory.category_id,
+        tenant_id: subcategory.tenant_id,
       }),
     ).rejects.toEqual(new AppError('SubCategory Already Exists!'));
   });

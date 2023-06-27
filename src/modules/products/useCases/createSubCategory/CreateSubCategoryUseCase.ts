@@ -6,6 +6,7 @@ interface IRequest {
   name: string;
   image: string;
   category_id: string;
+  tenant_id: string;
 }
 
 @injectable()
@@ -15,7 +16,12 @@ class CreateSubCategoryUseCase {
     private subcategoriesRepository: ISubCategoriesRepository,
   ) {}
 
-  async execute({ name, image, category_id }: IRequest): Promise<void> {
+  async execute({
+    name,
+    image,
+    category_id,
+    tenant_id,
+  }: IRequest): Promise<void> {
     //verifica se a categoria já existe
     const subcategoryAlreadyExists = await this.subcategoriesRepository.findByName(
       name,
@@ -28,6 +34,7 @@ class CreateSubCategoryUseCase {
       name,
       image,
       category_id,
+      tenant_id,
     });
   }
 }

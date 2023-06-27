@@ -32,7 +32,7 @@ export class CreateUsers1622312830649 implements MigrationInterface {
           {
             name: 'phone',
             type: 'varchar',
-           
+            isNullable: false,
           },
 
           {
@@ -43,13 +43,13 @@ export class CreateUsers1622312830649 implements MigrationInterface {
           {
             name: 'avatar',
             type: 'varchar',
-            
+            isNullable: true,
           },
 
           {
             name: 'type',
             type: 'varchar',
-           
+            isNullable: true,
           },
 
           {

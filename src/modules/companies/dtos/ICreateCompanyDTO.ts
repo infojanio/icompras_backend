@@ -9,6 +9,7 @@ interface ICreateCompanyDTO {
   isActive: boolean;
   openinghours_id: string;
   tenant_id: string;
+  city_id: string;
 }
 export { ICreateCompanyDTO };
 

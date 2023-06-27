@@ -23,6 +23,7 @@ class SubCategoriesRepositoryInMemory implements ISubCategoriesRepository {
     name,
     image,
     category_id,
+    tenant_id,
   }: ICreateSubCategoryDTO): Promise<void> {
     const subcategory = new SubCategory();
 
@@ -30,6 +31,7 @@ class SubCategoriesRepositoryInMemory implements ISubCategoriesRepository {
       name,
       image,
       category_id,
+      tenant_id,
     });
     this.subcategories.push(subcategory);
   }

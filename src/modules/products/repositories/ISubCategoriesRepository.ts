@@ -5,12 +5,18 @@ interface ICreateSubCategoryDTO {
   name: string;
   image: string;
   category_id: string;
+  tenant_id: string;
 }
 
 interface ISubCategoriesRepository {
   findByName(name: string): Promise<SubCategory | undefined>;
   list(): Promise<SubCategory[]>;
-  create({ name, image, category_id }: ICreateSubCategoryDTO): Promise<void>;
+  create({
+    name,
+    image,
+    category_id,
+    tenant_id,
+  }: ICreateSubCategoryDTO): Promise<void>;
 }
 
 export { ISubCategoriesRepository, ICreateSubCategoryDTO };

@@ -16,12 +16,7 @@ const listUsersController = new ListUsersController();
 
 const updateUserAvatarController = new UpdateUserAvatarController();
 
-usersRoutes.post(
-  '/',
-  ensureAuthenticated,
-  ensureAdmin,
-  createUserController.handle,
-);
+usersRoutes.post('/', createUserController.handle);
 
 usersRoutes.get('/', listUsersController.handle); //não necessita estar logado
 

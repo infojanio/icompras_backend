@@ -30,8 +30,12 @@ import { OrdersRepository } from '@modules/orders/infra/typeorm/repositories/Ord
 
 import { ICompaniesRepository } from '@modules/companies/repositories/ICompaniesRepository';
 import { CompaniesRepository } from '@modules/companies/infra/typeorm/repositories/CompaniesRepository';
+
 import { ITenantsRepository } from '@modules/tenants/repositories/ITenantsRepository';
 import { TenantsRepository } from '@modules/tenants/infra/typeorm/repositories/TenantsRepository';
+
+import { OpeningHoursRepository } from '@modules/companies/infra/typeorm/repositories/OpeningHoursRepository';
+import { IOpeningHoursRepository } from '@modules/companies/repositories/IOpeningHoursRepository';
 
 container.registerSingleton<IUsersRepository>(
   'UsersRepository',
@@ -66,6 +70,11 @@ container.registerSingleton<ICompaniesRepository>(
 container.registerSingleton<ISpecificationsRepository>(
   'SpecificationsRepository',
   SpecificationsRepository,
+);
+
+container.registerSingleton<IOpeningHoursRepository>(
+  'OpeningHoursRepository',
+  OpeningHoursRepository,
 );
 
 container.registerSingleton<IProductsRepository>(
