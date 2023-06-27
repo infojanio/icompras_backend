@@ -57,6 +57,18 @@ class ProductsRepository implements IProductsRepository {
     subcategory_id?: string,
   ): Promise<Product[]> {
     // const products = await this.repository.find({ subcategory_id });
+
+    const productsQuery = await this.repository
+      .createQueryBuilder('product')
+      .leftJoinAndSelect('product.subcategory', 'subcategory')
+      .where('subcategory.name = :subcategory_id', { subcategory_id });
+
+    const products = await productsQuery.getMany();
+
+    return products;
+  }
+
+  /*
     const productsQuery = await this.repository
       .createQueryBuilder('c')
       .where('available = :available', { available: true });
@@ -77,6 +89,7 @@ class ProductsRepository implements IProductsRepository {
     // console.log(products); //No insominia não retorna os dados filtrados
     return products;
   }
+  */
 
   // Encontra todos os produtos disponíveis
   async findAvailable(
