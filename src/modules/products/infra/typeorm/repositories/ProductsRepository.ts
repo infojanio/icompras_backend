@@ -53,9 +53,16 @@ class ProductsRepository implements IProductsRepository {
     return products;
   }
 
-  async listById(id: string): Promise<Product> {
-    const product = await this.repository.findOneOrFail({ id });
-    return product;
+  async listById(id?: string): Promise<Product> {
+    // const products = await this.repository.find({ subcategory_id });
+
+    const productsQuery = await this.repository
+      .createQueryBuilder('product')
+      .where('product.id = :id', { id });
+
+    const products = await productsQuery.getOneOrFail();
+
+    return products;
   }
 
   //ATENÇÃO: O método findAvailable retorna o filtro no console.log, mas não retorna no Insominia

@@ -10,12 +10,13 @@ import { ListAvailableProductsController } from '@modules/products/useCases/list
 import { UploadProductImagesController } from '@modules/products/useCases/uploadProductImages/UploadProductImagesController';
 import { ListProductsController } from '@modules/products/useCases/listProducts/ListProductsController';
 import { ListBySubCategoryProductsController } from '@modules/products/useCases/listBySubCategoryProducts/ListBySubCategoryProductsController';
+import { ListByIdProductsController } from '@modules/products/useCases/listByIdProducts/ListByIdProductsController';
 
 const productsRoutes = Router();
 
 const createProductController = new CreateProductController();
 const listProductsController = new ListProductsController();
-
+const listByIdProductsController = new ListByIdProductsController();
 const listBySubCategoryProductsController = new ListBySubCategoryProductsController();
 const listAvailableProductsController = new ListAvailableProductsController();
 const createProductSpecificationController = new CreateProductSpecificationController();
@@ -47,14 +48,6 @@ productsRoutes.post(
 
 productsRoutes.get('/', listProductsController.handle); //products
 
-/*
-productsRoutes.get(
-  '/:id',
-  //  ensureAuthenticated,
-  listProductController.handle,
-);
-*/
-
 productsRoutes.get('/subcategory', listBySubCategoryProductsController.handle); //products
 
 productsRoutes.get('/available', listAvailableProductsController.handle);
@@ -64,5 +57,7 @@ productsRoutes.get(
   ensureAuthenticated,
   createProductSpecificationController.handle,
 );
+
+productsRoutes.get('/:id', listByIdProductsController.handle);
 
 export { productsRoutes };

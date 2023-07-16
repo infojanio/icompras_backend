@@ -17,10 +17,8 @@ interface IProductsRepository {
   listById(
     id?: string,
     name?: string,
-    price?: number,
-    quantity?: number,
     subcategory_id?: string,
-  ): Promise<Product[]>;
+  ): Promise<Product>;
 
   findAvailable(
     id?: string,
