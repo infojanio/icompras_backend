@@ -38,6 +38,7 @@ export async function ensureAuthenticated(
     const user = await userTokensRepository.findUserByIdAndRefreshToken(
       user_id,
       token,
+      
     );
 
     if (!user) {

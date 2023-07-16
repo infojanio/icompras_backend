@@ -12,6 +12,7 @@ class CreateProductController {
       subcategory_id,
       company_id,
       tenant_id,
+      image,
     } = request.body;
 
     const createProductUseCase = container.resolve(CreateProductUseCase);
@@ -24,6 +25,7 @@ class CreateProductController {
       subcategory_id,
       company_id,
       tenant_id,
+      image,
     });
     return response.status(201).json(product);
   }

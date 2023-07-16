@@ -19,6 +19,7 @@ class ProductsRepository implements IProductsRepository {
     subcategory_id,
     company_id,
     tenant_id,
+    image,
   }: ICreateProductDTO): Promise<Product> {
     const product = this.repository.create({
       name,
@@ -28,6 +29,7 @@ class ProductsRepository implements IProductsRepository {
       subcategory_id,
       company_id,
       tenant_id,
+      image,
     });
     await this.repository.save(product);
     return product;
@@ -49,6 +51,11 @@ class ProductsRepository implements IProductsRepository {
   async list(): Promise<Product[]> {
     const products = await this.repository.find();
     return products;
+  }
+
+  async listById(id: string): Promise<Product> {
+    const product = await this.repository.findOneOrFail({ id });
+    return product;
   }
 
   //ATENÇÃO: O método findAvailable retorna o filtro no console.log, mas não retorna no Insominia

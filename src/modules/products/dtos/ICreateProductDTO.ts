@@ -10,6 +10,7 @@ interface ICreateProductDTO {
   subcategory_id: string;
   company_id: string;
   tenant_id: string;
+  image: string;
   //specifications?: Specification[];
 }
 

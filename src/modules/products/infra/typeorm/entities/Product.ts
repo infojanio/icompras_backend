@@ -62,6 +62,9 @@ class Product {
   @OneToMany(() => Score, (score) => score.product)
   scores: Score[];
 
+  @Column()
+  image: string;
+
   @CreateDateColumn()
   created_at: Date;
 

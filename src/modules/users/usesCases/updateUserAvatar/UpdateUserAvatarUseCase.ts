@@ -6,7 +6,7 @@ interface IRequest {
   user_id: string;
   avatar_file: string;
 }
-//faz a atualização do avata do usuário
+//faz a atualização do avatar do usuário
 @injectable()
 class UpdateUserAvatarUseCase {
   constructor(

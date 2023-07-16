@@ -11,6 +11,7 @@ interface IRequest {
   subcategory_id: string;
   company_id: string;
   tenant_id: string;
+  image: string;
 }
 
 @injectable()
@@ -28,6 +29,7 @@ class CreateProductUseCase {
     subcategory_id,
     company_id,
     tenant_id,
+    image,
   }: IRequest): Promise<Product> {
     //Verifica se o nome já foi cadastrado
     const productAlreadyExists = await this.productsRepository.findByName(name);
@@ -44,6 +46,7 @@ class CreateProductUseCase {
       subcategory_id,
       company_id,
       tenant_id,
+      image,
     });
 
     return product;

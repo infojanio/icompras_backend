@@ -15,6 +15,7 @@ const productsRoutes = Router();
 
 const createProductController = new CreateProductController();
 const listProductsController = new ListProductsController();
+
 const listBySubCategoryProductsController = new ListBySubCategoryProductsController();
 const listAvailableProductsController = new ListAvailableProductsController();
 const createProductSpecificationController = new CreateProductSpecificationController();
@@ -45,6 +46,14 @@ productsRoutes.post(
 );
 
 productsRoutes.get('/', listProductsController.handle); //products
+
+/*
+productsRoutes.get(
+  '/:id',
+  //  ensureAuthenticated,
+  listProductController.handle,
+);
+*/
 
 productsRoutes.get('/subcategory', listBySubCategoryProductsController.handle); //products
 
