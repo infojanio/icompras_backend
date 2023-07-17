@@ -5,6 +5,7 @@ import { ImportSubCategoryController } from '@modules/products/useCases/importSu
 import { ListSubCategoriesController } from '@modules/products/useCases/listSubCategories/ListSubCategoriesController';
 import { ensureAuthenticated } from '@shared/infra/http/middlewares/ensureAuthenticated';
 import { ensureAdmin } from '@shared/infra/http/middlewares/ensureAdmin';
+import { ListByCategorySubCategoriesController } from '@modules/products/useCases/listByCategorySubCategories/ListByCategorySubCategoriesController';
 
 const subcategoriesRoutes = Router();
 
@@ -15,6 +16,7 @@ const uploads = multer({
 const createSubCategoryController = new CreateSubCategoryController();
 const importSubCategoryController = new ImportSubCategoryController();
 const listSubCategoriesController = new ListSubCategoriesController();
+const listByCategorySubCategoriesController = new ListByCategorySubCategoriesController();
 
 subcategoriesRoutes.post(
   '/',
@@ -24,6 +26,11 @@ subcategoriesRoutes.post(
 );
 
 subcategoriesRoutes.get('/', listSubCategoriesController.handle);
+
+subcategoriesRoutes.get(
+  '/category',
+  listByCategorySubCategoriesController.handle,
+);
 
 //rota de importação p/ uploads de arquivos
 subcategoriesRoutes.post(

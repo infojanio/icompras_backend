@@ -1,3 +1,4 @@
+import { Category } from '../infra/typeorm/entities/Category';
 import { SubCategory } from '../infra/typeorm/entities/SubCategory';
 
 //DTO -> Data Transfer Object
@@ -11,6 +12,9 @@ interface ICreateSubCategoryDTO {
 interface ISubCategoriesRepository {
   findByName(name: string): Promise<SubCategory | undefined>;
   list(): Promise<SubCategory[]>;
+
+  listByCategory(name?: string, category_id?: string): Promise<SubCategory[]>;
+
   create({
     name,
     image,

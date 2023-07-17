@@ -82,29 +82,6 @@ class ProductsRepository implements IProductsRepository {
     return products;
   }
 
-  /*
-    const productsQuery = await this.repository
-      .createQueryBuilder('c')
-      .where('available = :available', { available: true });
-
-    //busca produtos disponíveis pelo nome
-    if (name) {
-      productsQuery.andWhere('name = :name', { name });
-    }
-
-    //busca produtos disponíveis pela subcategoria
-    if (subcategory_id) {
-      productsQuery.andWhere('subcategory_id = :subcategory_id', {
-        subcategory_id,
-      });
-    }
-
-    const products = await productsQuery.getMany();
-    // console.log(products); //No insominia não retorna os dados filtrados
-    return products;
-  }
-  */
-
   // Encontra todos os produtos disponíveis
   async findAvailable(
     name?: string,

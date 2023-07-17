@@ -48,7 +48,7 @@ productsRoutes.post(
 
 productsRoutes.get('/', listProductsController.handle); //products
 
-productsRoutes.get('/subcategory', listBySubCategoryProductsController.handle); //products
+productsRoutes.get('/subcategory', listBySubCategoryProductsController.handle);
 
 productsRoutes.get('/available', listAvailableProductsController.handle);
 

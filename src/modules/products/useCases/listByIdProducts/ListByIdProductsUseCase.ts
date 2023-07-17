@@ -9,7 +9,7 @@ class ListByIdProductsUseCase {
     private productsRepository: IProductsRepository,
   ) {}
 
-  async execute({ id }): Promise<Product[]> {
+  async execute({ id }): Promise<Product> {
     const product = await this.productsRepository.listById(id);
     console.log('UseCase=', product); //lista o produto por id
     return product;

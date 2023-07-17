@@ -20,7 +20,7 @@ interface IProductsRepository {
     price?: number,
     quantity?: number,
     subcategory_id?: string,
-  ): Promise<Product[]>;
+  ): Promise<Product>;
 
   findAvailable(
     id?: string,

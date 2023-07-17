@@ -4,6 +4,7 @@ import {
 } from '@modules/products/repositories/ISubCategoriesRepository';
 import { getRepository, Repository } from 'typeorm';
 import { SubCategory } from '../entities/SubCategory';
+import { Product } from '../entities/Product';
 
 class SubCategoriesRepository implements ISubCategoriesRepository {
   private repository: Repository<SubCategory>;
@@ -36,6 +37,42 @@ class SubCategoriesRepository implements ISubCategoriesRepository {
   async findByName(name: string): Promise<SubCategory | undefined> {
     const subcategory = this.repository.findOne({ name });
     return subcategory;
+  }
+
+  //ATENÇÃO: O método findAvailable retorna o filtro no console.log, mas não retorna no Insominia
+  async listBySubCategory(
+    name?: string,
+    subcategory_id?: string,
+    price?: number,
+    available?: boolean,
+    quantity?: number,
+  ): Promise<Product[] | SubCategory[]> {
+    // const products = await this.repository.find({ subcategory_id });
+
+    const productsQuery = await this.repository
+      .createQueryBuilder('product')
+      .leftJoinAndSelect('product.subcategory', 'subcategory')
+      .where('subcategory.name = :subcategory_id', { subcategory_id });
+
+    const products = await productsQuery.getMany();
+
+    return products;
+  }
+
+  async listByCategory(
+    name?: string,
+    category_id?: string,
+  ): Promise<SubCategory[]> {
+    // const products = await this.repository.find({ subcategory_id });
+
+    const subcategoriesQuery = await this.repository
+      .createQueryBuilder('subcategory')
+      .leftJoinAndSelect('subcategory.category', 'category')
+      .where('category.id = :category_id', { category_id });
+
+    const subcategories = await subcategoriesQuery.getMany();
+
+    return subcategories;
   }
 }
 export { SubCategoriesRepository };

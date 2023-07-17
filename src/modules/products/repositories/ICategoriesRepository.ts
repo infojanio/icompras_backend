@@ -10,6 +10,12 @@ interface ICreateCategoryDTO {
 interface ICategoriesRepository {
   findByName(name: string): Promise<Category | undefined>;
   list(): Promise<Category[]>;
+  listById(
+    id?: string,
+    name?: string,
+    image?: string,
+    tenant_id?: string,
+  ): Promise<Category>;
   create({ name, image, tenant_id }: ICreateCategoryDTO): Promise<void>;
 }
 
