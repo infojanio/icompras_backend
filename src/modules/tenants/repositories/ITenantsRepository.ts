@@ -5,6 +5,7 @@ interface ITenantsRepository {
   create(data: ICreateTenantDTO): Promise<void>;
   findByName(name: string): Promise<Tenant | undefined>;
   list(): Promise<Tenant[]>;
+
   findById(id: string): Promise<Tenant | undefined>;
 }
 export { ITenantsRepository };

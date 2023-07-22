@@ -55,6 +55,32 @@ class CompaniesRepository implements ICompaniesRepository {
     return company;
   }
 
+  //ATENÇÃO: O método findAvailable retorna o filtro no console.log, mas não retorna no Insominia
+  async listByCity(name?: string, city_id?: string): Promise<Company[]> {
+    // const products = await this.repository.find({ subcategory_id });
+
+    const companiesQuery = await this.repository
+      .createQueryBuilder('company')
+      .leftJoinAndSelect('company.city', 'city')
+      .where('city.id = :city_id', { city_id });
+
+    const companies = await companiesQuery.getMany();
+
+    return companies;
+  }
+
+  async listById(id?: string): Promise<Company> {
+    // const products = await this.repository.find({ subcategory_id });
+
+    const companiesQuery = await this.repository
+      .createQueryBuilder('company')
+      .where('company.id = :id', { id });
+
+    const companies = await companiesQuery.getOneOrFail();
+
+    return companies;
+  }
+
   async findById(id: string): Promise<Company | undefined> {
     const company = await this.repository.findOne(id);
     return company;

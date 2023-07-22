@@ -6,7 +6,7 @@ export class AlterCompanyAddCityId1684797114360 implements MigrationInterface {
       'companies',
       new TableColumn({
         name: 'city_id',
-        type: 'varchar',
+        type: 'uuid',
         isNullable: true,
       }),
     );

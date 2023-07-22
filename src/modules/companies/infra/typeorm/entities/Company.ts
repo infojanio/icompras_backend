@@ -9,6 +9,7 @@ import {
   OneToOne,
   PrimaryColumn,
 } from 'typeorm';
+
 import { v4 as uuidV4 } from 'uuid';
 import { OpeningHours } from './OpeningHours';
 import { MapLocation } from '@modules/maplocations/infra/typeorm/entities/MapLocation';
@@ -58,7 +59,7 @@ class Company {
   tenant_id: string;
 
   //muitos supermercados -> 1 cidade
-  @ManyToOne(() => City, (city) => city.companies)
+  @ManyToOne(() => City)
   @JoinColumn({ name: 'city_id' })
   city: City;
 
