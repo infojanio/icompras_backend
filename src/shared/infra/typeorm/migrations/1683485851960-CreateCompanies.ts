@@ -21,31 +21,26 @@ export class CreateCompanies1683485851960 implements MigrationInterface {
           {
             name: 'slug',
             type: 'varchar',
-           
           },
 
           {
             name: 'email',
             type: 'varchar',
-           
           },
 
           {
             name: 'cnpj',
             type: 'varchar',
-           
           },
 
           {
             name: 'logo',
             type: 'varchar',
-           
           },
 
           {
             name: 'phone',
             type: 'varchar',
-           
           },
 
           {
@@ -54,15 +49,19 @@ export class CreateCompanies1683485851960 implements MigrationInterface {
             default: true,
           },
 
-     
           {
             name: 'openinghours_id',
             type: 'uuid',
-           
           },
 
           {
             name: 'tenant_id',
+            type: 'uuid',
+            isNullable: false,
+          },
+
+          {
+            name: 'city_id',
             type: 'uuid',
             isNullable: false,
           },
@@ -84,11 +83,20 @@ export class CreateCompanies1683485851960 implements MigrationInterface {
             onUpdate: 'SET NULL',
           },
 
-              {
+          {
             name: 'FKTenantCompanies',
             referencedTableName: 'tenants',
             referencedColumnNames: ['id'],
             columnNames: ['tenant_id'],
+            onDelete: 'SET NULL',
+            onUpdate: 'SET NULL',
+          },
+
+          {
+            name: 'FKCityCompanies',
+            referencedTableName: 'cities',
+            referencedColumnNames: ['id'],
+            columnNames: ['city_id'],
             onDelete: 'SET NULL',
             onUpdate: 'SET NULL',
           },

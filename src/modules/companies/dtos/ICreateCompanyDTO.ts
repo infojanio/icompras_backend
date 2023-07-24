@@ -6,10 +6,10 @@ interface ICreateCompanyDTO {
   cnpj: string;
   logo?: string;
   phone: string;
+  city_id: string;
   isActive: boolean;
   openinghours_id: string;
   tenant_id: string;
-  city_id: string;
 }
 export { ICreateCompanyDTO };
 

@@ -60,7 +60,8 @@ class SubCategoriesRepository implements ISubCategoriesRepository {
   }
 
   async listByCategory(
-    name?: string,
+    id?: string,
+    // name?: string,
     category_id?: string,
   ): Promise<SubCategory[]> {
     // const products = await this.repository.find({ subcategory_id });

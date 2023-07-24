@@ -3,11 +3,13 @@ import { ensureAuthenticated } from '@shared/infra/http/middlewares/ensureAuthen
 import { Router } from 'express';
 import { ensureAdmin } from '../middlewares/ensureAdmin';
 import { ListTenantsController } from '@modules/tenants/usesCases/listTenants/ListTenantsController';
+import { ListByCityTenantsController } from '@modules/tenants/usesCases/listByTenantCompanies/ListByCityTenantsController';
 
 const tenantsRoutes = Router();
 
 const createTenantController = new CreateTenantController();
 const listTenantsController = new ListTenantsController();
+const listByCityTenantsController = new ListByCityTenantsController();
 
 tenantsRoutes.post(
   '/',
@@ -17,5 +19,7 @@ tenantsRoutes.post(
 );
 
 tenantsRoutes.get('/', listTenantsController.handle); //não necessita estar logado
+
+tenantsRoutes.get('/city', listByCityTenantsController.handle);
 
 export { tenantsRoutes };

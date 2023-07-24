@@ -1,5 +1,6 @@
 import { Address } from '@modules/address/infra/typeorm/entities/Address';
 import { Company } from '@modules/companies/infra/typeorm/entities/Company';
+import { Tenant } from '@modules/tenants/infra/typeorm/entities/Tenant';
 import {
   Column,
   CreateDateColumn,
@@ -26,6 +27,9 @@ class City {
   @Column()
   isActive: boolean;
 
+  //1 cidade -> empresas de atividades diversas
+  @OneToMany(() => Tenant, (tenant) => tenant.city)
+  tenants: City[];
   //1 cidade tem muitos endereços
   @OneToMany(() => Address, (address) => address.city)
   addresses: Address[];

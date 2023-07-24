@@ -4,13 +4,13 @@ import { Router } from 'express';
 import { ensureAdmin } from '../middlewares/ensureAdmin';
 import { ListCompaniesController } from '@modules/companies/usesCases/listCompanies/ListCompaniesController';
 import { ListByIdCompaniesController } from '@modules/companies/usesCases/listByIdCompanies/ListByIdCompaniesController';
-import { ListByCityCompaniesController } from '@modules/companies/usesCases/listByCityCompanies/ListByCityCompaniesController';
+import { ListByTenantCompaniesController } from '@modules/companies/usesCases/listByTenantCompanies/ListByTenantCompaniesController';
 
 const companiesRoutes = Router();
 
 const createCompanyController = new CreateCompanyController();
 const listCompaniesController = new ListCompaniesController();
-const listByCityCompaniesController = new ListByCityCompaniesController();
+const listByTenantCompaniesController = new ListByTenantCompaniesController();
 const listByIdCompaniesController = new ListByIdCompaniesController();
 
 companiesRoutes.post(
@@ -23,6 +23,6 @@ companiesRoutes.post(
 companiesRoutes.get('/:id', listByIdCompaniesController.handle);
 
 companiesRoutes.get('/', listCompaniesController.handle); //não necessita estar logado
-companiesRoutes.get('/city', listByCityCompaniesController.handle);
+companiesRoutes.get('/tenant', listByTenantCompaniesController.handle);
 
 export { companiesRoutes };

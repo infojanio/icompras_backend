@@ -1,17 +1,17 @@
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
-import { ListByCategorySubCategoriesUseCase } from './ListByCategorySubCategoriesUseCase';
+import { ListByCityTenantsUseCase } from './ListByCityTenantsUseCase';
 
-class ListByCategorySubCategoriesController {
+class ListByCityTenantsController {
   async handle(request: Request, response: Response): Promise<Response> {
     try {
       const { name, city_id } = request.query;
 
-      const listByCategorySubCategoriesUseCase = container.resolve(
-        ListByCategorySubCategoriesUseCase,
+      const listByCityTenantsUseCase = container.resolve(
+        ListByCityTenantsUseCase,
       );
 
-      const tenants = await listByCategorySubCategoriesUseCase.execute({
+      const tenants = await listByCityTenantsUseCase.execute({
         name: name as string,
         city_id: city_id as string,
       });
@@ -22,4 +22,4 @@ class ListByCategorySubCategoriesController {
   }
 }
 
-export { ListByCategorySubCategoriesController };
+export { ListByCityTenantsController };

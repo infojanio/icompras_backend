@@ -18,6 +18,11 @@ export class CreateProducts1623701334584 implements MigrationInterface {
           },
 
           {
+            name: 'image',
+            type: 'varchar',
+          },
+
+          {
             name: 'price',
             type: 'numeric',
           },
