@@ -1,10 +1,10 @@
 import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 
-export class CreateCompaniees1683485851960 implements MigrationInterface {
+export class CreateStores1690232862030 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'companies',
+        name: 'stores',
         columns: [
           {
             name: 'id',
@@ -75,7 +75,7 @@ export class CreateCompaniees1683485851960 implements MigrationInterface {
 
         foreignKeys: [
           {
-            name: 'FKOpeningHoursCompanies',
+            name: 'FKOpeningHoursStores',
             referencedTableName: 'opening_hours',
             referencedColumnNames: ['id'],
             columnNames: ['openinghours_id'],
@@ -84,7 +84,7 @@ export class CreateCompaniees1683485851960 implements MigrationInterface {
           },
 
           {
-            name: 'FKTenantCompanies',
+            name: 'FKTenantStores',
             referencedTableName: 'tenants',
             referencedColumnNames: ['id'],
             columnNames: ['tenant_id'],
@@ -93,7 +93,7 @@ export class CreateCompaniees1683485851960 implements MigrationInterface {
           },
 
           {
-            name: 'FKCityCompanies',
+            name: 'FKCityStores',
             referencedTableName: 'cities',
             referencedColumnNames: ['id'],
             columnNames: ['city_id'],
@@ -106,6 +106,6 @@ export class CreateCompaniees1683485851960 implements MigrationInterface {
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable('companies');
+    await queryRunner.dropTable('stores');
   }
 }

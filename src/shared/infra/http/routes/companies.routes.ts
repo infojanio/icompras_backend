@@ -10,8 +10,8 @@ const companiesRoutes = Router();
 
 const createCompanyController = new CreateCompanyController();
 const listCompaniesController = new ListCompaniesController();
-const listByTenantCompaniesController = new ListByTenantCompaniesController();
 const listByIdCompaniesController = new ListByIdCompaniesController();
+const listByTenantCompaniesController = new ListByTenantCompaniesController();
 
 companiesRoutes.post(
   '/',
@@ -21,8 +21,8 @@ companiesRoutes.post(
 );
 
 companiesRoutes.get('/:id', listByIdCompaniesController.handle);
+companiesRoutes.get('/tenant', listByTenantCompaniesController.handle);
 
 companiesRoutes.get('/', listCompaniesController.handle); //não necessita estar logado
-companiesRoutes.get('/tenant', listByTenantCompaniesController.handle);
 
 export { companiesRoutes };

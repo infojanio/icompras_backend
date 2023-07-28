@@ -3,7 +3,7 @@ import { ensureAuthenticated } from '@shared/infra/http/middlewares/ensureAuthen
 import { Router } from 'express';
 import { ensureAdmin } from '../middlewares/ensureAdmin';
 import { ListTenantsController } from '@modules/tenants/usesCases/listTenants/ListTenantsController';
-import { ListByCityTenantsController } from '@modules/tenants/usesCases/listByTenantCompanies/ListByCityTenantsController';
+import { ListByCityTenantsController } from '@modules/tenants/usesCases/listByCityTenants/ListByCityTenantsController';
 
 const tenantsRoutes = Router();
 

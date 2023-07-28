@@ -51,7 +51,7 @@ class Company {
   openinghours_id: string;
 
   //muitos supermercados -> 1 empresa locatária
-  @ManyToOne(() => Tenant, (tenant) => tenant.companies)
+  @ManyToOne(() => Tenant)
   @JoinColumn({ name: 'tenant_id' })
   tenant: Tenant;
 

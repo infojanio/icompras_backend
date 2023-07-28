@@ -1,4 +1,6 @@
 import { getRepository, Repository } from 'typeorm';
+import { validate as isUuid } from 'uuid';
+
 import { ICreateCompanyDTO } from '@modules/companies/dtos/ICreateCompanyDTO';
 import { ICompaniesRepository } from '@modules/companies/repositories/ICompaniesRepository';
 import { Company } from '@modules/companies/infra/typeorm/entities/Company';
@@ -55,20 +57,22 @@ class CompaniesRepository implements ICompaniesRepository {
     return company;
   }
 
-  //ATENÇÃO: O método findAvailable retorna o filtro no console.log, mas não retorna no Insominia
-  async listByTenant(id?: string, tenant_id?: string): Promise<Company[]> {
-    // const products = await this.repository.find({ subcategory_id });
+  async listByTenant(name: string, tenant_id: string): Promise<Company[]> {
     try {
+      if (!tenant_id || !isUuid(tenant_id)) {
+        throw new Error('O tenant_id é obrigatório para filtrar');
+      }
       const companiesQuery = await this.repository
         .createQueryBuilder('company')
         .leftJoinAndSelect('company.tenant', 'tenant')
         .where('tenant.id = :tenant_id', { tenant_id });
 
       const companies = await companiesQuery.getMany();
-      console.log(companies);
+
       return companies;
     } catch (error) {
-      console.log('Erro no Tenant', error);
+      console.log('Erro no Tenant:', error.message);
+      throw error;
     }
   }
 
