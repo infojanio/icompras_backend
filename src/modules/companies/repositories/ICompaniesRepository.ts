@@ -8,6 +8,12 @@ interface ICompaniesRepository {
 
   listByTenant(name?: string, tenant_id?: string): Promise<Company[]>;
   listById(id?: string, name?: string, tenant_id?: string): Promise<Company>;
+  findAvailable(
+    id?: string,
+    name?: string,
+    tenant_id?: string,
+  ): Promise<Company[]>;
+
   findById(id: string): Promise<Company | undefined>;
 }
 export { ICompaniesRepository };

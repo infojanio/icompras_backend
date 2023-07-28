@@ -12,13 +12,13 @@ class ListByTenantCompaniesUseCase {
     private companiesRepository: ICompaniesRepository,
   ) {}
 
-  async execute({ tenant_id }): Promise<Company[]> {
+  async execute({ name, tenant_id }): Promise<Company[]> {
     try {
       if (!tenant_id || !isUuid(tenant_id)) {
         throw new Error('O tenant_id é obrigatório para filtrar');
       }
 
-      const companies = await this.companiesRepository.listByTenant(tenant_id);
+      const companies = await this.companiesRepository.findAvailable(name);
       console.log('UseCase=', companies); //lista produtos por subcategoria
       return companies;
     } catch (error) {

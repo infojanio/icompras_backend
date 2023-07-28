@@ -20,7 +20,7 @@ interface ISubCategoriesRepository {
 
   list(): Promise<SubCategory[]>;
 
-  listByCategory(name?: string, category_id?: string): Promise<SubCategory[]>;
+  listByCategory(category_id?: string): Promise<SubCategory[]>;
 }
 
 export { ISubCategoriesRepository, ICreateSubCategoryDTO };

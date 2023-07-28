@@ -41,11 +41,7 @@ class SubCategoriesRepository implements ISubCategoriesRepository {
 
   //ATENÇÃO: O método findAvailable retorna o filtro no console.log, mas não retorna no Insominia
   async listBySubCategory(
-    name?: string,
     subcategory_id?: string,
-    price?: number,
-    available?: boolean,
-    quantity?: number,
   ): Promise<Product[] | SubCategory[]> {
     // const products = await this.repository.find({ subcategory_id });
 

@@ -57,7 +57,7 @@ class CompaniesRepository implements ICompaniesRepository {
     return company;
   }
 
-  async listByTenant(name: string, tenant_id: string): Promise<Company[]> {
+  async listByTenant(tenant_id?: string): Promise<Company[]> {
     try {
       if (!tenant_id || !isUuid(tenant_id)) {
         throw new Error('O tenant_id é obrigatório para filtrar');
@@ -74,6 +74,28 @@ class CompaniesRepository implements ICompaniesRepository {
       console.log('Erro no Tenant:', error.message);
       throw error;
     }
+  }
+  // Encontra todos os produtos disponíveis
+  async findAvailable(name?: string, tenant_id?: string): Promise<Company[]> {
+    const companiesQuery = await this.repository
+      .createQueryBuilder('c')
+      .where('isActive = :isActive', { isActive: true });
+
+    //busca produtos disponíveis pelo nome
+    if (name) {
+      companiesQuery.andWhere('name = :name', { name });
+    }
+
+    //busca produtos disponíveis pela subcategoria
+    if (tenant_id) {
+      companiesQuery.andWhere('tenant_id = :tenant_id', {
+        tenant_id,
+      });
+    }
+
+    const companies = await companiesQuery.getMany();
+    // console.log(products); //No insominia não retorna os dados filtrados
+    return companies;
   }
 
   async listById(id?: string): Promise<Company> {
