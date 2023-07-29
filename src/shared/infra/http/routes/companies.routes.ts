@@ -20,7 +20,7 @@ companiesRoutes.post(
   createCompanyController.handle,
 );
 
-companiesRoutes.get('/:id', listByIdCompaniesController.handle);
+//companiesRoutes.get('/:id', listByIdCompaniesController.handle);
 companiesRoutes.get('/tenant', listByTenantCompaniesController.handle);
 
 companiesRoutes.get('/', listCompaniesController.handle); //não necessita estar logado

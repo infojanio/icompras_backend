@@ -33,9 +33,21 @@ class TenantsRepository implements ITenantsRepository {
     return tenants;
   }
 
+  async listById(id?: string): Promise<Tenant> {
+    // const products = await this.repository.find({ subcategory_id });
+
+    const tenantsQuery = await this.repository
+      .createQueryBuilder('tenant')
+      .where('tenant.id = :id', { id });
+
+    const tenant = await tenantsQuery.getOneOrFail();
+
+    return tenant;
+  }
+
   async listByCity(
-    id?: string,
-    // name?: string,
+    // id?: string,
+    name?: string,
     city_id?: string,
   ): Promise<Tenant[]> {
     // const products = await this.repository.find({ subcategory_id });

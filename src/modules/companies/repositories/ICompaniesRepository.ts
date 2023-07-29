@@ -1,5 +1,6 @@
 import { ICreateCompanyDTO } from '@modules/companies/dtos/ICreateCompanyDTO';
 import { Company } from '@modules/companies/infra/typeorm/entities/Company';
+import { Tenant } from '@modules/tenants/infra/typeorm/entities/Tenant';
 
 interface ICompaniesRepository {
   create(data: ICreateCompanyDTO): Promise<void>;

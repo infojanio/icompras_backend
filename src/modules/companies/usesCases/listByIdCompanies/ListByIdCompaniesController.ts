@@ -11,10 +11,10 @@ class ListByIdCompaniesController {
         ListByIdCompaniesUseCase,
       );
 
-      const city = await listByIdCompaniesUseCase.execute({
+      const company = await listByIdCompaniesUseCase.execute({
         id: id as string,
       });
-      return response.status(201).json(city);
+      return response.status(201).json(company);
     } catch (error) {
       return response.status(400).json({ error: error.message });
     }

@@ -8,11 +8,9 @@ class ListByTenantCompaniesController {
     try {
       const { name, tenant_id } = request.query;
 
-      /*
-      if (!tenant_id || !isUuid(tenant_id)) {
+      if (!tenant_id) {
         throw new Error('O tenant_id é obrigatório para filtrar');
       }
-      */
 
       const listByTenantCompaniesUseCase = container.resolve(
         ListByTenantCompaniesUseCase,
@@ -22,6 +20,7 @@ class ListByTenantCompaniesController {
         name: name as string,
         tenant_id: tenant_id as string,
       });
+
       return response.status(201).json(companies);
     } catch (error) {
       return response.status(400).json({ error: error.message });

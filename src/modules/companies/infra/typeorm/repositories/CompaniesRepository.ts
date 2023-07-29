@@ -4,6 +4,7 @@ import { validate as isUuid } from 'uuid';
 import { ICreateCompanyDTO } from '@modules/companies/dtos/ICreateCompanyDTO';
 import { ICompaniesRepository } from '@modules/companies/repositories/ICompaniesRepository';
 import { Company } from '@modules/companies/infra/typeorm/entities/Company';
+import { Tenant } from '@modules/tenants/infra/typeorm/entities/Tenant';
 
 class CompaniesRepository implements ICompaniesRepository {
   private repository: Repository<Company>;
@@ -57,7 +58,11 @@ class CompaniesRepository implements ICompaniesRepository {
     return company;
   }
 
-  async listByTenant(tenant_id?: string): Promise<Company[]> {
+  async listByTenant(
+    //  id: string,
+    name?: string,
+    tenant_id?: string,
+  ): Promise<Company[]> {
     try {
       if (!tenant_id || !isUuid(tenant_id)) {
         throw new Error('O tenant_id é obrigatório para filtrar');
@@ -80,11 +85,6 @@ class CompaniesRepository implements ICompaniesRepository {
     const companiesQuery = await this.repository
       .createQueryBuilder('c')
       .where('isActive = :isActive', { isActive: true });
-
-    //busca produtos disponíveis pelo nome
-    if (name) {
-      companiesQuery.andWhere('name = :name', { name });
-    }
 
     //busca produtos disponíveis pela subcategoria
     if (tenant_id) {

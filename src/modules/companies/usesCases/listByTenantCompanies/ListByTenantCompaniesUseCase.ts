@@ -18,11 +18,15 @@ class ListByTenantCompaniesUseCase {
         throw new Error('O tenant_id é obrigatório para filtrar');
       }
 
-      const companies = await this.companiesRepository.findAvailable(name);
+      const companies = await this.companiesRepository.listByTenant(
+        name,
+        tenant_id,
+      );
       console.log('UseCase=', companies); //lista produtos por subcategoria
+
       return companies;
     } catch (error) {
-      console.log('Erro no Tenant:', error.message);
+      console.log('Erro no Tenants:', error.message);
       throw error;
     }
   }
