@@ -3,6 +3,7 @@ import {
   CreateDateColumn,
   Entity,
   JoinColumn,
+  ManyToMany,
   ManyToOne,
   OneToMany,
   PrimaryColumn,
@@ -10,6 +11,7 @@ import {
 import { v4 as uuidV4 } from 'uuid';
 import { SubCategory } from './SubCategory';
 import { Tenant } from '@modules/tenants/infra/typeorm/entities/Tenant';
+import { Company } from '@modules/companies/infra/typeorm/entities/Company';
 
 @Entity('categories')
 class Category {
@@ -22,15 +24,18 @@ class Category {
   @Column()
   image?: string;
 
-   /*1 categoria -> vários produtos
+  /*1 categoria -> vários produtos
   @OneToMany(() => Product, (product) => product.categories)
   products: Product[];
   */
- 
- //1 categoria -> várias subcategorias
- @OneToMany(() => SubCategory, (subcategory) => subcategory.category)
- subcategories: SubCategory[];
- 
+
+  //1 categoria -> várias subcategorias
+  @OneToMany(() => SubCategory, (subcategory) => subcategory.category)
+  subcategories: SubCategory[];
+
+  @ManyToMany(() => Company, (company) => company.categories)
+  companies: Company[];
+
   //muitas categorias para 1 estabelecimento
   @ManyToOne(() => Tenant)
   @JoinColumn({ name: 'tenant_id' })

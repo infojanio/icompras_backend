@@ -4,6 +4,8 @@ import {
   CreateDateColumn,
   Entity,
   JoinColumn,
+  JoinTable,
+  ManyToMany,
   ManyToOne,
   OneToMany,
   OneToOne,
@@ -15,6 +17,7 @@ import { OpeningHours } from './OpeningHours';
 import { MapLocation } from '@modules/maplocations/infra/typeorm/entities/MapLocation';
 import { Tenant } from '@modules/tenants/infra/typeorm/entities/Tenant';
 import { City } from '@modules/cities/infra/typeorm/entities/City';
+import { Category } from '@modules/products/infra/typeorm/entities/Category';
 
 @Entity('companies')
 class Company {
@@ -73,6 +76,10 @@ class Company {
   //1 supermercado pode ter muitos endereços
   @OneToMany(() => Address, (address) => address.company)
   addresses: Address[];
+
+  @ManyToMany(() => Category, (category) => category.companies)
+  @JoinTable()
+  categories: Category[];
 
   @CreateDateColumn()
   created_at: Date;
