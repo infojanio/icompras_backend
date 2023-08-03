@@ -77,8 +77,12 @@ class Company {
   @OneToMany(() => Address, (address) => address.company)
   addresses: Address[];
 
-  @ManyToMany(() => Category, (category) => category.companies)
-  @JoinTable()
+  @ManyToMany(() => Category)
+  @JoinTable({
+    name: 'categories_companies',
+    joinColumns: [{ name: 'company_id' }],
+    inverseJoinColumns: [{ name: 'category_id' }],
+  })
   categories: Category[];
 
   @CreateDateColumn()

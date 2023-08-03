@@ -1,3 +1,5 @@
+import { Category } from '@modules/products/infra/typeorm/entities/Category';
+
 interface ICreateCompanyDTO {
   id?: string;
   name: string;
@@ -10,6 +12,7 @@ interface ICreateCompanyDTO {
   isActive: boolean;
   openinghours_id: string;
   tenant_id: string;
+  categories?: Category[];
 }
 export { ICreateCompanyDTO };
 
