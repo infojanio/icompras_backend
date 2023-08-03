@@ -9,6 +9,7 @@ import { ListByTenantCompaniesController } from '@modules/companies/usesCases/li
 const companiesRoutes = Router();
 
 const createCompanyController = new CreateCompanyController();
+const createCompanyCategoryController = new CreateCompanyController();
 const listCompaniesController = new ListCompaniesController();
 const listByIdCompaniesController = new ListByIdCompaniesController();
 const listByTenantCompaniesController = new ListByTenantCompaniesController();
@@ -22,6 +23,8 @@ companiesRoutes.post(
 
 //companiesRoutes.get('/:id', listByIdCompaniesController.handle);
 companiesRoutes.get('/tenant', listByTenantCompaniesController.handle);
+
+companiesRoutes.get('/categories/:id', createCompanyCategoryController.handle);
 
 companiesRoutes.get('/', listCompaniesController.handle); //não necessita estar logado
 
