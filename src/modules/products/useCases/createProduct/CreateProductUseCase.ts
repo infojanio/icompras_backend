@@ -5,12 +5,13 @@ import { inject, injectable } from 'tsyringe';
 
 interface IRequest {
   name: string;
-  description: string;
-  daily_rate: number;
-  license_plate: string;
-  fine_amount: number;
-  brand: string;
-  category_id: string;
+  price: number;
+  quantity: number;
+  available: boolean;
+  subcategory_id: string;
+  company_id: string;
+  tenant_id: string;
+  image: string;
 }
 
 @injectable()
@@ -22,17 +23,16 @@ class CreateProductUseCase {
 
   async execute({
     name,
-    description,
-    daily_rate,
-    license_plate,
-    fine_amount,
-    brand,
-    category_id,
+    price,
+    quantity,
+    available,
+    subcategory_id,
+    company_id,
+    tenant_id,
+    image,
   }: IRequest): Promise<Product> {
-    //Verifica se a placa já foi cadastrada
-    const productAlreadyExists = await this.productsRepository.findByLicensePlate(
-      license_plate,
-    );
+    //Verifica se o nome já foi cadastrado
+    const productAlreadyExists = await this.productsRepository.findByName(name);
 
     if (productAlreadyExists) {
       throw new AppError('Product already exists!');
@@ -40,12 +40,13 @@ class CreateProductUseCase {
 
     const product = await this.productsRepository.create({
       name,
-      description,
-      daily_rate,
-      license_plate,
-      fine_amount,
-      brand,
-      category_id,
+      price,
+      quantity,
+      available,
+      subcategory_id,
+      company_id,
+      tenant_id,
+      image,
     });
 
     return product;

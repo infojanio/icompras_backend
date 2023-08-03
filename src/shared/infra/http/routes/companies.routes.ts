@@ -3,11 +3,16 @@ import { ensureAuthenticated } from '@shared/infra/http/middlewares/ensureAuthen
 import { Router } from 'express';
 import { ensureAdmin } from '../middlewares/ensureAdmin';
 import { ListCompaniesController } from '@modules/companies/usesCases/listCompanies/ListCompaniesController';
+import { ListByIdCompaniesController } from '@modules/companies/usesCases/listByIdCompanies/ListByIdCompaniesController';
+import { ListByTenantCompaniesController } from '@modules/companies/usesCases/listByTenantCompanies/ListByTenantCompaniesController';
 
 const companiesRoutes = Router();
 
 const createCompanyController = new CreateCompanyController();
+const createCompanyCategoryController = new CreateCompanyController();
 const listCompaniesController = new ListCompaniesController();
+const listByIdCompaniesController = new ListByIdCompaniesController();
+const listByTenantCompaniesController = new ListByTenantCompaniesController();
 
 companiesRoutes.post(
   '/',
@@ -15,6 +20,11 @@ companiesRoutes.post(
   ensureAdmin,
   createCompanyController.handle,
 );
+
+//companiesRoutes.get('/:id', listByIdCompaniesController.handle);
+companiesRoutes.get('/tenant', listByTenantCompaniesController.handle);
+
+companiesRoutes.get('/categories/:id', createCompanyCategoryController.handle);
 
 companiesRoutes.get('/', listCompaniesController.handle); //não necessita estar logado
 

@@ -5,6 +5,9 @@ import { ImportCategoryController } from '@modules/products/useCases/importCateg
 import { ListCategoriesController } from '@modules/products/useCases/listCategories/ListCategoriesController';
 import { ensureAuthenticated } from '@shared/infra/http/middlewares/ensureAuthenticated';
 import { ensureAdmin } from '@shared/infra/http/middlewares/ensureAdmin';
+import { ListByIdCategoriesUseCase } from '@modules/products/useCases/listByIdCategories/ListByIdCategoriesUseCase';
+import { ListByIdCategoriesController } from '@modules/products/useCases/listByIdCategories/ListByIdCategoriesController';
+import { ListByCompanyCategoriesController } from '@modules/products/useCases/listByCompanyCategories/ListByCompanyCategoriesController';
 
 const categoriesRoutes = Router();
 
@@ -15,6 +18,8 @@ const uploads = multer({
 const createCategoryController = new CreateCategoryController();
 const importCategoryController = new ImportCategoryController();
 const listCategoriesController = new ListCategoriesController();
+const listByIdCategoriesController = new ListByIdCategoriesController();
+const listByCompanyCategoriesController = new ListByCompanyCategoriesController();
 
 categoriesRoutes.post(
   '/',
@@ -33,5 +38,8 @@ categoriesRoutes.post(
   ensureAdmin,
   importCategoryController.handle,
 );
+
+categoriesRoutes.get('/:id', listByIdCategoriesController.handle);
+categoriesRoutes.get('/company', listByCompanyCategoriesController.handle);
 
 export { categoriesRoutes };

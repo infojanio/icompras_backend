@@ -4,16 +4,20 @@ import {
   CreateDateColumn,
   Entity,
   JoinColumn,
+  JoinTable,
+  ManyToMany,
   ManyToOne,
   OneToMany,
   OneToOne,
   PrimaryColumn,
 } from 'typeorm';
+
 import { v4 as uuidV4 } from 'uuid';
 import { OpeningHours } from './OpeningHours';
 import { MapLocation } from '@modules/maplocations/infra/typeorm/entities/MapLocation';
 import { Tenant } from '@modules/tenants/infra/typeorm/entities/Tenant';
 import { City } from '@modules/cities/infra/typeorm/entities/City';
+import { Category } from '@modules/products/infra/typeorm/entities/Category';
 
 @Entity('companies')
 class Company {
@@ -50,7 +54,7 @@ class Company {
   openinghours_id: string;
 
   //muitos supermercados -> 1 empresa locatária
-  @ManyToOne(() => Tenant, (tenant) => tenant.companies)
+  @ManyToOne(() => Tenant)
   @JoinColumn({ name: 'tenant_id' })
   tenant: Tenant;
 
@@ -58,7 +62,7 @@ class Company {
   tenant_id: string;
 
   //muitos supermercados -> 1 cidade
-  @ManyToOne(() => City)
+  @ManyToOne(() => City) //, (city) => city.companies
   @JoinColumn({ name: 'city_id' })
   city: City;
 
@@ -72,6 +76,14 @@ class Company {
   //1 supermercado pode ter muitos endereços
   @OneToMany(() => Address, (address) => address.company)
   addresses: Address[];
+
+  @ManyToMany(() => Category)
+  @JoinTable({
+    name: 'categories_companies',
+    joinColumns: [{ name: 'company_id' }],
+    inverseJoinColumns: [{ name: 'category_id' }],
+  })
+  categories: Category[];
 
   @CreateDateColumn()
   created_at: Date;

@@ -21,9 +21,6 @@ class OpeningHours {
   @Column()
   status: string;
 
-  @Column()
-  isActive: boolean;
-
   @CreateDateColumn()
   created_at: Date;
 

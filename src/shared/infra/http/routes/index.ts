@@ -11,6 +11,7 @@ import { passwordRoutes } from './password.routes';
 import { citiesRoutes } from './cities.routes';
 import { companiesRoutes } from './companies.routes';
 import { tenantsRoutes } from './tenants.routes';
+import { openinghoursRoutes } from './openinghours.routes';
 
 const router = Router();
 
@@ -21,9 +22,11 @@ router.use('/users', usersRoutes);
 router.use('/cities', citiesRoutes);
 router.use('/companies', companiesRoutes);
 router.use('/orders', ordersRoutes);
+router.use('/openinghours', openinghoursRoutes);
 router.use('/products', productsRoutes);
 router.use('/tenants', tenantsRoutes);
 router.use('/password', passwordRoutes);
+router.use('/sessions', authenticateRoutes);
 router.use(authenticateRoutes); // assim passa com "/"
 
 export { router };

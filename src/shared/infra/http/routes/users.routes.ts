@@ -5,25 +5,21 @@ import { Router } from 'express';
 import multer from 'multer';
 import uploadConfig from '@config/upload';
 import { ListUsersController } from '@modules/users/usesCases/listUsers/ListUsersController';
-import { ensureAdmin } from '../middlewares/ensureAdmin';
+// /import { ProfileUserController } from "@modules/accounts/useCases/profileUserUseCase/ProfileUserController";
 
 const usersRoutes = Router();
 
 const uploadAvatar = multer(uploadConfig.upload('./tmp/avatar'));
 
 const createUserController = new CreateUserController();
+const updateUserAvatarController = new UpdateUserAvatarController();
+//const profileUserController = new ProfileUserController();
+
 const listUsersController = new ListUsersController();
 
-const updateUserAvatarController = new UpdateUserAvatarController();
-
-usersRoutes.post(
-  '/',
-  ensureAuthenticated,
-  ensureAdmin,
-  createUserController.handle,
-);
-
 usersRoutes.get('/', listUsersController.handle); //não necessita estar logado
+
+usersRoutes.post('/', createUserController.handle);
 
 usersRoutes.patch(
   '/avatar',
@@ -31,5 +27,7 @@ usersRoutes.patch(
   uploadAvatar.single('avatar'),
   updateUserAvatarController.handle,
 );
+
+//usersRoutes.get("/profile", ensureAuthenticated, profileUserController.handle);
 
 export { usersRoutes };

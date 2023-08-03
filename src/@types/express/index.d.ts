@@ -9,5 +9,13 @@ declare namespace Express {
     company: {
       id: string;
     };
+
+    city: {
+      id: string;
+    };
+
+    tenant: {
+      id: string;
+    };
   }
 }

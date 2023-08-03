@@ -17,13 +17,10 @@ import { OrderItem } from '@modules/orders/infra/typeorm/entities/OrderItem';
 @Entity('products')
 class Product {
   @PrimaryColumn()
-  id: string;
+  id?: string;
 
   @Column()
   name: string;
-
-  @Column()
-  available: boolean;
 
   @Column()
   price: number;
@@ -31,6 +28,8 @@ class Product {
   @Column()
   quantity: number;
 
+  @Column()
+  available: boolean;
   //1 produto pode estar em vários itens pedidos
   @OneToMany(() => OrderItem, (orderItem) => orderItem.product)
   orderItems: OrderItem[];
@@ -62,6 +61,9 @@ class Product {
   //1 produto terá varias avaliações
   @OneToMany(() => Score, (score) => score.product)
   scores: Score[];
+
+  @Column()
+  image: string;
 
   @CreateDateColumn()
   created_at: Date;

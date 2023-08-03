@@ -10,12 +10,14 @@ import { idText } from 'typescript';
 import { IDateProvider } from '@shared/container/providers/DateProvider/IDateProvider';
 
 interface IRequest {
+  id: string;
   password: string;
   email: string;
 }
 
 interface IResponse {
   user: {
+    id: string;
     name: string;
     email: string;
   };
@@ -48,14 +50,14 @@ class AuthenticateUserUseCase {
     } = auth;
 
     if (!user) {
-      throw new AppError('EEmail or password incorrect!');
+      throw new AppError('Email ou senha incorretos!');
     }
 
     ////senha está correta? compara a senha com a criptografada
     const passwordMatch = await compare(password, user.password);
 
     if (!passwordMatch) {
-      throw new AppError('Email or Ppassword incorrect!');
+      throw new AppError('Email ou senha incorretos!');
     }
 
     const token = sign({}, secret_token, {
@@ -81,6 +83,7 @@ class AuthenticateUserUseCase {
     const tokenReturn: IResponse = {
       token,
       user: {
+        id: user.id,
         name: user.name,
         email: user.email,
       },

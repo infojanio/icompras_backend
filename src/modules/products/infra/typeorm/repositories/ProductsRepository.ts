@@ -1,4 +1,4 @@
-import { ICreateCarDTO } from '@modules/products/dtos/ICreateCarDTO';
+import { ICreateProductDTO } from '@modules/products/dtos/ICreateProductDTO';
 import { IProductsRepository } from '@modules/products/repositories/IProductsRepository';
 import { getRepository, Repository } from 'typeorm';
 import { Product } from '../entities/Product';
@@ -13,69 +13,99 @@ class ProductsRepository implements IProductsRepository {
   //Deve ser possível cadastrar um novo Productro
   async create({
     name,
-    description,
-    brand,
-    category_id,
-    daily_rate,
-    fine_amount,
-    license_plate,
-    specifications,
-    id,
+    price,
+    quantity,
+    available,
+    subcategory_id,
+    company_id,
+    tenant_id,
+    image,
   }: ICreateProductDTO): Promise<Product> {
     const product = this.repository.create({
       name,
-      description,
-      brand,
-      category_id,
-      daily_rate,
-      fine_amount,
-      license_plate,
-      specifications,
-      id,
+      price,
+      quantity,
+      available,
+      subcategory_id,
+      company_id,
+      tenant_id,
+      image,
     });
     await this.repository.save(product);
     return product;
   }
 
-  /*Encontra carro por placa
-  async findByLicensePlate(license_plate: string): Promise<Car | undefined> {
-    const car = await this.repository.findOne({
-      license_plate,
-    });
-    return car;
+  //Encontrar por subcategoria
+  async findBySubCategory(
+    subcategory_id: string,
+  ): Promise<Product | undefined> {
+    const product = await this.repository.findOne({ where: subcategory_id });
+    return product;
   }
-  */
+
+  async findByName(name: string): Promise<Product | undefined> {
+    const product = await this.repository.findOne({ name });
+    return product;
+  }
+
+  async list(): Promise<Product[]> {
+    const products = await this.repository.find();
+    return products;
+  }
+
+  async listById(id?: string): Promise<Product> {
+    // const products = await this.repository.find({ subcategory_id });
+
+    const productsQuery = await this.repository
+      .createQueryBuilder('product')
+      .where('product.id = :id', { id });
+
+    const products = await productsQuery.getOneOrFail();
+
+    return products;
+  }
 
   //ATENÇÃO: O método findAvailable retorna o filtro no console.log, mas não retorna no Insominia
+  async listBySubCategory(
+    name?: string,
+    subcategory_id?: string,
+  ): Promise<Product[]> {
+    // const products = await this.repository.find({ subcategory_id });
+
+    const productsQuery = await this.repository
+      .createQueryBuilder('product')
+      .leftJoinAndSelect('product.subcategory', 'subcategory')
+      .where('subcategory.name = :subcategory_id', { subcategory_id });
+
+    const products = await productsQuery.getMany();
+
+    return products;
+  }
 
   // Encontra todos os produtos disponíveis
   async findAvailable(
-    brand?: string,
     name?: string,
-    category_id?: string,
+    subcategory_id?: string,
   ): Promise<Product[]> {
-    const carsQuery = await this.repository
+    const productsQuery = await this.repository
       .createQueryBuilder('c')
       .where('available = :available', { available: true });
 
-    //busca por marca
-    if (brand) {
-      carsQuery.andWhere('brand = :brand', { brand });
-    }
-
-    //busca por nome
+    //busca produtos disponíveis pelo nome
     if (name) {
-      carsQuery.andWhere('name = :name', { name });
+      productsQuery.andWhere('name = :name', { name });
     }
 
-    //busca por categoria
-    if (category_id) {
-      carsQuery.andWhere('category_id = :category_id', { category_id });
+    //busca produtos disponíveis pela subcategoria
+    if (subcategory_id) {
+      productsQuery.andWhere('subcategory_id = :subcategory_id', {
+        subcategory_id,
+      });
     }
 
-    const products = await carsQuery.getMany();
+    const products = await productsQuery.getMany();
+    // console.log(products); //No insominia não retorna os dados filtrados
     return products;
-    //console.log(cars); No insominia não retorna os dados filtrados
   }
 
   async findById(id: string): Promise<Product | undefined> {

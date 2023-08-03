@@ -3,11 +3,13 @@ import { ensureAuthenticated } from '@shared/infra/http/middlewares/ensureAuthen
 import { Router } from 'express';
 import { ensureAdmin } from '../middlewares/ensureAdmin';
 import { ListCitiesController } from '@modules/cities/usesCases/listCities/ListCitiesController';
+import { ListByIdCitiesController } from '@modules/cities/usesCases/listByIdCities/ListByIdCitiesController';
 
 const citiesRoutes = Router();
 
 const createCityController = new CreateCityController();
 const listCitiesController = new ListCitiesController();
+const listByIdCitiesController = new ListByIdCitiesController();
 
 citiesRoutes.post(
   '/',
@@ -17,5 +19,6 @@ citiesRoutes.post(
 );
 
 citiesRoutes.get('/', listCitiesController.handle); //não necessita estar logado
+citiesRoutes.get('/:id', listByIdCitiesController.handle);
 
 export { citiesRoutes };

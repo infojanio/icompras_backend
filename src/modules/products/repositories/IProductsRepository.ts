@@ -4,15 +4,34 @@ import { Product } from '@modules/products/infra/typeorm/entities/Product';
 interface IProductsRepository {
   create(data: ICreateProductDTO): Promise<Product>;
 
-  //findByLicensePlate(license_plate: string): Promise<Product | undefined>;
+  findByName(name: string): Promise<Product | undefined>;
+
+  findBySubCategory(name: string): Promise<Product | undefined>;
+
+  listBySubCategory(
+    id?: string,
+    name?: string,
+    subcategory_id?: string,
+  ): Promise<Product[]>;
+
+  listById(
+    id?: string,
+    name?: string,
+    price?: number,
+    quantity?: number,
+    subcategory_id?: string,
+  ): Promise<Product>;
 
   findAvailable(
-    brand?: string,
+    id?: string,
     name?: string,
-    category_id?: string,
+    subcategory_id?: string,
   ): Promise<Product[]>; //encontrar Productros disponíveis
 
-  findById(id: string): Promise<Product | undefined>;
+  list(): Promise<Product[]>;
+
   updateAvailable(id: string, available: boolean): Promise<void>;
+
+  findById(id: string): Promise<Product | undefined>;
 }
 export { IProductsRepository };

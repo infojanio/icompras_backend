@@ -35,7 +35,6 @@ class User {
 
   @Column()
   isActive: boolean;
-  default: true;
 
   @Column()
   isAdmin: boolean;

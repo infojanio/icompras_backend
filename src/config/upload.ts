@@ -5,6 +5,7 @@ import path from 'path';
 export default {
   upload(folder: string) {
     const tmpFolder = path.resolve(__dirname, '..', '..', folder); //salva sempre na pasta tmp
+
     return {
       directory: tmpFolder,
 

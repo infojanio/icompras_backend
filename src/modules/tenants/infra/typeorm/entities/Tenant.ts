@@ -1,3 +1,4 @@
+import { City } from '@modules/cities/infra/typeorm/entities/City';
 import { Company } from '@modules/companies/infra/typeorm/entities/Company';
 import { Category } from '@modules/products/infra/typeorm/entities/Category';
 import { Product } from '@modules/products/infra/typeorm/entities/Product';
@@ -6,6 +7,8 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
+  ManyToOne,
   OneToMany,
   PrimaryColumn,
 } from 'typeorm';
@@ -24,6 +27,14 @@ class Tenant {
 
   @Column()
   isActive: boolean;
+
+  // muitos tipos de empresas -> 1 cidade
+  @ManyToOne(() => City)
+  @JoinColumn({ name: 'city_id' })
+  city: City;
+
+  @Column()
+  city_id: string;
 
   //1 locatário tem várias subcategorias
   @OneToMany(() => SubCategory, (subcategory) => subcategory.tenant)

@@ -6,17 +6,23 @@ import { ensureAdmin } from '../middlewares/ensureAdmin';
 import { ensureAuthenticated } from '../middlewares/ensureAuthenticated';
 import { CreateProductController } from '@modules/products/useCases/createProduct/CreateProductController';
 import { CreateProductSpecificationController } from '@modules/products/useCases/createProductSpecification/CreateProductSpecificationController';
-import { ListAvailableController } from '@modules/products/useCases/lisAvailableProducts/ListAvailableController';
+import { ListAvailableProductsController } from '@modules/products/useCases/listAvailableProducts/ListAvailableProductsController';
 import { UploadProductImagesController } from '@modules/products/useCases/uploadProductImages/UploadProductImagesController';
+import { ListProductsController } from '@modules/products/useCases/listProducts/ListProductsController';
+import { ListBySubCategoryProductsController } from '@modules/products/useCases/listBySubCategoryProducts/ListBySubCategoryProductsController';
+import { ListByIdProductsController } from '@modules/products/useCases/listByIdProducts/ListByIdProductsController';
 
 const productsRoutes = Router();
 
 const createProductController = new CreateProductController();
-const listAvailableController = new ListAvailableController();
+const listProductsController = new ListProductsController();
+const listByIdProductsController = new ListByIdProductsController();
+const listBySubCategoryProductsController = new ListBySubCategoryProductsController();
+const listAvailableProductsController = new ListAvailableProductsController();
 const createProductSpecificationController = new CreateProductSpecificationController();
 const uploadProductImagesController = new UploadProductImagesController();
 
-const upload = multer(uploadConfig.upload('./tmp/cars'));
+const upload = multer(uploadConfig.upload('./tmp/products'));
 
 productsRoutes.post(
   '/',
@@ -24,8 +30,6 @@ productsRoutes.post(
   ensureAdmin,
   createProductController.handle,
 );
-
-productsRoutes.get('/available', listAvailableController.handle);
 
 productsRoutes.post(
   '/specifications/:id',
@@ -41,5 +45,19 @@ productsRoutes.post(
   upload.array('images'),
   uploadProductImagesController.handle,
 );
+
+productsRoutes.get('/', listProductsController.handle); //products
+
+productsRoutes.get('/subcategory', listBySubCategoryProductsController.handle);
+
+productsRoutes.get('/available', listAvailableProductsController.handle);
+
+productsRoutes.get(
+  '/products/:id',
+  ensureAuthenticated,
+  createProductSpecificationController.handle,
+);
+
+productsRoutes.get('/:id', listByIdProductsController.handle);
 
 export { productsRoutes };

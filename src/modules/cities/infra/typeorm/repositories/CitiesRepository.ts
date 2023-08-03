@@ -34,6 +34,18 @@ class CitiesRepository implements ICitiesRepository {
     return cities;
   }
 
+  async listById(id?: string): Promise<City> {
+    // const products = await this.repository.find({ subcategory_id });
+
+    const citiesQuery = await this.repository
+      .createQueryBuilder('city')
+      .where('city.id = :id', { id });
+
+    const city = await citiesQuery.getOneOrFail();
+
+    return city;
+  }
+
   async findById(id: string): Promise<City | undefined> {
     const city = await this.repository.findOne(id);
     return city;
