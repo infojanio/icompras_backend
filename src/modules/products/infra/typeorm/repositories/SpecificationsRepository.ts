@@ -14,11 +14,17 @@ class SpecificationsRepository implements ISpecificationsRepository {
 
   async create({
     description,
-    name,
+    expiration_date,
+    unity,
+    weight,
+    brand,
   }: ICreateSpecificationDTO): Promise<Specification> {
     const specification = this.repository.create({
       description,
-      name,
+      expiration_date,
+      unity,
+      weight,
+      brand,
     });
     await this.repository.save(specification);
     return specification;

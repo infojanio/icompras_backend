@@ -3,8 +3,11 @@ import { AppError } from '@shared/errors/AppError';
 import { ISpecificationsRepository } from '@modules/products/repositories/ISpecificationsRepository';
 
 interface IRequest {
-  name: string;
   description: string;
+  expiration_date;
+  unity;
+  weight;
+  brand;
 }
 
 @injectable()
@@ -14,18 +17,25 @@ class CreateSpecificationUseCase {
     private specificationsRepository: ISpecificationsRepository,
   ) {}
 
-  async execute({ name, description }: IRequest): Promise<void> {
+  async execute({ description }: IRequest): Promise<void> {
     //verifica se a especificação já existe
     const specificationAlreadyExists = await this.specificationsRepository.findByName(
-      name,
+      description,
+      expiration_date,
+      unity,
+      weight,
+      brand,
     );
     if (specificationAlreadyExists) {
       throw new AppError('Specification already exists!');
     }
 
     await this.specificationsRepository.create({
-      name,
       description,
+      expiration_date,
+      unity,
+      weight,
+      brand,
     });
   }
 }

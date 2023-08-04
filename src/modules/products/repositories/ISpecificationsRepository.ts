@@ -16,7 +16,7 @@ interface ISpecificationsRepository {
     weight,
     brand,
   }: ICreateSpecificationDTO): Promise<Specification>;
-  findByName(name: string): Promise<Specification | undefined>;
+  findByName(brand: string): Promise<Specification | undefined>;
   findByIds(ids: string[]): Promise<Specification[]>;
 }
 

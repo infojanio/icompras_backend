@@ -1,4 +1,5 @@
 import { CreateCompanyController } from '@modules/companies/usesCases/createCompany/CreateCompanyController';
+import { CreateCompanyCategoryController } from '@modules/companies/usesCases/createCompanyCategory/CreateCompanyCategoryController';
 import { ensureAuthenticated } from '@shared/infra/http/middlewares/ensureAuthenticated';
 import { Router } from 'express';
 import { ensureAdmin } from '../middlewares/ensureAdmin';
@@ -9,7 +10,7 @@ import { ListByTenantCompaniesController } from '@modules/companies/usesCases/li
 const companiesRoutes = Router();
 
 const createCompanyController = new CreateCompanyController();
-const createCompanyCategoryController = new CreateCompanyController();
+const createCompanyCategoryController = new CreateCompanyCategoryController();
 const listCompaniesController = new ListCompaniesController();
 const listByIdCompaniesController = new ListByIdCompaniesController();
 const listByTenantCompaniesController = new ListByTenantCompaniesController();
@@ -24,7 +25,20 @@ companiesRoutes.post(
 //companiesRoutes.get('/:id', listByIdCompaniesController.handle);
 companiesRoutes.get('/tenant', listByTenantCompaniesController.handle);
 
-companiesRoutes.get('/categories/:id', createCompanyCategoryController.handle);
+companiesRoutes.post(
+  '/categories/:id',
+  ensureAuthenticated,
+  ensureAdmin,
+  createCompanyCategoryController.handle,
+);
+
+/*
+companiesRoutes.get(
+  '/companies/:id',
+  ensureAuthenticated,
+  listCompanyCategoryController.handle,
+);
+*/
 
 companiesRoutes.get('/', listCompaniesController.handle); //não necessita estar logado
 
