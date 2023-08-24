@@ -25,6 +25,7 @@ companiesRoutes.post(
 //companiesRoutes.get('/:id', listByIdCompaniesController.handle);
 companiesRoutes.get('/tenant', listByTenantCompaniesController.handle);
 
+//cadastra categorias de cada empresa
 companiesRoutes.post(
   '/categories/:id',
   ensureAuthenticated,

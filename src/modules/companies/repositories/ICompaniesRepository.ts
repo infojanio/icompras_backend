@@ -1,5 +1,6 @@
 import { ICreateCompanyDTO } from '@modules/companies/dtos/ICreateCompanyDTO';
 import { Company } from '@modules/companies/infra/typeorm/entities/Company';
+import { Category } from '@modules/products/infra/typeorm/entities/Category';
 import { Tenant } from '@modules/tenants/infra/typeorm/entities/Tenant';
 
 interface ICompaniesRepository {
@@ -8,6 +9,7 @@ interface ICompaniesRepository {
   list(): Promise<Company[]>;
 
   listByTenant(name?: string, tenant_id?: string): Promise<Company[]>;
+
   listById(id?: string, name?: string, tenant_id?: string): Promise<Company>;
   findAvailable(
     id?: string,
