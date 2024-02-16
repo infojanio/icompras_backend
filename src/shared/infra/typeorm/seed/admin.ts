@@ -10,8 +10,8 @@ async function create() {
 
   //seed de criação de usuário via SQL puro, na mão
   await connection.query(
-    `INSERT INTO USERS(id, name, email, password, "isAdmin", created_at, driver_license) values
-    ('${id}', 'admin', 'admin@rentlx.com.br', '${password}', true, 'now()', 'xxxxxxxx' ) `,
+    `INSERT INTO USERS(id, name, email, password, "isAdmin", created_at) values
+    ('${id}', 'admin', 'admin@icompras.com.br', '${password}', true, 'now()' ) `,
   );
 
   await connection.close; //fecha a conexão

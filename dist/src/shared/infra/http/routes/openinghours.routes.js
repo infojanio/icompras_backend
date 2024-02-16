@@ -1,0 +1,14 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.openinghoursRoutes = void 0;
+var express_1 = require("express");
+var ensureAuthenticated_1 = require("@shared/infra/http/middlewares/ensureAuthenticated");
+var ensureAdmin_1 = require("@shared/infra/http/middlewares/ensureAdmin");
+var CreateOpeningHoursController_1 = require("@modules/companies/usesCases/createOpeningHours/CreateOpeningHoursController");
+var ListOpeningHoursController_1 = require("@modules/companies/usesCases/listOpeningHours/ListOpeningHoursController");
+var openinghoursRoutes = express_1.Router();
+exports.openinghoursRoutes = openinghoursRoutes;
+var createOpeningHoursController = new CreateOpeningHoursController_1.CreateOpeningHoursController();
+var listOpeningHoursController = new ListOpeningHoursController_1.ListOpeningHoursController();
+openinghoursRoutes.post('/', ensureAuthenticated_1.ensureAuthenticated, ensureAdmin_1.ensureAdmin, createOpeningHoursController.handle);
+openinghoursRoutes.get('/', listOpeningHoursController.handle);
