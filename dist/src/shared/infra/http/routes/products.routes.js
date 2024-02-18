@@ -1,0 +1,36 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.productsRoutes = void 0;
+var express_1 = require("express");
+var multer_1 = __importDefault(require("multer"));
+var upload_1 = __importDefault(require("@config/upload"));
+var ensureAdmin_1 = require("../middlewares/ensureAdmin");
+var ensureAuthenticated_1 = require("../middlewares/ensureAuthenticated");
+var CreateProductController_1 = require("@modules/products/useCases/createProduct/CreateProductController");
+var CreateProductSpecificationController_1 = require("@modules/products/useCases/createProductSpecification/CreateProductSpecificationController");
+var ListAvailableProductsController_1 = require("@modules/products/useCases/listAvailableProducts/ListAvailableProductsController");
+var UploadProductImagesController_1 = require("@modules/products/useCases/uploadProductImages/UploadProductImagesController");
+var ListProductsController_1 = require("@modules/products/useCases/listProducts/ListProductsController");
+var ListBySubCategoryProductsController_1 = require("@modules/products/useCases/listBySubCategoryProducts/ListBySubCategoryProductsController");
+var ListByIdProductsController_1 = require("@modules/products/useCases/listByIdProducts/ListByIdProductsController");
+var productsRoutes = express_1.Router();
+exports.productsRoutes = productsRoutes;
+var createProductController = new CreateProductController_1.CreateProductController();
+var listProductsController = new ListProductsController_1.ListProductsController();
+var listByIdProductsController = new ListByIdProductsController_1.ListByIdProductsController();
+var listBySubCategoryProductsController = new ListBySubCategoryProductsController_1.ListBySubCategoryProductsController();
+var listAvailableProductsController = new ListAvailableProductsController_1.ListAvailableProductsController();
+var createProductSpecificationController = new CreateProductSpecificationController_1.CreateProductSpecificationController();
+var uploadProductImagesController = new UploadProductImagesController_1.UploadProductImagesController();
+var upload = multer_1.default(upload_1.default.upload('./tmp/products'));
+productsRoutes.post('/', ensureAuthenticated_1.ensureAuthenticated, ensureAdmin_1.ensureAdmin, createProductController.handle);
+productsRoutes.post('/specifications/:id', ensureAuthenticated_1.ensureAuthenticated, ensureAdmin_1.ensureAdmin, createProductSpecificationController.handle);
+productsRoutes.post('/images/:id', ensureAuthenticated_1.ensureAuthenticated, ensureAdmin_1.ensureAdmin, upload.array('images'), uploadProductImagesController.handle);
+productsRoutes.get('/', listProductsController.handle); //products
+productsRoutes.get('/subcategory', listBySubCategoryProductsController.handle);
+productsRoutes.get('/available', listAvailableProductsController.handle);
+productsRoutes.get('/products/:id', ensureAuthenticated_1.ensureAuthenticated, createProductSpecificationController.handle);
+productsRoutes.get('/:id', listByIdProductsController.handle);
