@@ -84,6 +84,30 @@ class CompaniesRepository implements ICompaniesRepository {
       throw error;
     }
   }
+
+  async listByCity(
+    //  id: string,
+    name?: string,
+    city_id?: string,
+  ): Promise<Company[]> {
+    try {
+      if (!city_id || !isUuid(city_id)) {
+        throw new Error('O city_id é obrigatório para filtrar');
+      }
+      const companiesQuery = await this.repository
+        .createQueryBuilder('company')
+        .leftJoinAndSelect('company.city', 'city')
+        .where('city.id = :city_id', { city_id });
+
+      const companies = await companiesQuery.getMany();
+      console.log(companies);
+      return companies;
+    } catch (error) {
+      console.log('Erro no City:', error.message);
+      throw error;
+    }
+  }
+
   // Encontra todos os produtos disponíveis
   async findAvailable(name?: string, tenant_id?: string): Promise<Company[]> {
     const companiesQuery = await this.repository

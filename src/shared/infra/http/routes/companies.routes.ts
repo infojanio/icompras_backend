@@ -6,6 +6,7 @@ import { ensureAdmin } from '../middlewares/ensureAdmin';
 import { ListCompaniesController } from '@modules/companies/usesCases/listCompanies/ListCompaniesController';
 import { ListByIdCompaniesController } from '@modules/companies/usesCases/listByIdCompanies/ListByIdCompaniesController';
 import { ListByTenantCompaniesController } from '@modules/companies/usesCases/listByTenantCompanies/ListByTenantCompaniesController';
+import { ListByCityCompaniesController } from '@modules/companies/usesCases/listByCityCompanies/ListByCityCompaniesController';
 
 const companiesRoutes = Router();
 
@@ -14,6 +15,7 @@ const createCompanyCategoryController = new CreateCompanyCategoryController();
 const listCompaniesController = new ListCompaniesController();
 const listByIdCompaniesController = new ListByIdCompaniesController();
 const listByTenantCompaniesController = new ListByTenantCompaniesController();
+const listByCityCompaniesController = new ListByCityCompaniesController();
 
 companiesRoutes.post(
   '/',
@@ -24,6 +26,8 @@ companiesRoutes.post(
 
 //companiesRoutes.get('/:id', listByIdCompaniesController.handle);
 companiesRoutes.get('/tenant', listByTenantCompaniesController.handle);
+
+companiesRoutes.get('/city', listByCityCompaniesController.handle);
 
 //cadastra categorias de cada empresa
 companiesRoutes.post(

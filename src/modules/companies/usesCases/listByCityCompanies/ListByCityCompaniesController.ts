@@ -7,6 +7,10 @@ class ListByCityCompaniesController {
     try {
       const { name, city_id } = request.query;
 
+      if (!city_id) {
+        throw new Error('O city_id é obrigatório para filtrar');
+      }
+
       const listByCityCompaniesUseCase = container.resolve(
         ListByCityCompaniesUseCase,
       );

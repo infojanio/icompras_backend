@@ -9,6 +9,7 @@ interface ICompaniesRepository {
   list(): Promise<Company[]>;
 
   listByTenant(name?: string, tenant_id?: string): Promise<Company[]>;
+  listByCity(name?: string, city_id?: string): Promise<Company[]>;
 
   listById(id?: string, name?: string, tenant_id?: string): Promise<Company>;
   findAvailable(
