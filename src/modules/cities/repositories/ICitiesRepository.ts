@@ -11,6 +11,7 @@ interface ICitiesRepository {
     uf?: string,
     cep?: string,
     isActive?: boolean,
+    tenantId?: string,
   ): Promise<City>;
   findById(id: string): Promise<City | undefined>;
 }

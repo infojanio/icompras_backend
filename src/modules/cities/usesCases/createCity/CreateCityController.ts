@@ -4,7 +4,15 @@ import { CreateCityUseCase } from './CreateCityUseCase';
 
 class CreateCityController {
   async handle(request: Request, response: Response): Promise<Response> {
-    const { name, uf, cep, longitude, latitude, isActive } = request.body;
+    const {
+      name,
+      uf,
+      cep,
+      longitude,
+      latitude,
+      isActive,
+      tenantId,
+    } = request.body;
 
     const createCityUseCase = container.resolve(CreateCityUseCase);
     await createCityUseCase.execute({
@@ -12,6 +20,7 @@ class CreateCityController {
       uf,
       cep,
       isActive,
+      tenantId,
     });
     return response.status(201).send();
   }

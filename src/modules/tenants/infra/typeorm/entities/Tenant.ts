@@ -29,12 +29,16 @@ class Tenant {
   isActive: boolean;
 
   // muitos tipos de empresas -> 1 cidade
-  @ManyToOne(() => City)
-  @JoinColumn({ name: 'city_id' })
+
+  /*
+  @OneToMany(() => City, (city) => city.tenant, { cascade: true })
+  cities: City[];
+*/
+  @ManyToOne(() => City, (city) => city.tenants)
   city: City;
 
   @Column()
-  city_id: string;
+  cityId: string;
 
   //1 locatário tem várias subcategorias
   @OneToMany(() => SubCategory, (subcategory) => subcategory.tenant)

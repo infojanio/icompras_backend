@@ -1,10 +1,12 @@
 import { Address } from '@modules/address/infra/typeorm/entities/Address';
 import { Company } from '@modules/companies/infra/typeorm/entities/Company';
 import { Tenant } from '@modules/tenants/infra/typeorm/entities/Tenant';
+
 import {
   Column,
   CreateDateColumn,
   Entity,
+  ManyToOne,
   OneToMany,
   PrimaryColumn,
 } from 'typeorm';
@@ -25,11 +27,25 @@ class City {
   cep: string;
 
   @Column()
+  tenantId: string;
+
+  @Column()
   isActive: boolean;
 
-  //1 cidade -> empresas de atividades diversas
+  /*1 cidade -> empresas de atividades diversas
+  @ManyToOne(() => Tenant, (tenant) => tenant.cities)
+  tenant: Tenant;
+
+  //muitos supermercados -> 1 cidade
+  @ManyToOne(() => Tenant) //, (city) => city.companies
+  //@JoinColumn({ name: 'tenant_id' })
+  tenant: Tenant;
+}
+*/
+
   @OneToMany(() => Tenant, (tenant) => tenant.city)
-  tenants: City[];
+  tenants: Tenant[];
+
   //1 cidade tem muitos endereços
   @OneToMany(() => Address, (address) => address.city)
   addresses: Address[];

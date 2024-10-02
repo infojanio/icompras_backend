@@ -11,7 +11,7 @@ class ListByCityTenantsUseCase {
 
   async execute({ name, city_id }): Promise<Tenant[]> {
     const tenants = await this.tenantsRepository.listByCity(name, city_id);
-    console.log('UseCase=', tenants); //lista produtos por subcategoria
+    console.log('UseCase=', tenants); //lista tenants por cidade
     return tenants;
   }
 }
