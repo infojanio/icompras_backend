@@ -36,6 +36,8 @@ import { TenantsRepository } from '@modules/tenants/infra/typeorm/repositories/T
 
 import { OpeningHoursRepository } from '@modules/companies/infra/typeorm/repositories/OpeningHoursRepository';
 import { IOpeningHoursRepository } from '@modules/companies/repositories/IOpeningHoursRepository';
+import { PromotionsRepository } from '@modules/promotions/infra/typeorm/repositories/PromotionsRepository';
+import { IPromotionsRepository } from '@modules/promotions/repositories/IPromotionsRepository';
 
 container.registerSingleton<IUsersRepository>(
   'UsersRepository',
@@ -60,6 +62,11 @@ container.registerSingleton<ISubCategoriesRepository>(
 container.registerSingleton<ICitiesRepository>(
   'CitiesRepository',
   CitiesRepository,
+);
+
+container.registerSingleton<IPromotionsRepository>(
+  'PromotionsRepository',
+  PromotionsRepository,
 );
 
 container.registerSingleton<ICompaniesRepository>(

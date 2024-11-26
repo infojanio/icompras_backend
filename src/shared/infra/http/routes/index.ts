@@ -12,6 +12,7 @@ import { citiesRoutes } from './cities.routes';
 import { companiesRoutes } from './companies.routes';
 import { tenantsRoutes } from './tenants.routes';
 import { openinghoursRoutes } from './openinghours.routes';
+import { promotionsRoutes } from './promotions.routes';
 
 const router = Router();
 
@@ -24,6 +25,7 @@ router.use('/companies', companiesRoutes);
 router.use('/orders', ordersRoutes);
 router.use('/openinghours', openinghoursRoutes);
 router.use('/products', productsRoutes);
+router.use('/promotions', promotionsRoutes);
 router.use('/tenants', tenantsRoutes);
 router.use('/password', passwordRoutes);
 router.use('/sessions', authenticateRoutes);

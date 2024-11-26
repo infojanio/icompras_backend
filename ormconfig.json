@@ -16,6 +16,7 @@
     "./src/modules/orders/infra/typeorm/entities/**.ts",
     "./src/modules/products/infra/typeorm/entities/**.ts",
     "./src/modules/tenants/infra/typeorm/entities/**.ts",
+    "./src/modules/promotions/infra/typeorm/entities/**.ts",
     "./src/modules/users/infra/typeorm/entities/**.ts"
   ],
 

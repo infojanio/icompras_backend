@@ -1,7 +1,7 @@
-import { CreateCityController } from '@modules/cities/usesCases/createCity/CreateCityController';
 import { ensureAuthenticated } from '@shared/infra/http/middlewares/ensureAuthenticated';
 import { Router } from 'express';
 import { ensureAdmin } from '../middlewares/ensureAdmin';
+import { CreateCityController } from '@modules/cities/usesCases/createCity/CreateCityController';
 import { ListCitiesController } from '@modules/cities/usesCases/listCities/ListCitiesController';
 import { ListByIdCitiesController } from '@modules/cities/usesCases/listByIdCities/ListByIdCitiesController';
 

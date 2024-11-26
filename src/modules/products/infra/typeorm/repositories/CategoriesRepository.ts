@@ -17,24 +17,7 @@ class CategoriesRepository implements ICategoriesRepository {
     id?: string,
     //name?: string,
     category_id?: string,
-  ): Promise<Company[]> {
-    // const products = await this.repository.find({ subcategory_id });
-
-    const categoriesQuery = await this.repository
-      .createQueryBuilder('category')
-      .leftJoinAndSelect('category.company', 'company')
-      .where('category.id = :category_id', { category_id });
-
-    const categories = await categoriesQuery.getMany();
-
-    return categories;
-  }
-
-  async listByCategory(
-    id?: string,
-    //name?: string,
-    category_id?: string,
-  ): Promise<SubCategory[]> {
+  ): Promise<Category[]> {
     // const products = await this.repository.find({ subcategory_id });
 
     const subcategoriesQuery = await this.repository
